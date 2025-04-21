@@ -1,0 +1,26 @@
+{
+  "name": "recettes-de-cuisine",
+  "version": "1.0.0",
+  "homepage": "https://ton-utilisateur.github.io/ton-repository",  // Remplace ceci par l'URL de ton GitHub Pages
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "vite",  // Utilise vite pour le mode développement
+    "build": "vite build",  // Utilise vite pour la construction du projet
+    "preview": "vite preview"  // Optionnel : pour prévisualiser la version construite
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.2.0",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "@eslint/js": "^9.21.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "globals": "^15.15.0"
+  }
+}
