@@ -1,27 +1,35 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function RecipeForm() {
-  const [form, setForm] = useState({ title: '', ingredients: '', instructions: '' });
-
-  const handleChange = e => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+const RecipeForm = () => {
+  const [recipe, setRecipe] = useState(null);
+  
+  // Fonction pour récupérer une recette par ID
+  const fetchRecipe = async (id) => {
+    try {
+      const response = await axios.get(`/api/recipes/${id}`); // Appel à l'API pour récupérer la recette avec l'ID
+      setRecipe(response.data); // Stocke la recette récupérée dans le state
+    } catch (error) {
+      console.error('Erreur lors de la récupération de la recette', error); // En cas d'erreur
+    }
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    await axios.post('http://localhost:5000/api/recipes', form);
-    window.location.reload();
-  };
+  useEffect(() => {
+    const recipeId = '123'; // Exemple d'ID de recette, remplace-le par un ID réel
+    fetchRecipe(recipeId);
+  }, []);
+
+  if (!recipe) {
+    return <div>Chargement...</div>; // Affiche un message de chargement si la recette n'est pas encore récupérée
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="title" placeholder="Titre" onChange={handleChange} required />
-      <textarea name="ingredients" placeholder="Ingrédients" onChange={handleChange} required />
-      <textarea name="instructions" placeholder="Instructions" onChange={handleChange} required />
-      <button type="submit">Ajouter</button>
-    </form>
+    <div>
+      <h2>{recipe.title}</h2>
+      <p>{recipe.ingredients}</p>
+      <p>{recipe.instructions}</p>
+    </div>
   );
-}
+};
 
 export default RecipeForm;

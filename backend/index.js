@@ -1,37 +1,42 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 
+const recipesRoutes = require('./routes/recipes');
+
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-// Middleware
+// Middleware CORS
+app.use(cors({
+  origin: 'http://localhost:5173', // ✅ Adresse frontend
+  credentials: true
+}));
+
 app.use(express.json());
-app.use(cors()); // Permet les requêtes depuis d'autres domaines
 
-// Connexion à MongoDB
-const mongoURI = process.env.MONGO_URI;
+// Routes API
+app.use('/api/recipes', recipesRoutes);
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected!'))
-  .catch(err => console.log(`MongoDB connection error: ${err}`));
+// Connexion MongoDB
+const mongoURI = process.env.MONGO_URI || 'mongodb+srv://raniaguesmi:AhfnzsUoS3gnIfNe@cluster2.stjl3ql.mongodb.net/recettes?retryWrites=true&w=majority&appName=Cluster2';
 
-// Exemple de route
-app.get('/api/recipes', (req, res) => {
-  // Logique pour récupérer les recettes depuis la base de données
-  res.json({ message: 'Liste des recettes' });
-});
+if (!mongoURI) {
+  console.error('❌ MongoDB URI is not définie');
+  process.exit(1);
+}
 
-// Sert les fichiers statiques du frontend React
-app.use(express.static(path.join(__dirname, 'public', 'dist')));
-
-// Route fallback pour servir index.html (frontend React)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => {
+  console.log('✅ MongoDB connecté');
+  app.listen(PORT, () => {
+    console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
+  });
+})
+.catch(err => {
+  console.error('❌ Erreur de connexion MongoDB :', err);
 });
