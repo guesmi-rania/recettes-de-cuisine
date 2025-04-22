@@ -1,18 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+const Recipe = require('./models/Recipe');
 require('dotenv').config();
 
 const recipesRoutes = require('./routes/recipes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const productRoutes = require("./routes/products");
+app.use("/api/products", productRoutes);
+const cors = require('cors');
 
 // Middleware CORS
 app.use(cors({
-  origin: 'http://localhost:5173', // ✅ Adresse frontend
+  origin: "https://5173-idx-recettes-de-cuisinegit-1745333535364.cluster-ombtxv25tbd6yrjpp3lukp6zhc.cloudworkstations.dev",
   credentials: true
 }));
+
 
 app.use(express.json());
 

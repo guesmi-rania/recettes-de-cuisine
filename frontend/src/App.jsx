@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./index.css";
+import ProductList from "./ProductList";
+import Checkout from "./Checkout"; // Assurez-vous que le composant Checkout est bien créé
 
 const App = () => {
   const [recipes, setRecipes] = useState([]);
@@ -10,6 +12,9 @@ const App = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [instructions, setInstructions] = useState('');
+
+  const [cart, setCart] = useState([]);
+  const [isCheckout, setIsCheckout] = useState(false);
 
   const fetchRecipes = async () => {
     try {
@@ -44,6 +49,19 @@ const App = () => {
       console.error('Erreur lors de l\'ajout de la recette :', err);
       setError('Erreur lors de l\'ajout de la recette');
     }
+  };
+
+  const handleAddToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  const getTotal = () => {
+    return cart.reduce((total, product) => total + product.price, 0).toFixed(2);
+  };
+
+  const handleClearCart = () => {
+    setCart([]);
+    setIsCheckout(false);
   };
 
   if (loading) return <div className="loading">Chargement des recettes...</div>;
@@ -95,6 +113,30 @@ const App = () => {
         </ul>
       ) : (
         <p className="no-recipes">Aucune recette disponible</p>
+      )}
+
+      {/* Affichage des produits */}
+      <ProductList onAddToCart={handleAddToCart} />
+
+      {/* Affichage du panier */}
+      {cart.length > 0 && !isCheckout && (
+        <div className="cart">
+          <h2>Panier</h2>
+          <ul>
+            {cart.map((item, index) => (
+              <li key={index}>
+                {item.name} - {item.price} €
+              </li>
+            ))}
+          </ul>
+          <p>Total : {getTotal()} €</p>
+          <button onClick={() => setIsCheckout(true)}>Passer à la commande</button>
+        </div>
+      )}
+
+      {/* Page de checkout */}
+      {isCheckout && (
+        <Checkout cart={cart} total={getTotal()} onClearCart={handleClearCart} />
       )}
     </div>
   );

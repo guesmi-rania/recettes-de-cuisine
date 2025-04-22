@@ -1,86 +1,82 @@
-body {
+/* index.css */
+
+/* Reset des marges et des paddings par défaut */
+* {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f9fafc;
-}
-
-.container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  text-align: center;
-  color: #ff6b6b;
-  margin-bottom: 30px;
-}
-
-.recipe-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 40px;
-}
-
-.recipe-form label {
-  font-weight: 600;
-}
-
-.recipe-form input,
-.recipe-form textarea {
-  padding: 10px;
-  border-radius: 10px;
-  border: 2px solid #e0e0e0;
-  font-size: 16px;
-  width: 100%;
+  padding: 0;
   box-sizing: border-box;
 }
 
-.recipe-form button {
-  background-color: #ff6b6b;
-  color: white;
-  border: none;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.recipe-form button:hover {
-  background-color: #e94e4e;
-}
-
-.recipe-list {
-  list-style: none;
-  padding: 0;
-}
-
-.recipe-card {
-  background-color: #fff0f0;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-left: 5px solid #ff6b6b;
-  border-radius: 10px;
-}
-
-.recipe-card h3 {
-  margin: 0 0 10px;
+/* Mise en page générale */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
   color: #333;
 }
 
-.loading,
-.error,
-.no-recipes {
-  text-align: center;
-  font-size: 18px;
-  color: #888;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.error {
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #007BFF;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+input, textarea, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #007BFF;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.error, .loading, .no-recipes {
   color: red;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.recipe-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
