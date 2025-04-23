@@ -1,0 +1,21 @@
+.product-detail {
+  text-align: center;
+  padding: 2rem;
+}
+
+.product-detail img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.product-detail h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.product-detail p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}

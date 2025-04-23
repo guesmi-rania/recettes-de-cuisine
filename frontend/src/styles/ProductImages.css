@@ -1,0 +1,29 @@
+.product-images {
+    text-align: center;
+    padding: 40px;
+  }
+  
+  .product-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .product-item {
+    width: 30%;
+    padding: 20px;
+    background-color: #f8f8f8;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+  .product-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .product-item p {
+    margin-top: 10px;
+  }
+  

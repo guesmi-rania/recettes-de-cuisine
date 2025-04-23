@@ -1,0 +1,41 @@
+.tasting-list-container {
+    padding: 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .tasting-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tasting-item img {
+    width: 80px;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .tasting-item-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1rem;
+  }
+  
+  .tasting-item .btn-add-to-cart {
+    background-color: #c94f7c;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  
+  .tasting-item .btn-add-to-cart:hover {
+    background-color: #b13f6c;
+  }
+  
