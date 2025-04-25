@@ -23,4 +23,4 @@ Déploiement : GitHub Pages pour le frontend, Render pour le backend
 
 Contribuer
 Les contributions sont les bienvenues ! Si vous souhaitez contribuer, ouvrez une issue ou soumettez une pull request.
-![recette-cuisine](https://github.com/user-attachments/assets/7dbedb21-878b-46f5-b272-3102a51172e6)
+![image](https://github.com/user-attachments/assets/5e2c74f1-55e7-4f75-a82a-84b4b80db4a3)
