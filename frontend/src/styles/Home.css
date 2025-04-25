@@ -1,60 +1,158 @@
-.home {
-  font-family: 'Arial', sans-serif;
-  text-align: center;
-  margin: 0;
+/* Centrer la page et ajuster les éléments */
+.home-page {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrer tous les éléments horizontalement */
+  justify-content: flex-start;
+  margin: 0; /* Enlever toute marge par défaut */
+  padding-top: 20px; /* Espacement au-dessus de la page */
+  min-height: 100vh; /* Remplir toute la hauteur de la fenêtre */
+}
+
+/* Style pour la barre de navigation */
+.navbar {
+  display: flex;
+  justify-content: center; /* Centrer la barre de navigation */
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 0;
+  width: 100%; /* Prendre toute la largeur */
+  margin-bottom: 0px; /* Espacement entre la barre de menu et les autres sections */
+}
+
+/* Espacement entre le logo et la barre de menu */
+.navbar .logo {
+  margin-right: 30px; /* Éloigner le logo des éléments de menu */
+}
+
+/* Liste de navigation */
+.navbar ul {
+  display: flex;
+  gap: 30px; /* Espacement entre les éléments du menu */
+  list-style: none;
   padding: 0;
 }
 
-header {
-  background-color: #4CAF50;
-  padding: 20px;
-  color: white;
+.navbar ul li {
+  font-size: 18px;
+  font-weight: bold;
 }
 
-header h1 {
-  margin: 0;
+/* Centrer le contenu principal : liste des catégories et slider */
+.main-content {
+  display: flex;
+  justify-content: center; /* Centrer la liste des catégories et le slider */
+  align-items: flex-start; /* Aligner les éléments en haut */
+  gap: 20px; /* Espacement entre la liste des catégories et le slider */
+  width: 80%; /* Limiter la largeur à 80% de la fenêtre */
+  margin-top: 0px; /* Espacement entre la barre de menu et les autres sections */
 }
 
-nav {
-  margin-top: 10px;
+/* Sidebar des catégories */
+.categories-sidebar {
+  width: 220px;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
+/* Container du slider (élargi) */
+.slider-container {
+  width: 100%; /* Élégir la largeur à 100% de la fenêtre */
+  height: 400px; /* Hauteur du slider */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-nav a:hover {
-  text-decoration: underline;
-}
-
-.hero {
-  padding: 50px;
-  background-color: #f8f8f8;
-  margin-top: 20px;
-}
-
-.hero h2 {
-  font-size: 2rem;
-  color: #333;
-}
-
-.hero p {
-  color: #666;
-}
-
-button {
-  background-color: #4CAF50;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-size: 1rem;
+/* Sections supplémentaires sous le slider */
+.below-sections {
+  margin-top: 40px;
+  width: 80%;
   text-align: center;
 }
 
-button a {
-  color: white;
-  text-decoration: none;
+/* Responsivité : sur petit écran */
+@media screen and (max-width: 768px) {
+  .home-page {
+    padding-top: 10px; /* Réduire l'espacement sur mobile */
+  }
+
+  .main-content {
+    flex-direction: column; /* Aligner en colonne sur mobile */
+    gap: 20px;
+    align-items: center; /* Centrer tout sur mobile */
+    width: 90%; /* Réduire la largeur */
+  }
+
+  .categories-sidebar {
+    width: 100%;
+    margin-bottom: 20px; /* Ajouter un espacement entre la liste et le slider */
+  }
+
+  .slider-container {
+    width: 100%;
+    height: 300px; /* Réduire la hauteur sur mobile */
+  }
+}
+/* Applique la police Roboto à toute la page d'accueil */
+.home-page {
+  font-family: 'Roboto', sans-serif;
+  color: #333; /* Couleur générale du texte (gris foncé) */
+  font-size: 18px; /* Taille de la police */
+}
+
+/* Applique la police Roboto aux éléments du menu */
+.navbar ul li {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px; /* Taille de la police du menu */
+  font-weight: 500; /* Poids moyen pour le texte du menu */
+  margin-right: 20px; /* Espacement entre les éléments du menu */
+}
+
+/* Applique la police Roboto au contenu des sections sous le slider */
+.below-sections {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px; /* Taille du texte sous le slider */
+}
+
+/* Applique la police au titre de la page (si vous avez un h1 ou un logo) */
+h1, .logo {
+  font-family: 'Roboto', sans-serif;
+  font-size: 36px; /* Taille de la police du titre */
+  font-weight: 700; /* Poids fort pour le titre */
+  text-align: center; /* Centrer le titre */
+}
+
+/* Appliquer la police aux autres sections de contenu */
+.slider-container, .categories-sidebar {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px; /* Taille de la police des autres sections */
+}
+/* Menu de navigation */
+.navbar {
+  background-color: #f7f7f7; /* Fond clair pour la barre de menu */
+  padding: 10px 0; /* Espacement au-dessus et en-dessous du menu */
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: center; /* Centrer les éléments du menu */
+  list-style: none;
+  padding: 0;
+}
+
+.navbar ul li {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333; /* Couleur du texte du menu */
+  margin: 0 15px; /* Espacement entre chaque élément */
+}
+
+/* Lorsque vous passez la souris sur un élément du menu */
+.navbar ul li:hover {
+  color: #007BFF; /* Change la couleur du texte lorsque vous survolez */
 }

@@ -1,15 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import "./styles/index.css";
-import "./styles/Home.css";
-import "./styles/ProductList.css";
-import "./styles/ProductDetail.css";
-import "./styles/TastingList.css";
+import React from "react";
+import ReactDOM from "react-dom/client"; // Importer depuis 'react-dom/client'
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+// Utilisation de createRoot à la place de render
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>
 );

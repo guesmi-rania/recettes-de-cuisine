@@ -1,21 +1,18 @@
-import React from 'react';
+import React from "react";
 import "../styles/Categories.css";
 
 function Categories() {
-  const categories = ['Gâteaux', 'Tartes', 'Biscuits', 'Pâtisseries Salées'];
+  const categories = ["Gâteaux", "Salés", "Viennoiseries", "Biscuits", "Tartes"];
 
   return (
-    <section className="categories">
-      <h2>Nos Catégories</h2>
-      <div className="category-list">
-        {categories.map((category, index) => (
-          <div key={index} className="category-item">
-            <h3>{category}</h3>
-            <p>Découvrez nos produits dans cette catégorie.</p>
-          </div>
+    <div className="categories-list">
+      <h3>Catégories</h3>
+      <ul>
+        {categories.map((cat, index) => (
+          <li key={index}>{cat}</li>
         ))}
-      </div>
-    </section>
+      </ul>
+    </div>
   );
 }
 

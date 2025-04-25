@@ -1,24 +1,23 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductList from './components/ProductList';
-import ProductDetail from './components/ProductDetail';
-import Cart from './components/Cart';
-import Checkout from './components/Checkout';
-import TastingList from './components/TastingList';
-import Home from './pages/Home';
+import React from "react";
+import { Routes, Route } from "react-router-dom"; // Assure-toi d'importer Routes et Route
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import CartPage from "./pages/CartPage"; // et non Cart
+import ProductsPage from "./pages/ProductsPage";
+import AdminLogin from "./pages/AdminLogin";
+import 'font-awesome/css/font-awesome.min.css';
 
 function App() {
   return (
-    <Router>
-      <Routes>
+    <>
+      <Navbar />
+      <Routes> {/* Utilisation de Routes ici */}
         <Route path="/" element={<Home />} />
-        <Route path="/produits" element={<ProductList />} />
-        <Route path="/produits/:id" element={<ProductDetail />} />
-        <Route path="/panier" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/degustation" element={<TastingList />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/panier" element={<CartPage />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 

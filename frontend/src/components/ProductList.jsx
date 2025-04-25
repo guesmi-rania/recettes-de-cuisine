@@ -12,6 +12,19 @@ function ProductList() {
       .catch(err => console.error(err));
   }, []);
 
+  function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const existingProduct = cart.find(item => item._id === product._id);
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
   return (
     <div className="product-list">
       <h2>Nos Produits</h2>
@@ -30,12 +43,6 @@ function ProductList() {
       </div>
     </div>
   );
-}
-
-function addToCart(product) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  cart.push({ ...product, quantity: 1 });
-  localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 export default ProductList;

@@ -1,0 +1,164 @@
+/* Bannière en haut de la page avec dégradé */
+.banner {
+  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Dégradé de couleur */
+  color: white;
+  text-align: center;
+  padding: 8px 0; /* Taille plus petite */
+  font-size: 1.1rem;
+  font-weight: bold;
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar container */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre sous la barre de navigation */
+  border-bottom: 2px solid #ddd; /* Bordure sous la navbar */
+}
+
+/* Logo centré */
+.navbar-container .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.navbar-container .logo img {
+  height: 40px; /* Ajuste la taille du logo */
+  width: auto;
+}
+
+/* Barre de recherche */
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 5px 15px;
+  background-color: #f5f5f5;
+  width: 300px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1rem;
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.search-bar button {
+  background-color: #ff7e5f;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #feb47b;
+}
+
+/* Menu (liens de navigation) */
+.menu-right {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Liens dans la navbar */
+.menu-right a {
+  font-size: 1.1rem;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Effet au survol des liens */
+.menu-right a:hover {
+  color: #fff;
+  background-color: #ff7e5f; /* Couleur de fond au survol */
+  transform: scale(1.05);
+}
+
+/* Ajout d'une barre sous chaque lien au survol */
+.menu-right a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  left: 50%;
+  bottom: 0;
+  transition: width 0.3s, left 0.3s;
+}
+
+.menu-right a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Menu toggle (Hamburger icon) */
+.menu-toggle {
+  display: none; /* Cacher sur les écrans larges */
+  cursor: pointer;
+}
+
+.menu-toggle i {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Styles de la sidebar */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* Afficher le bouton hamburger sur mobile */
+  }
+
+  .navbar-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .menu-right {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .menu-right a {
+    font-size: 1.5rem; /* Augmenter la taille des liens sur mobile */
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s;
+  }
+
+  /* Effet sur les liens sur mobile */
+  .menu-right a:hover {
+    background-color: #f7f7f7;
+    transform: translateX(10px); /* Décalage à droite */
+  }
+}
