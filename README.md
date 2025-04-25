@@ -23,4 +23,4 @@ Déploiement : GitHub Pages pour le frontend, Render pour le backend
 
 Contribuer
 Les contributions sont les bienvenues ! Si vous souhaitez contribuer, ouvrez une issue ou soumettez une pull request.
-![image](https://github.com/user-attachments/assets/ada3c213-1f3d-4d72-8fbf-4bad7e1a179f)
+![image](https://github.com/user-attachments/assets/ce0fc32c-ca90-4dd0-b301-16a168f0c166)
