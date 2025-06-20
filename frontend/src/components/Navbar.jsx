@@ -1,44 +1,63 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import SidebarMenu from "./SidebarMenu"; // Composant de la sidebar pour mobile
-import "../styles/Navbar.css"; // Importation du fichier CSS pour le style
+import "../styles/Navbar.css";
+import { FaUser, FaShoppingCart, FaPhone } from "react-icons/fa";
+import logo from "../assets/loglou.png";
 
 function Navbar() {
-  const [showSidebar, setShowSidebar] = useState(false); // Etat pour afficher/masquer la sidebar
+  const [showSidebar, setShowSidebar] = useState(false);
 
   return (
     <>
-      {/* Bannière d'ouverture de la boutique */}
+      {/* 🎉 Bannière promo */}
       <div className="banner">
         <p>🎉 Découvrez notre nouvelle boutique en ligne ! 🎂 Livraison de pâtisseries fraîches et artisanales.</p>
       </div>
 
+      {/* 🚀 Barre principale */}
       <header className="navbar-container">
+        {/* 🍔 Menu mobile */}
         <div className="menu-toggle" onClick={() => setShowSidebar(!showSidebar)}>
-          <i className="fas fa-bars"></i> {/* Icône hamburger */}
+          <i className="fas fa-bars"></i>
         </div>
 
-        {/* Logo centré */}
-        <div className="logo">
-          <img src="/images/logolou.png" alt="Logo" />
+               {/* 🧁 Ligne 1 : Logo + recherche + icônes */}
+      
+        <div className="logo-zone">
+          <Link to="/" className="logo-link"> 
+            <div className="brand-text">
+            <img src={logo} alt="Logo Lotfi Chef" />
+              <p>Le goût raffiné de la pâtisserie tunisienne</p>
+            </div>
+          </Link>
         </div>
 
-        {/* Barre de recherche */}
-        <div className="search-bar">
-          <input type="text" placeholder="Rechercher une catégorie..." />
-          <button><i className="fas fa-search"></i></button>
-        </div>
 
-        {/* Menu de navigation */}
+        {/* 🔗 Liens */}
         <div className="menu-right">
-          {/* Liens internes vers les pages */}
-          <Link to="/">Accueil</Link>
-          <Link to="/catalogue">Catalogue</Link>
-          <Link to="/panier"><i className="fas fa-shopping-cart"></i> Panier</Link>
-          <Link to="/connexion"><i className="fas fa-user-circle"></i> Se connecter</Link>
+          <Link to="/produits">Produits</Link>
+          <Link to="/dégustation">Dégustation</Link>
+          <Link to="/pieces-montees">Pièces Montées</Link>
+          <Link to="/contact">Contact</Link>
+
+         
+         {/* 👤 Mon compte */}
+         <div className="top-item">
+         <FaUser className="icon" />
+         <Link to="/login" className="top-bold">Mon compte</Link>
         </div>
 
-        {/* Sidebar si le menu hamburger est activé */}
+       {/* 🛒 Panier */}
+      <div className="top-item">
+        <FaShoppingCart className="icon" />
+          <span className="panier-label">Panier</span>
+         <span className="cart-badge">0</span>
+    </div>
+
+
+        </div>
+
+        {/* 📱 Sidebar mobile */}
         {showSidebar && <SidebarMenu closeSidebar={() => setShowSidebar(false)} />}
       </header>
     </>

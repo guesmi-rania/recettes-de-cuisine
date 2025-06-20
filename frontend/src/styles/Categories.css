@@ -1,22 +1,80 @@
-.categories-list {
-  background-color: #fff0f5;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.categories-list h3 {
-  margin-bottom: 15px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.categories-list ul {
-  list-style: none;
+/* 📂 Bloc catégories */
+.categories-dropdown {
+  width: 300px;
+  min-width: 200px; /* ✅ force la largeur minimum */
+  flex-shrink: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  font-family: 'Krub', sans-serif;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  border: none;
+  background-color: #ffffff;
   padding: 0;
+  margin-top: 0px;
+ 
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.3s ease;
 }
 
-.categories-list li {
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
-  font-family: 'Poppins', sans-serif;
+.dropdown-item:hover {
+  background-color: #f9f9f9;
+}
+
+.dropdown-item .icon {
+  color: #954C2E;
+  font-size: 1.2rem;
+}
+
+/* 🏷️ En-tête : "Toutes les catégories" */
+.dropdown-header {
+  background-color: #254D70;
+  color: white;
+  padding: 15px 18px;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 16px 16px 0 0;
+  margin: 0;
+}
+
+/* 📃 Liste déroulante */
+.dropdown-list {
+  background-color: transparent;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  min-width: 500px; /* ✅ force la largeur minimum */
+  flex-shrink: 0;
+}
+
+/* Catégories */
+.dropdown-list li {
+  display: flex;
+  align-items: center;
+  padding: 12.75px 18px;
+  font-size: 1rem;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.dropdown-list li:last-child {
+  border-bottom: none;
 }

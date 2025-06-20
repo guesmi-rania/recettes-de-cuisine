@@ -1,158 +1,109 @@
-/* Centrer la page et ajuster les éléments */
-.home-page {
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centrer tous les éléments horizontalement */
-  justify-content: flex-start;
-  margin: 0; /* Enlever toute marge par défaut */
-  padding-top: 20px; /* Espacement au-dessus de la page */
-  min-height: 100vh; /* Remplir toute la hauteur de la fenêtre */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(to right, #ffe3ec, #fff7f9);
+  border-radius: 12px;
+  margin-bottom: 30px;
 }
 
-/* Style pour la barre de navigation */
-.navbar {
-  display: flex;
-  justify-content: center; /* Centrer la barre de navigation */
-  align-items: center;
-  background-color: #ffffff;
-  padding: 10px 0;
-  width: 100%; /* Prendre toute la largeur */
-  margin-bottom: 0px; /* Espacement entre la barre de menu et les autres sections */
+.hero h1 {
+  font-size: 40px;
+  font-weight: 700;
+  color: #d63384;
 }
 
-/* Espacement entre le logo et la barre de menu */
-.navbar .logo {
-  margin-right: 30px; /* Éloigner le logo des éléments de menu */
+.hero .highlight {
+  color: #ff69b4;
 }
 
-/* Liste de navigation */
-.navbar ul {
-  display: flex;
-  gap: 30px; /* Espacement entre les éléments du menu */
-  list-style: none;
-  padding: 0;
+.hero p {
+  font-size: 20px;
+  color: #555;
+  margin: 10px 0 20px;
 }
 
-.navbar ul li {
-  font-size: 18px;
-  font-weight: bold;
+.hero-btn {
+  background-color: #ff69b4;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* Centrer le contenu principal : liste des catégories et slider */
+.hero-btn:hover {
+  background-color: #e84393;
+}
 .main-content {
   display: flex;
-  justify-content: center; /* Centrer la liste des catégories et le slider */
-  align-items: flex-start; /* Aligner les éléments en haut */
-  gap: 20px; /* Espacement entre la liste des catégories et le slider */
-  width: 80%; /* Limiter la largeur à 80% de la fenêtre */
-  margin-top: 0px; /* Espacement entre la barre de menu et les autres sections */
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-start;
+  width: 90%;
+  margin: auto;
 }
 
-/* Sidebar des catégories */
-.categories-sidebar {
-  width: 220px;
-  background-color: #f7f7f7;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
-/* Container du slider (élargi) */
+.section-separator {
+  border: none;
+  border-bottom: 1px solid #ccc; /* ligne grise */
+  margin: 40px auto; /* espace vertical au-dessus et dessous */
+  width: 90%; /* alignée avec les sections */
+  max-width: 1200px;
+}
 .slider-container {
-  width: 100%; /* Élégir la largeur à 100% de la fenêtre */
-  height: 400px; /* Hauteur du slider */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  flex: 1;
+  max-width: 800px;
+  height: 400px;
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-/* Sections supplémentaires sous le slider */
 .below-sections {
-  margin-top: 40px;
-  width: 80%;
+  width: 90%;
+  margin: 40px auto 0;
   text-align: center;
+  padding-bottom: 50px;
 }
 
-/* Responsivité : sur petit écran */
+.below-sections h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #d63384;
+}
 @media screen and (max-width: 768px) {
-  .home-page {
-    padding-top: 10px; /* Réduire l'espacement sur mobile */
-  }
-
   .main-content {
-    flex-direction: column; /* Aligner en colonne sur mobile */
-    gap: 20px;
-    align-items: center; /* Centrer tout sur mobile */
-    width: 90%; /* Réduire la largeur */
-  }
-
-  .categories-sidebar {
-    width: 100%;
-    margin-bottom: 20px; /* Ajouter un espacement entre la liste et le slider */
+    flex-direction: column;
+    width: 95%;
   }
 
   .slider-container {
     width: 100%;
-    height: 300px; /* Réduire la hauteur sur mobile */
+    height: 300px;
   }
-}
-/* Applique la police Roboto à toute la page d'accueil */
-.home-page {
-  font-family: 'Roboto', sans-serif;
-  color: #333; /* Couleur générale du texte (gris foncé) */
-  font-size: 18px; /* Taille de la police */
-}
 
-/* Applique la police Roboto aux éléments du menu */
-.navbar ul li {
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px; /* Taille de la police du menu */
-  font-weight: 500; /* Poids moyen pour le texte du menu */
-  margin-right: 20px; /* Espacement entre les éléments du menu */
-}
+  .hero h1 {
+    font-size: 28px;
+  }
 
-/* Applique la police Roboto au contenu des sections sous le slider */
-.below-sections {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px; /* Taille du texte sous le slider */
-}
-
-/* Applique la police au titre de la page (si vous avez un h1 ou un logo) */
-h1, .logo {
-  font-family: 'Roboto', sans-serif;
-  font-size: 36px; /* Taille de la police du titre */
-  font-weight: 700; /* Poids fort pour le titre */
-  text-align: center; /* Centrer le titre */
-}
-
-/* Appliquer la police aux autres sections de contenu */
-.slider-container, .categories-sidebar {
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px; /* Taille de la police des autres sections */
-}
-/* Menu de navigation */
-.navbar {
-  background-color: #f7f7f7; /* Fond clair pour la barre de menu */
-  padding: 10px 0; /* Espacement au-dessus et en-dessous du menu */
-}
-
-.navbar ul {
-  display: flex;
-  justify-content: center; /* Centrer les éléments du menu */
-  list-style: none;
-  padding: 0;
-}
-
-.navbar ul li {
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: #333; /* Couleur du texte du menu */
-  margin: 0 15px; /* Espacement entre chaque élément */
-}
-
-/* Lorsque vous passez la souris sur un élément du menu */
-.navbar ul li:hover {
-  color: #007BFF; /* Change la couleur du texte lorsque vous survolez */
+  .hero p {
+    font-size: 16px;
+  }
+  .hero {
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
 }

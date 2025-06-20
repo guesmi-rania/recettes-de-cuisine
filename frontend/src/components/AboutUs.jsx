@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/AboutUs.css";
+import chefImage from "../assets/chef.jpg"; 
 
 function AboutUs() {
   return (
@@ -18,7 +19,7 @@ function AboutUs() {
         </p>
       </div>
       <div className="about-image">
-        <img src="/images/chef.jpg" alt="Le chef pâtissier" />
+      <img src={chefImage} alt="Le chef pâtissier" />
       </div>
     </section>
   );

@@ -4,29 +4,43 @@ import Categories from "../components/Categories";
 import RecipeShowcase from "../components/RecipeShowcase";
 import AboutUs from "../components/AboutUs";
 import Footer from "../components/Footer";
+import CategoryExplore from "../components/CategoryExplore";
 import "../styles/Home.css";
+
 
 function Home() {
   return (
     <div className="home-page">
       <header>
         {/* Ta barre de menu ici */}
-      </header>
-      
+      </header> 
+
+    
       <div className="main-content">
-        <aside className="categories-sidebar">
-          <Categories /> {/* Affichage des catégories ici */}
-        </aside>
+      <aside className="categories-dropdown">
+      <Categories />
+      </aside>
+
 
         <div className="slider-container">
           <Slider /> {/* Le slider ici, avec une taille réduite */}
         </div>
       </div>
+      <hr className="section-separator" />
+
+       {/* Autres sections */}
+       <CategoryExplore />
+      {/* Autres sections */}
+      <hr className="section-separator" />
 
       {/* Autres sections en dessous */}
       <div className="below-sections">
         <RecipeShowcase />
+        <hr className="section-separator" />
+
         <AboutUs />
+        <hr className="section-separator" />
+
         <Footer />
       </div>
     </div>
