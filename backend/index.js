@@ -1,50 +1,37 @@
-require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-const productRoutes = require('./routes/products');
-const adminRoutes = require('./routes/adminRoutes');
 const clientRoutes = require('./routes/clients');
+const authRoutes = require('./routes/auth');     // pour login/register user
+const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = [
-  'https://frontend-recettes-fxc8.onrender.com',
-  'https://guesmi-rania.github.io',
-];
-
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    callback(new Error('CORS non autorisé pour cette origine'));
-  },
-  credentials: true,
+  origin: ["https://frontend-recettes-fxc8.onrender.com", "http://localhost:3000"]
 }));
+
 
 app.use(express.json());
 
-app.use('/api/products', productRoutes);
-app.use('/api/admin', adminRoutes);
+// Ici on monte les routes
 app.use('/api/clients', clientRoutes);
-
-app.use(express.static(path.join(__dirname, 'public', 'dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
-});
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('✅ Connexion à MongoDB réussie');
+    app.get('/', (req, res) => {
+      res.send('Backend API fonctionne !');
+    });
     app.listen(PORT, () => {
       console.log(`🚀 Serveur démarré sur le port ${PORT}`);
     });
   })
-  .catch(error => {
-    console.error('❌ Erreur de connexion à MongoDB :', error.message);
+  .catch(err => {
+    console.error('❌ Erreur de connexion à MongoDB :', err.message);
   });
