@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: '../backend/public/dist', // Si tu déploies avec le backend
+    outDir: 'dist', // Si tu déploies avec le backend
   },
   server: {
     port: 3000,
