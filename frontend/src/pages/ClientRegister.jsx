@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "../styles/ClientRegister.css";
 
+// 🔥 L'URL du BACKEND ici
+const BASE_URL = "https://recettes-de-cuisine.onrender.com";
+
 function ClientRegister() {
   const [formData, setFormData] = useState({
     name: "",
@@ -17,12 +20,12 @@ function ClientRegister() {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Les mots de passe ne correspondent pas.");
+      alert("❌ Les mots de passe ne correspondent pas.");
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/clients/register", {
+      const response = await fetch(`${BASE_URL}/api/clients/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -6,9 +6,8 @@ function ProductsPage() {
   return (
     <div>
       <h2>Nos Produits</h2>
-      
-      <ProductList />
-      
+     <ProductList />
+      <ProductDetails />
     </div>
   );
 }
