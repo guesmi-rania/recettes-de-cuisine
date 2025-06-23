@@ -1,41 +1,129 @@
+/* AdminLogin.css - design amélioré */
+
 .admin-login-container {
-    max-width: 400px;
-    margin: 80px auto;
-    padding: 30px;
-    background-color: #fff7f2;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .admin-login-container h2 {
-    text-align: center;
-    color: #b5651d;
-    margin-bottom: 20px;
-  }
-  
-  .admin-login-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .admin-login-container input {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-  
-  .admin-login-container button {
-    padding: 10px;
-    background-color: #b5651d;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .admin-login-container button:hover {
-    background-color: #914910;
-  }
-  
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 30px 35px;
+  background-color: #faf4f4; /* gris clair */
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(196, 92, 1, 0.3);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #e07d04;
+  transition: box-shadow 0.3s ease;
+}
+
+
+.admin-login-container:hover {
+  box-shadow: 0 12px 30px rgba(181, 101, 29, 0.5);
+}
+
+.admin-login-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #d7af6f;
+  user-select: none;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding-bottom: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #b3862e;
+  cursor: pointer;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.tab.active {
+  color: #4a2c0a;
+  border-bottom: 3px solid #4a2c0a;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  padding: 12px 14px;
+  border: 1.5px solid #c7a256;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  outline-color: #e46a00;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  border-color: #7d4b0b;
+  box-shadow: 0 0 8px rgba(125, 75, 11, 0.3);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin-top: 14px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+button {
+  margin-top: 24px;
+  padding: 14px;
+  background-color: #ee6f00;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+button:hover {
+  background-color: #e46600;
+  box-shadow: 0 6px 12px rgba(233, 105, 1, 0.5);
+}
+
+
+.forgot-password {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #b94a4a;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #7a2d2d;
+}

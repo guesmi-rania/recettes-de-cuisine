@@ -1,0 +1,46 @@
+.client-register {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff8f2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .client-register h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e91e63;
+  }
+  
+  .client-register form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .client-register label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .client-register input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .client-register button {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .client-register button:hover {
+    background-color: #d81b60;
+  }
+  

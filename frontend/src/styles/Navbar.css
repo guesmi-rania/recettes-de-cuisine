@@ -1,10 +1,10 @@
 /* 🎉 Bannière promo animée */
 .banner {
-  background: linear-gradient(270deg, #00809D, #FCECDD, #F3A26D);
+  background: linear-gradient(270deg, #FE7A36, #C738BD, #E49BFF ,#C4E4FF);
   background-size: 600% 600%;
   color: white;
   text-align: center;
-  padding: 2px 0;
+  padding: 1px 0;
   font-size: 0.9rem;
   font-weight: bold;
   width: 100%;
@@ -111,7 +111,7 @@
 /* 👑 Icônes */
 .menu-right .icon {
   font-size: 20px;
-  color: #954C2E;
+  color: #FE7A36;
   transition: transform 0.2s;
 }
 
@@ -121,7 +121,7 @@
 
 /* 🛒 Badge Panier */
 .cart-badge {
-  background-color: #954C2E;
+  background-color: #FE7A36;
   color: white;
   font-size: 11px;
   font-weight: bold;

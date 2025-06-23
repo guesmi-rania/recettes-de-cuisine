@@ -5,7 +5,9 @@ import Home from "./pages/Home";
 import CartPage from "./pages/CartPage"; // et non Cart
 import ProductsPage from "./pages/ProductsPage";
 import AdminLogin from "./pages/AdminLogin";
+import ClientRegister from "./pages/ClientRegister";
 import 'font-awesome/css/font-awesome.min.css';
+
 
 function App() {
   return (
@@ -13,9 +15,10 @@ function App() {
       <Navbar />
       <Routes> {/* Utilisation de Routes ici */}
         <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/login" element={<AdminLogin />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/panier" element={<CartPage />} />
+        <Route path="/register" element={<ClientRegister />} />
       </Routes>
     </>
   );
