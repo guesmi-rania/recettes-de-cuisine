@@ -24,8 +24,8 @@ router.post("/register", async (req, res) => {
     res.status(201).json({ message: "Client enregistré avec succès !" });
   } catch (error) {
     console.error("Erreur lors de l'inscription :", error);
-    res.status(500).json({ message: "Erreur serveur" });
-  }
+    res.status(500).json({ message: `Erreur serveur : ${error.message}` });
+}
 });
 
 // POST /api/clients/login
