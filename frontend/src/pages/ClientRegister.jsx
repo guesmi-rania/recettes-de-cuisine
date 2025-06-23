@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from 'axios';
+
 const BASE_URL = "https://recettes-de-cuisine.onrender.com";
 
 function ClientRegister() {
@@ -8,6 +10,7 @@ function ClientRegister() {
     password: "",
     confirmPassword: "",
   });
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
