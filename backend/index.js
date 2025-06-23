@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 const productRoutes = require('./routes/products');
 const adminRoutes = require('./routes/adminRoutes');
@@ -12,14 +13,13 @@ const PORT = process.env.PORT || 5000;
 
 // Liste des origines autorisées
 const allowedOrigins = [
-  'https://frontend-recettes-fxc8.onrender.com',  // Ton frontend Render
-  'https://guesmi-rania.github.io'               // Si tu déploies aussi sur GitHub Pages
+  'https://frontend-recettes-fxc8.onrender.com',
+  'https://guesmi-rania.github.io'
 ];
 
-// Middleware CORS avec vérification d’origine dynamique
+// CORS
 app.use(cors({
   origin: function (origin, callback) {
-    // Autoriser les requêtes sans origine (comme Postman, Curl)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
@@ -27,15 +27,21 @@ app.use(cors({
       return callback(new Error('CORS non autorisé pour cette origine'), false);
     }
   },
-  credentials: true // Si tu veux autoriser les cookies (sinon tu peux l'enlever)
+  credentials: true
 }));
 
 app.use(express.json());
 
-// Routes
+// Routes API
 app.use('/api/products', productRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/clients', clientRoutes);
+
+// Servir le frontend Vite (dans /public/dist)
+app.use(express.static(path.join(__dirname, 'public', 'dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
+});
 
 // Connexion MongoDB
 mongoose.connect(process.env.MONGO_URI)
