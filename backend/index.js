@@ -13,19 +13,18 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   'https://frontend-recettes-fxc8.onrender.com',
-  'https://guesmi-rania.github.io'
+  'https://guesmi-rania.github.io',
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
+  origin: function(origin, callback) {
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS non autorisé pour cette origine'), false);
+      return callback(null, true);
     }
+    callback(new Error('CORS non autorisé pour cette origine'));
   },
-  credentials: true
+  credentials: true,
 }));
 
 app.use(express.json());
@@ -34,7 +33,6 @@ app.use('/api/products', productRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/clients', clientRoutes);
 
-// Si tu sers aussi le frontend depuis le backend (optionnel)
 app.use(express.static(path.join(__dirname, 'public', 'dist')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
