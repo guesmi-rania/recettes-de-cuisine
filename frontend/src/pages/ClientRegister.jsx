@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import "../styles/ClientRegister.css";
-
-// 🔥 L'URL du BACKEND ici
 const BASE_URL = "https://recettes-de-cuisine.onrender.com";
 
 function ClientRegister() {
@@ -66,7 +63,6 @@ function ClientRegister() {
           onChange={handleChange}
           required
         />
-
         <label>Email</label>
         <input
           type="email"
@@ -75,7 +71,6 @@ function ClientRegister() {
           onChange={handleChange}
           required
         />
-
         <label>Mot de passe</label>
         <input
           type="password"
@@ -84,7 +79,6 @@ function ClientRegister() {
           onChange={handleChange}
           required
         />
-
         <label>Confirmer le mot de passe</label>
         <input
           type="password"
@@ -93,7 +87,6 @@ function ClientRegister() {
           onChange={handleChange}
           required
         />
-
         <button type="submit">S'inscrire</button>
       </form>
     </div>
