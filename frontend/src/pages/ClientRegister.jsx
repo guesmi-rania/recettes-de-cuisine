@@ -1,7 +1,9 @@
+// src/components/ClientRegister.jsx
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
+import "../styles/ClientRegister.css"; // facultatif si tu as un style
 
-const BASE_URL = "https://recettes-de-cuisine.onrender.com";
+const BASE_URL = "https://recettes-de-cuisine.onrender.com"; // ⚠️ Remplace par ton backend réel si différent
 
 function ClientRegister() {
   const [formData, setFormData] = useState({
@@ -11,9 +13,13 @@ function ClientRegister() {
     confirmPassword: "",
   });
 
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -24,33 +30,28 @@ function ClientRegister() {
       return;
     }
 
+    setLoading(true);
+
     try {
-      const response = await fetch(`${BASE_URL}/api/clients/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
+      const response = await axios.post(`${BASE_URL}/api/clients/register`, {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        alert("🎉 Inscription réussie !");
-        setFormData({
-          name: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-        });
-      } else {
-        alert(`❌ Erreur : ${data.message}`);
+      if (response.status === 201) {
+        alert("✅ Inscription réussie !");
+        setFormData({ name: "", email: "", password: "", confirmPassword: "" });
       }
     } catch (error) {
-      console.error("Erreur réseau :", error);
-      alert("Erreur lors de l'inscription. Veuillez réessayer.");
+      if (error.response) {
+        alert(`❌ Erreur : ${error.response.data.message}`);
+      } else {
+        alert("❌ Erreur réseau. Veuillez réessayer.");
+      }
+      console.error("Erreur lors de l'inscription :", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,7 +59,7 @@ function ClientRegister() {
     <div className="client-register">
       <h2>Créer un compte</h2>
       <form onSubmit={handleSubmit}>
-        <label>Nom complet</label>
+        <label>Nom</label>
         <input
           type="text"
           name="name"
@@ -66,6 +67,7 @@ function ClientRegister() {
           onChange={handleChange}
           required
         />
+
         <label>Email</label>
         <input
           type="email"
@@ -74,6 +76,7 @@ function ClientRegister() {
           onChange={handleChange}
           required
         />
+
         <label>Mot de passe</label>
         <input
           type="password"
@@ -82,6 +85,7 @@ function ClientRegister() {
           onChange={handleChange}
           required
         />
+
         <label>Confirmer le mot de passe</label>
         <input
           type="password"
@@ -90,7 +94,10 @@ function ClientRegister() {
           onChange={handleChange}
           required
         />
-        <button type="submit">S'inscrire</button>
+
+        <button type="submit" disabled={loading}>
+          {loading ? "⏳ Enregistrement..." : "S'inscrire"}
+        </button>
       </form>
     </div>
   );
