@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/ClientLogin.css";
 
-const BASE_URL = "https://recettes-de-cuisine.onrender.com";
+const BASE_URL = "https://recettes-de-cuisine.onrender.com/api/auth";
 
 function ClientLogin() {
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ function ClientLogin() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${BASE_URL}/api/clients/login`, {
+      const response = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -55,7 +55,8 @@ function ClientLogin() {
           required
         />
 
-        <button type="submit">Se connecter</button>
+    <button type="submit">Se connecter</button>
+     <p>Pas de compte ? <a href="/register">S'inscrire</a></p>
       </form>
     </div>
   );

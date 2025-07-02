@@ -2,53 +2,71 @@ const express = require("express");
 const router = express.Router();
 const Client = require("../models/Client");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-// POST /api/clients/register
-router.post("/register", async (req, res) => {
+// Clé secrète pour JWT (mettre dans .env en prod)
+const JWT_SECRET = process.env.JWT_SECRET || "secret_jwt_key";
+
+// Route POST pour s'inscrire
+router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Vérifie si l'email existe déjà
+    // Vérifier si l'email existe déjà
     const existingClient = await Client.findOne({ email });
     if (existingClient) {
       return res.status(400).json({ message: "Email déjà utilisé." });
     }
 
-    // Hash du mot de passe avant sauvegarde
+    // Hash du mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Crée et enregistre le client avec le mot de passe hashé
+    // Créer et sauvegarder le client
     const newClient = new Client({ name, email, password: hashedPassword });
     await newClient.save();
 
-    res.status(201).json({ message: "Client enregistré avec succès !" });
+    res.status(201).json({ message: "Inscription réussie !" });
   } catch (error) {
-    console.error("Erreur lors de l'inscription :", error);
-    res.status(500).json({ message: `Erreur serveur : ${error.message}` });
-}
+    console.error(error);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
 });
 
-// POST /api/clients/login
-router.post("/login", async (req, res) => {
+// Route POST pour se connecter
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Recherche le client par email
+    // Trouver le client
     const client = await Client.findOne({ email });
-
     if (!client) {
-      return res.status(401).json({ message: "Identifiants invalides" });
+      return res.status(401).json({ message: "Email ou mot de passe incorrect" });
     }
 
-    // Compare le mot de passe fourni avec le hash stocké
+    // Comparer les mots de passe
     const isMatch = await bcrypt.compare(password, client.password);
     if (!isMatch) {
-      return res.status(401).json({ message: "Mot de passe incorrect" });
+      return res.status(401).json({ message: "Email ou mot de passe incorrect" });
     }
 
-    res.json({ message: "Connexion réussie", token: "fake-jwt-token" });
+    // Créer un token JWT
+    const token = jwt.sign(
+      { id: client._id, email: client.email },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.json({
+      message: "Connexion réussie",
+      token,
+      client: {
+        id: client._id,
+        name: client.name,
+        email: client.email,
+      },
+    });
   } catch (error) {
-    console.error("Erreur lors de la connexion :", error);
+    console.error(error);
     res.status(500).json({ message: "Erreur serveur" });
   }
 });

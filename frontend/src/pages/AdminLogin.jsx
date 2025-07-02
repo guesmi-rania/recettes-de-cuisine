@@ -17,10 +17,13 @@ export default function MonCompte() {
     registerEmail.trim() !== "" &&
     registerPassword.trim() !== "";
 
+  // ✅ Récupérer l'URL backend depuis la variable d'environnement
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = isLogin ? "/api/auth/login" : "/api/auth/register";
+    const url = isLogin ? `${BASE_URL}/api/auth/login` : `${BASE_URL}/api/auth/register`;
     const body = isLogin
       ? { username, password }
       : { username: registerUsername, email: registerEmail, password: registerPassword };
@@ -38,13 +41,12 @@ export default function MonCompte() {
         alert(data.message);
 
         if (isLogin && data.token) {
-          // Exemple : stocker token et rediriger
           localStorage.setItem("token", data.token);
           // window.location.href = "/admin-dashboard"; // décommente si tu as une route admin
         }
 
         if (!isLogin) {
-          // Reset champs inscription
+          // Reset des champs d'inscription
           setRegisterUsername("");
           setRegisterEmail("");
           setRegisterPassword("");
@@ -60,7 +62,7 @@ export default function MonCompte() {
 
   return (
     <div className="admin-login-container">
-      <h2>{isLogin ? "Connexion Admin" : "Inscription Admin"}</h2>
+      <h2>{isLogin ? "Connexion" : "Inscription"}</h2>
       <div className="tabs">
         <div
           onClick={() => setIsLogin(true)}

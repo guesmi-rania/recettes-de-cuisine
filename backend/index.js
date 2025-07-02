@@ -1,37 +1,46 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config();
+const path = require('path');
 
-const clientRoutes = require('./routes/clients');
-const authRoutes = require('./routes/auth');     // pour login/register user
+const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({
-  origin: ["https://frontend-recettes-fxc8.onrender.com", "http://localhost:3000"]
-}));
 
+const corsOptions = {
+  origin: ['https://frontend-recettes-fxc8.onrender.com'], // Mets l'URL de ton frontend
+  credentials: true
+};
 
+app.use(cors(corsOptions));
+
+// Middleware JSON
 app.use(express.json());
 
-// Ici on monte les routes
-app.use('/api/clients', clientRoutes);
+// Routes API
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Servir le frontend React buildé
+app.use(express.static(path.join(__dirname, 'public', 'dist')));
+
+// Route fallback pour SPA (React Router)
+app.get('/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
+});
+
+// Connexion MongoDB + démarrage serveur
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('✅ Connexion à MongoDB réussie');
-    app.get('/', (req, res) => {
-      res.send('Backend API fonctionne !');
-    });
-    app.listen(PORT, () => {
-      console.log(`🚀 Serveur démarré sur le port ${PORT}`);
-    });
-  })
-  .catch(err => {
-    console.error('❌ Erreur de connexion à MongoDB :', err.message);
+.then(() => {
+  console.log('✅ Connecté à MongoDB Atlas');
+  app.listen(PORT, () => {
+    console.log(`🚀 Serveur démarré sur le port ${PORT}`);
   });
+})
+.catch(err => {
+  console.error('❌ Erreur de connexion MongoDB :', err.message);
+});

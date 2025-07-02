@@ -1,9 +1,9 @@
 // src/components/ClientRegister.jsx
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/ClientRegister.css"; // facultatif si tu as un style
+import "../styles/ClientRegister.css"; 
 
-const BASE_URL = "https://recettes-de-cuisine.onrender.com"; // ⚠️ Remplace par ton backend réel si différent
+const BASE_URL = "https://recettes-de-cuisine.onrender.com/api/auth";
 
 function ClientRegister() {
   const [formData, setFormData] = useState({
@@ -33,11 +33,11 @@ function ClientRegister() {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/clients/register`, {
+      const response = await axios.post(`${BASE_URL}/register`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-      });
+      });      
 
       if (response.status === 201) {
         alert("✅ Inscription réussie !");
@@ -95,9 +95,12 @@ function ClientRegister() {
           required
         />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "⏳ Enregistrement..." : "S'inscrire"}
-        </button>
+    <button type="submit" disabled={loading}>
+     {loading ? "⏳ Enregistrement..." : "S'inscrire"}
+    </button>
+
+     <p>Déjà inscrit ? <a href="/login">Se connecter</a></p>
+
       </form>
     </div>
   );
