@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 
@@ -10,10 +9,12 @@ const adminRoutes = require('./routes/adminRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const cors = require('cors');
 
 const corsOptions = {
-  origin: ['https://frontend-recettes-fxc8.onrender.com'], // Mets l'URL de ton frontend
-  credentials: true
+  origin: ['http://localhost:5173', 'https://frontend-recettes-fxc8.onrender.com'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
