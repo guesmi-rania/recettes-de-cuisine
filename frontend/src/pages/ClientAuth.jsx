@@ -1,154 +1,188 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "../styles/ClientAuth.css";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL || "https://recettes-de-cuisine.onrender.com";
 
-function ClientAuth() {
-  const [activeTab, setActiveTab] = useState("login");
-
-  // Login states
+export default function ClientAuth() {
+  const [isLogin, setIsLogin] = useState(true);
+  
+  // Formulaire de connexion
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Register states
-  const [registerName, setRegisterName] = useState("");
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // Formulaire d'inscription
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  // Connexion client
+  const [loading, setLoading] = useState(false);
+
+  // ✅ Changement des champs pour le formulaire d'inscription
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  // ✅ Formulaire Connexion
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/auth/login`, {
-        email,
-        password,
+      const response = await fetch(`${BASE_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
 
-      console.log("Réponse connexion :", response);
+      const data = await response.json();
 
-      if (response.status === 200) {
+      if (response.ok) {
         alert("🎉 Connexion réussie !");
-        localStorage.setItem("clientToken", response.data.token);
-        // Tu peux rediriger ici si tu veux
-        // window.location.href = "/";
+        localStorage.setItem("clientToken", data.token);
+        // window.location.href = "/"; // Redirection si tu veux
+      } else {
+        alert(`❌ Erreur : ${data.message}`);
       }
     } catch (error) {
-      console.error("Erreur connexion :", error.response?.data || error.message);
-      alert(`❌ Erreur lors de la connexion : ${error.response?.data?.message || error.message}`);
+      console.error("Erreur réseau :", error);
+      alert("Erreur lors de la connexion. Veuillez réessayer.");
     }
   };
 
-  // Inscription client
+  // ✅ Formulaire Inscription
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (registerPassword !== confirmPassword) {
+    if (formData.password !== formData.confirmPassword) {
       alert("❌ Les mots de passe ne correspondent pas.");
       return;
     }
 
+    setLoading(true);
+
     try {
-      const response = await axios.post(`${BASE_URL}/api/auth/register`, {
-        name: registerName,
-        email: registerEmail,
-        password: registerPassword,
+      const response = await fetch(`${BASE_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
       });
 
-      console.log("Réponse inscription :", response);
+      const data = await response.json();
 
-      if (response.status === 201 || response.status === 200) {
+      if (response.status === 201 || response.ok) {
         alert("✅ Inscription réussie !");
-        setRegisterName("");
-        setRegisterEmail("");
-        setRegisterPassword("");
-        setConfirmPassword("");
-        setActiveTab("login");
+        setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+        setIsLogin(true); // Redirige vers la page de connexion après inscription
+      } else {
+        alert(`❌ Erreur : ${data.message}`);
       }
     } catch (error) {
-      console.error("Erreur inscription :", error.response?.data || error.message);
-      alert(`❌ Erreur lors de l'inscription : ${error.response?.data?.message || error.message}`);
+      console.error("Erreur lors de l'inscription :", error);
+      alert("Erreur réseau. Veuillez réessayer.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="client-auth">
+    <div className="client-auth-container">
+      <h2>{isLogin ? "Connexion" : "Créer un compte"}</h2>
+
       <div className="tabs">
         <div
-          className={`tab ${activeTab === "login" ? "active" : ""}`}
-          onClick={() => setActiveTab("login")}
+          onClick={() => setIsLogin(true)}
+          className={`tab ${isLogin ? "active" : ""}`}
         >
-          Connexion
+          Se connecter
         </div>
         <div
-          className={`tab ${activeTab === "register" ? "active" : ""}`}
-          onClick={() => setActiveTab("register")}
+          onClick={() => setIsLogin(false)}
+          className={`tab ${!isLogin ? "active" : ""}`}
         >
-          Inscription
+          S’inscrire
         </div>
       </div>
 
-      {activeTab === "login" ? (
-        <form onSubmit={handleLogin}>
-          <label>Email *</label>
+      {isLogin ? (
+        <form onSubmit={handleLogin} className="auth-form">
+          <label>Email</label>
           <input
             type="email"
+            placeholder="Entrez votre email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
 
-          <label>Mot de passe *</label>
+          <label>Mot de passe</label>
           <input
             type="password"
+            placeholder="Entrez votre mot de passe"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
 
           <button type="submit">Se connecter</button>
+          <p>Pas de compte ? Cliquez sur "S’inscrire" ci-dessus.</p>
         </form>
       ) : (
-        <form onSubmit={handleRegister}>
-          <label>Nom *</label>
+        <form onSubmit={handleRegister} className="auth-form">
+          <label>Nom</label>
           <input
             type="text"
-            value={registerName}
-            onChange={(e) => setRegisterName(e.target.value)}
+            name="name"
+            placeholder="Entrez votre nom"
+            value={formData.name}
+            onChange={handleChange}
             required
           />
 
-          <label>Email *</label>
+          <label>Email</label>
           <input
             type="email"
-            value={registerEmail}
-            onChange={(e) => setRegisterEmail(e.target.value)}
+            name="email"
+            placeholder="Entrez votre email"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
 
-          <label>Mot de passe *</label>
+          <label>Mot de passe</label>
           <input
             type="password"
-            value={registerPassword}
-            onChange={(e) => setRegisterPassword(e.target.value)}
+            name="password"
+            placeholder="Entrez votre mot de passe"
+            value={formData.password}
+            onChange={handleChange}
             required
           />
 
-          <label>Confirmer le mot de passe *</label>
+          <label>Confirmer le mot de passe</label>
           <input
             type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            name="confirmPassword"
+            placeholder="Confirmez votre mot de passe"
+            value={formData.confirmPassword}
+            onChange={handleChange}
             required
           />
 
-          <button type="submit">S'inscrire</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "⏳ Enregistrement..." : "S’inscrire"}
+          </button>
+          <p>Déjà inscrit ? Cliquez sur "Se connecter" ci-dessus.</p>
         </form>
       )}
     </div>
   );
 }
-
-export default ClientAuth;
