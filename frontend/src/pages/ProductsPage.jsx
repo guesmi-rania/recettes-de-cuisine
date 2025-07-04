@@ -4,6 +4,10 @@ import ProductCard from "../components/ProductCard";
 import ProductFiltersSidebar from "../components/ProductFiltersSidebar";
 import QuickFilters from "../components/QuickFilters";
 import "../styles/Shop.css";
+import "../styles/ProductFiltersSidebar.css";
+import "../styles/ProductCard.css";
+import "../styles/QuickFilters.css";
+
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -19,14 +23,17 @@ export default function ProductsPage() {
   const fetchProducts = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/api/products`);
+      console.log("Produits récupérés :", res.data); // 👈 Ajoute cette ligne
       setProducts(res.data);
       setFilteredProducts(res.data);
     } catch (error) {
+      console.error("Erreur axios :", error); // 👈 Ajoute cette ligne
       alert("Erreur lors du chargement des produits");
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handleFilter = (category) => {
     if (category === "all") {
