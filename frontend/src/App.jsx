@@ -7,7 +7,7 @@ import ProductsPage from "./pages/ProductsPage";
 import OrdersPage from "./pages/OrdersPage";
 import ClientAuth from "./pages/ClientAuth";
 import WishlistPage from "./pages/WishlistPage";
-import ProductDetail from "./pages/ProductDetail";  // À créer
+import ProductDetail from "./pages/ProductDetail";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -58,7 +58,16 @@ function App() {
             />
           }
         />
-        <Route path="/produits/:id" element={<ProductDetail />} />
+        <Route
+          path="/produits/:id"
+          element={
+            <ProductDetail
+              onAddToCart={handleAddToCart}
+              onAddToWishlist={handleAddToWishlist}
+              wishlist={wishlist}
+            />
+          }
+        />
         <Route path="/panier" element={<CartPage cart={cart} setCart={setCart} />} />
         <Route path="/wishlist" element={<WishlistPage wishlist={wishlist} setWishlist={setWishlist} />} />
         <Route path="/commandes" element={<OrdersPage />} />
