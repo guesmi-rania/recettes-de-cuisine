@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Navbar.css";
-import { FaUser, FaShoppingCart, FaPhone } from "react-icons/fa";
+import { FaUser, FaShoppingCart, FaHeart } from "react-icons/fa";
 import logo from "../assets/loglou.png";
 
-function Navbar() {
+function Navbar({ cart = [], wishlist = [] }) {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
@@ -21,17 +21,15 @@ function Navbar() {
           <i className="fas fa-bars"></i>
         </div>
 
-               {/* 🧁 Ligne 1 : Logo + recherche + icônes */}
-      
+        {/* 🧁 Logo */}
         <div className="logo-zone">
-          <Link to="/" className="logo-link"> 
+          <Link to="/" className="logo-link">
             <div className="brand-text">
-            <img src={logo} alt="Logo Lotfi Chef" />
+              <img src={logo} alt="Logo Lotfi Chef" />
               <p>Le goût raffiné de la pâtisserie tunisienne</p>
             </div>
           </Link>
         </div>
-
 
         {/* 🔗 Liens */}
         <div className="menu-right">
@@ -40,22 +38,26 @@ function Navbar() {
           <Link to="/pieces-montees">Pièces Montées</Link>
           <Link to="/contact">Contact</Link>
 
-         
-         {/* 👤 Mon compte */}
-         <div className="top-item">
-         <FaUser className="icon" />
-         <Link to="/login" className="top-bold">Mon compte</Link>
-        </div>
+          {/* 👤 Mon compte */}
+          <div className="top-item">
+            <FaUser className="icon" />
+            <Link to="/login" className="top-bold">
+              Mon compte
+            </Link>
+          </div>
 
-       {/* 🛒 Panier */}
-       <Link to="/panier" className="top-item">
-       <FaShoppingCart className="icon" />
-        <span className="panier-label">Panier</span>
-       <span className="cart-badge">0</span>
-      </Link>
+          {/* ❤️ Wishlist */}
+          <Link to="/wishlist" className="top-item" style={{ position: "relative" }}>
+            <FaHeart className="icon" />
+            {wishlist.length > 0 && <span className="cart-badge">{wishlist.length}</span>}
+          </Link>
 
-
-
+          {/* 🛒 Panier */}
+          <Link to="/panier" className="top-item" style={{ position: "relative" }}>
+            <FaShoppingCart className="icon" />
+            <span className="panier-label">Panier</span>
+            {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
+          </Link>
         </div>
 
         {/* 📱 Sidebar mobile */}

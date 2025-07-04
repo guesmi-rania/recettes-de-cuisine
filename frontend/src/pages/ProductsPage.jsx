@@ -8,32 +8,57 @@ import "../styles/ProductFiltersSidebar.css";
 import "../styles/ProductCard.css";
 import "../styles/QuickFilters.css";
 
-
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
   useEffect(() => {
-    fetchProducts();
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    setCart(storedCart);
+    setWishlist(storedWishlist);
   }, []);
+  
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+  
+  useEffect(() => {
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  }, [wishlist]);
+  
+useEffect(() => {
+  const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+  const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+  setCart(storedCart);
+  setWishlist(storedWishlist);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}, [cart]);
+
+useEffect(() => {
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+}, [wishlist]);
 
   const fetchProducts = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/api/products`);
-      console.log("Produits récupérés :", res.data); // 👈 Ajoute cette ligne
+      console.log("Produits récupérés :", res.data);
       setProducts(res.data);
       setFilteredProducts(res.data);
     } catch (error) {
-      console.error("Erreur axios :", error); // 👈 Ajoute cette ligne
+      console.error("Erreur axios :", error);
       alert("Erreur lors du chargement des produits");
     } finally {
       setLoading(false);
     }
   };
-  
 
   const handleFilter = (category) => {
     if (category === "all") {
@@ -50,6 +75,20 @@ export default function ProductsPage() {
     setFilteredProducts(sorted);
   };
 
+  const handleAddToCart = (product) => {
+    setCart([...cart, product]);
+    alert(`${product.name} ajouté au panier !`);
+  };
+
+  const handleAddToWishlist = (product) => {
+    if (!wishlist.find((item) => item._id === product._id)) {
+      setWishlist([...wishlist, product]);
+      alert(`${product.name} ajouté à la wishlist !`);
+    } else {
+      alert(`${product.name} est déjà dans la wishlist !`);
+    }
+  };
+
   return (
     <div className="shop-container">
       <ProductFiltersSidebar onFilter={handleFilter} />
@@ -62,7 +101,12 @@ export default function ProductsPage() {
         ) : (
           <div className="product-grid">
             {filteredProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
+              <ProductCard
+                key={product._id}
+                product={product}
+                onAddToCart={handleAddToCart}
+                onAddToWishlist={handleAddToWishlist}
+              />
             ))}
           </div>
         )}
