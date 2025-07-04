@@ -16,21 +16,21 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    setCart(storedCart);
-    setWishlist(storedWishlist);
-  }, []);
-  
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-  
-  useEffect(() => {
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
-  }, [wishlist]);
-  
+useEffect(() => {
+  const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+  const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+  setCart(storedCart);
+  setWishlist(storedWishlist);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}, [cart]);
+
+useEffect(() => {
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+}, [wishlist]);
+
 useEffect(() => {
   const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
   const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
