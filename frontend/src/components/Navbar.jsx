@@ -48,11 +48,12 @@ function Navbar() {
         </div>
 
        {/* 🛒 Panier */}
-      <div className="top-item">
-        <FaShoppingCart className="icon" />
-          <span className="panier-label">Panier</span>
-         <span className="cart-badge">0</span>
-    </div>
+       <Link to="/panier" className="top-item">
+       <FaShoppingCart className="icon" />
+        <span className="panier-label">Panier</span>
+       <span className="cart-badge">0</span>
+      </Link>
+
 
 
         </div>
