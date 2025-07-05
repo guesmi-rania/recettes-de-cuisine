@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import "../styles/ContactPage.css";
+import { FaFacebookF, FaInstagram, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { MdLocationOn } from "react-icons/md";
 
 export default function ContactPage() {
   const form = useRef();
@@ -81,37 +82,49 @@ export default function ContactPage() {
 
         {/* Informations de contact */}
         <div className="contact-info">
-          <h2>Comment pouvons-nous vous aider ?</h2>
-          <p><strong>Téléphone du Chef :</strong> +216 20 828 055</p>
-          <p><strong>Email :</strong> lotfichef@gmail.com</p>
-          <p><strong>Localisation :</strong> n°11 rue Kawefel Borj Louzir Ariana</p>
-        
-          <h4>Suivez-nous :</h4>
-          <ul className="social-links">
-            <li>
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Facebook"
-              >
-                <FaFacebookF className="social-icon animated-icon" />
-                Facebook
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram"
-              >
-                <FaInstagram className="social-icon animated-icon" />
-                Instagram
-              </a>
-            </li>
-          </ul>
-        </div>
+  <h2>Comment pouvons-nous vous aider ?</h2>
+
+  <p>
+    <FaPhoneAlt className="info-icon" />
+    <strong>Téléphone : </strong> +216 20 828 055
+  </p>
+  <p>
+    <FaEnvelope className="info-icon" />
+    <strong>Email : </strong> lotfichef@gmail.com
+  </p>
+
+<p>
+  <MdLocationOn className="info-icon" />
+  <strong>Localisation :</strong> n°11 rue kawefel Borj Louzir Ariana
+</p>
+
+
+  <h4>Suivez-nous :</h4>
+  <ul className="social-links">
+    <li>
+      <a
+        href="https://www.facebook.com"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Facebook"
+      >
+        <FaFacebookF className="social-icon animated-icon" />
+        Facebook
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://www.instagram.com"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Instagram"
+      >
+        <FaInstagram className="social-icon animated-icon" />
+        Instagram
+      </a>
+    </li>
+  </ul>
+</div>
 
       </div>
 
