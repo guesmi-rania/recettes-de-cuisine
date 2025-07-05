@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import "../styles/ContactPage.css";
 
 export default function ContactPage() {
@@ -21,7 +22,7 @@ export default function ContactPage() {
       .then(
         () => {
           toast.success("✅ Message envoyé avec succès !");
-          form.current.reset(); // Vider le formulaire après envoi
+          form.current.reset();
         },
         (error) => {
           toast.error("❌ Une erreur est survenue. Veuillez réessayer.");
@@ -50,10 +51,21 @@ export default function ContactPage() {
           <h3>Comment pouvons-nous vous aider ?</h3>
           <p><strong>Téléphone du Chef :</strong> +216 50 123 456</p>
           <p><strong>Email :</strong> lotfichef@gmail.com</p>
+
           <h4>Suivez-nous :</h4>
-          <ul>
-            <li><a href="https://www.facebook.com" target="_blank" rel="noreferrer">Facebook</a></li>
-            <li><a href="https://www.instagram.com" target="_blank" rel="noreferrer">Instagram</a></li>
+          <ul className="social-links">
+            <li>
+              <a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+                <FaFacebookF className="social-icon" />
+                Facebook
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <FaInstagram className="social-icon" />
+                Instagram
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -61,7 +73,7 @@ export default function ContactPage() {
       {/* Carte Google Maps */}
       <div className="map-container">
         <iframe
-          src="https://www.google.com/maps/embed?..."
+          src="https://www.google.com/maps/embed?pb=..."
           width="100%"
           height="300"
           style={{ border: 0 }}
