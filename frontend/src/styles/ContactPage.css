@@ -8,7 +8,7 @@
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(254, 122, 54, 0.15);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #3e2723;
+    color: #333333; /* Texte noir doux */
   }
   
   .contact-container h2 {
@@ -59,6 +59,12 @@
     font-family: inherit;
     resize: vertical;
     transition: border-color 0.3s ease;
+    color: #333333;
+  }
+  
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: #888888;
   }
   
   .contact-form input:focus,
@@ -73,7 +79,7 @@
   }
   
   .contact-form button {
-    background: linear-gradient(45deg, #fe7a36, #c738bd);
+    background: #fe7a36;
     border: none;
     color: white;
     font-size: 1.2rem;
@@ -82,12 +88,17 @@
     cursor: pointer;
     font-weight: 700;
     letter-spacing: 1px;
-    transition: background 0.4s ease;
+    transition: background 0.3s ease;
+    user-select: none;
   }
   
   .contact-form button:hover {
-    background: linear-gradient(45deg, #c738bd, #fe7a36);
-    box-shadow: 0 5px 15px rgba(199, 56, 189, 0.7);
+    background: #ff914d;
+  }
+  
+  .contact-form button:active {
+    background: #ffb07d;
+    transform: scale(0.98);
   }
   
   /* Infos contact */
@@ -97,7 +108,7 @@
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 6px 15px rgba(199, 56, 189, 0.2);
-    color: #1a2a40;
+    color: #333333;
   }
   
   .contact-info h3 {
@@ -112,6 +123,7 @@
     font-size: 1.1rem;
     margin: 0.7rem 0;
     line-height: 1.5;
+    color: #666666; /* gris pour les textes */
   }
   
   .contact-info strong {
