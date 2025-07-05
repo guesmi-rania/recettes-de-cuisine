@@ -1,4 +1,3 @@
-// src/pages/ContactPage.jsx
 import React, { useRef, useState } from "react";
 import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
@@ -8,12 +7,20 @@ import "../styles/ContactPage.css";
 
 export default function ContactPage() {
   const form = useRef();
-  const [formData, setFormData] = useState({ user_name: "", user_email: "", message: "" });
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
-
-    if (!formData.user_name || !formData.user_email || !formData.message) {
+    const { user_name, user_email, message } = formData;
+    if (!user_name || !user_email || !message) {
       toast.error("❌ Veuillez remplir tous les champs.");
       return;
     }
@@ -25,33 +32,32 @@ export default function ContactPage() {
         form.current,
         "YOUR_USER_ID"
       )
-      .then(
-        () => {
-          toast.success("✅ Message envoyé avec succès !");
-          form.current.reset();
-          setFormData({ user_name: "", user_email: "", message: "" });
-        },
-        (error) => {
-          toast.error("❌ Une erreur est survenue. Veuillez réessayer.");
-          console.error(error);
-        }
-      );
+      .then(() => {
+        toast.success("✅ Message envoyé avec succès !");
+        form.current.reset();
+        setFormData({ user_name: "", user_email: "", message: "" });
+      })
+      .catch((error) => {
+        toast.error("❌ Une erreur est survenue. Veuillez réessayer.");
+        console.error(error);
+      });
   };
 
   return (
     <div className="contact-container">
-      <h2>Contactez-nous</h2>
       <div className="contact-content">
 
         {/* Formulaire de contact */}
         <div className="contact-form">
+          <h2>Contactez-nous</h2>
+
           <form ref={form} onSubmit={sendEmail}>
             <input
               type="text"
               name="user_name"
               placeholder="Nom"
               value={formData.user_name}
-              onChange={(e) => setFormData({ ...formData, user_name: e.target.value })}
+              onChange={handleChange}
               required
             />
             <input
@@ -59,42 +65,54 @@ export default function ContactPage() {
               name="user_email"
               placeholder="Email"
               value={formData.user_email}
-              onChange={(e) => setFormData({ ...formData, user_email: e.target.value })}
+              onChange={handleChange}
               required
             />
             <textarea
               name="message"
               placeholder="Votre message"
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              onChange={handleChange}
               required
-            ></textarea>
+            />
             <button type="submit">Envoyer un message</button>
           </form>
         </div>
 
         {/* Informations de contact */}
         <div className="contact-info">
-          <h3>Comment pouvons-nous vous aider ?</h3>
+          <h2>Comment pouvons-nous vous aider ?</h2>
           <p><strong>Téléphone du Chef :</strong> +216 20 828 055</p>
           <p><strong>Email :</strong> lotfichef@gmail.com</p>
-
+          <p><strong>Localisation :</strong> n°11 rue Kawefel Borj Louzir Ariana</p>
+        
           <h4>Suivez-nous :</h4>
           <ul className="social-links">
             <li>
-              <a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+              >
                 <FaFacebookF className="social-icon animated-icon" />
                 Facebook
               </a>
             </li>
             <li>
-              <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+              >
                 <FaInstagram className="social-icon animated-icon" />
                 Instagram
               </a>
             </li>
           </ul>
         </div>
+
       </div>
 
       {/* Carte Google Maps */}
