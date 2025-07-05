@@ -114,7 +114,7 @@
   .contact-info h3 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
-    color: #c738bd;
+    color: #1a1a1a;
     text-transform: uppercase;
     letter-spacing: 1.5px;
   }
@@ -127,14 +127,14 @@
   }
   
   .contact-info strong {
-    color: #fe7a36;
+    color: #1a1a1a;
   }
   
   .contact-info h4 {
     margin-top: 2rem;
     font-size: 1.5rem;
     text-transform: uppercase;
-    color: #fe7a36;
+    color: #1a1a1a;
     letter-spacing: 1.2px;
     margin-bottom: 1rem;
   }
@@ -152,7 +152,7 @@
     align-items: center;
     gap: 8px;
     font-size: 1.1rem;
-    color: #c738bd;
+    color: #1a1a1a;
     font-weight: 700;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -160,7 +160,7 @@
   
   .contact-info ul li a .social-icon {
     font-size: 1.6rem;
-    color: #fe7a36;
+    color: #3b3b3b;
     transition: color 0.3s ease, transform 0.3s ease;
   }
   
@@ -175,11 +175,11 @@
   }
   
   .contact-info ul li a:hover {
-    color: #fe7a36;
+    color: #1a1a1a;
   }
   
   .contact-info ul li a:hover .social-icon {
-    color: #c738bd;
+    color: #1a1a1a;
   }
   
   /* Carte */
