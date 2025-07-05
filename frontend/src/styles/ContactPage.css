@@ -161,7 +161,17 @@
   .contact-info ul li a .social-icon {
     font-size: 1.6rem;
     color: #fe7a36;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* 🌟 Animation icônes */
+  .animated-icon {
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .animated-icon:hover {
+    transform: rotate(20deg) scale(1.2);
+    color: #ff914d;
   }
   
   .contact-info ul li a:hover {
