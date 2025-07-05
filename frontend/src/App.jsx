@@ -1,3 +1,4 @@
+// src/App.jsx
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -8,8 +9,9 @@ import OrdersPage from "./pages/OrdersPage";
 import ClientAuth from "./pages/ClientAuth";
 import WishlistPage from "./pages/WishlistPage";
 import ProductDetail from "./pages/ProductDetail";
-import TastingList from "./pages/TastingList"; 
+import TastingList from "./pages/TastingList";
 import ContactPage from "./pages/ContactPage";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -77,7 +79,9 @@ function App() {
         <Route path="/dégustation" element={<TastingList />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
-      <ToastContainer position="bottom-right" autoClose={2500} />
+
+      {/* 🔥 Toast Container (notification) */}
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </>
   );
 }

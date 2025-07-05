@@ -1,41 +1,67 @@
 .contact-container {
     padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
   }
   
-  .contact-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  .contact-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 30px;
   }
   
-  .contact-container form {
+  .contact-form, .contact-info {
+    flex: 1;
+    min-width: 280px;
+  }
+  
+  .contact-form form {
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
   
-  .contact-container input, 
-  .contact-container textarea {
+  input, textarea {
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
   }
   
-  .contact-container button {
-    background-color: #C738BD;
-    color: white;
+  button {
     padding: 10px;
+    background-color: #FE7A36;
+    color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
   }
   
-  .contact-container button:hover {
-    background-color: #a42c9d;
+  button:hover {
+    background-color: #e56a2f;
+  }
+  
+  .contact-info h3 {
+    margin-bottom: 10px;
+  }
+  
+  .contact-info ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .contact-info ul li {
+    margin-bottom: 8px;
+  }
+  
+  .contact-info ul li a {
+    color: #FE7A36;
+    text-decoration: none;
+  }
+  
+  .contact-info ul li a:hover {
+    text-decoration: underline;
   }
   
   .map-container {
-    margin-top: 20px;
+    margin-top: 30px;
   }
   
