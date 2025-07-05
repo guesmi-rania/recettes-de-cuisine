@@ -1,41 +1,36 @@
-.tasting-list-container {
-    padding: 2rem;
-    background-color: #f9f9f9;
-  }
-  
-  .tasting-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .tasting-item img {
-    width: 80px;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .tasting-item-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 1rem;
-  }
-  
-  .tasting-item .btn-add-to-cart {
-    background-color: #c94f7c;
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 30px;
-    cursor: pointer;
-  }
-  
-  .tasting-item .btn-add-to-cart:hover {
-    background-color: #b13f6c;
-  }
-  
+.tasting-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tasting-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tasting-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tasting-container input, 
+.tasting-container textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.tasting-container button {
+  background-color: #FE7A36;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tasting-container button:hover {
+  background-color: #e86b2c;
+}

@@ -1,51 +1,51 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaUser, FaShoppingCart, FaHeart, FaBars, FaTimes } from "react-icons/fa";
-import logo from "../assets/loglou.png"; // adapte le chemin si besoin
 import "../styles/Navbar.css";
+import { FaUser, FaShoppingCart, FaHeart, FaBars, FaTimes } from "react-icons/fa";
+import logo from "../assets/loglou.png";
 
 function Navbar({ cart = [], wishlist = [] }) {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
     <>
-      {/* Bannière promo */}
       <div className="banner">
-        🎉 Découvrez notre nouvelle boutique en ligne ! 🎂 Livraison de pâtisseries fraîches et artisanales.
+        <p>🎉 Découvrez notre nouvelle boutique en ligne ! 🎂 Livraison de pâtisseries artisanales.</p>
       </div>
 
-      {/* Navbar principale */}
       <header className="navbar-container">
-        {/* Menu burger mobile */}
         <div className="menu-toggle" onClick={() => setShowSidebar(!showSidebar)}>
-          {showSidebar ? <FaTimes size={24} /> : <FaBars size={24} />}
+          {showSidebar ? <FaTimes className="menu-icon" /> : <FaBars className="menu-icon" />}
         </div>
 
-        {/* Logo */}
         <div className="logo-zone">
           <Link to="/" className="logo-link">
-            <img src={logo} alt="Logo Lotfi Chef" className="logo-img" />
-            <p className="brand-text">Le goût raffiné de la pâtisserie tunisienne</p>
+            <div className="brand-text">
+              <img src={logo} alt="Logo Lotfi Chef" />
+              <p>Le goût raffiné de la pâtisserie tunisienne</p>
+            </div>
           </Link>
         </div>
 
-        {/* Liens principaux */}
         <nav className={`menu-right ${showSidebar ? "show" : ""}`}>
           <Link to="/produits" onClick={() => setShowSidebar(false)}>Produits</Link>
           <Link to="/dégustation" onClick={() => setShowSidebar(false)}>Dégustation</Link>
           <Link to="/pieces-montees" onClick={() => setShowSidebar(false)}>Pièces Montées</Link>
           <Link to="/contact" onClick={() => setShowSidebar(false)}>Contact</Link>
 
-          <Link to="/login" className="top-item" onClick={() => setShowSidebar(false)}>
-            <FaUser className="icon" /> Mon compte
-          </Link>
+          <div className="top-item">
+            <FaUser className="icon" />
+            <Link to="/login" className="top-bold" onClick={() => setShowSidebar(false)}>
+              Mon compte
+            </Link>
+          </div>
 
-          <Link to="/wishlist" className="top-item" onClick={() => setShowSidebar(false)} style={{ position: "relative" }}>
+          <Link to="/wishlist" className="top-item" style={{ position: "relative" }} onClick={() => setShowSidebar(false)}>
             <FaHeart className="icon" />
             {wishlist.length > 0 && <span className="cart-badge">{wishlist.length}</span>}
           </Link>
 
-          <Link to="/panier" className="top-item" onClick={() => setShowSidebar(false)} style={{ position: "relative" }}>
+          <Link to="/panier" className="top-item" style={{ position: "relative" }} onClick={() => setShowSidebar(false)}>
             <FaShoppingCart className="icon" />
             <span className="panier-label">Panier</span>
             {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}

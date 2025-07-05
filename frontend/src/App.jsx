@@ -8,6 +8,8 @@ import OrdersPage from "./pages/OrdersPage";
 import ClientAuth from "./pages/ClientAuth";
 import WishlistPage from "./pages/WishlistPage";
 import ProductDetail from "./pages/ProductDetail";
+import TastingList from "./pages/TastingList"; 
+import ContactPage from "./pages/ContactPage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -72,6 +74,8 @@ function App() {
         <Route path="/wishlist" element={<WishlistPage wishlist={wishlist} setWishlist={setWishlist} />} />
         <Route path="/commandes" element={<OrdersPage />} />
         <Route path="/login" element={<ClientAuth />} />
+        <Route path="/dégustation" element={<TastingList />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
       <ToastContainer position="bottom-right" autoClose={2500} />
     </>
