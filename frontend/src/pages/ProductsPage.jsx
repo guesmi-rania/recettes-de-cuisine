@@ -1,12 +1,10 @@
+// src/pages/ProductsPage.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import ProductFiltersSidebar from "../components/ProductFiltersSidebar";
 import QuickFilters from "../components/QuickFilters";
 import "../styles/Shop.css";
-import "../styles/ProductFiltersSidebar.css";
-import "../styles/ProductCard.css";
-import "../styles/QuickFilters.css";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -31,8 +29,11 @@ export default function ProductsPage({ onAddToCart, onAddToWishlist }) {
   }, []);
 
   const handleFilter = (category) => {
-    if (category === "all") setFilteredProducts(products);
-    else setFilteredProducts(products.filter((p) => p.category === category));
+    if (category === "all") {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(products.filter((p) => p.category === category));
+    }
   };
 
   const handleSort = (order) => {
@@ -43,24 +44,38 @@ export default function ProductsPage({ onAddToCart, onAddToWishlist }) {
   };
 
   return (
-    <div className="shop-container">
-      <ProductFiltersSidebar onFilter={handleFilter} />
-      <div className="shop-content">
-        <QuickFilters onSort={handleSort} />
-        {loading ? (
-          <p>Chargement des produits...</p>
-        ) : (
-          <div className="product-grid">
-            {filteredProducts.map((product) => (
-              <ProductCard
-                key={product._id}
-                product={product}
-                onAddToCart={onAddToCart}
-                onAddToWishlist={onAddToWishlist}
-              />
-            ))}
-          </div>
-        )}
+    <div className="products-page">
+      {/* 🔸 Titre et description */}
+      <div className="products-header">
+        <h1>Nos Pâtisseries</h1>
+        <p className="products-description">
+          Découvrez nos délicieuses créations artisanales, pour tous les goûts et toutes les occasions.
+        </p>
+      </div>
+
+      <div className="products-content">
+        {/* 🧰 Sidebar */}
+        <ProductFiltersSidebar onFilter={handleFilter} />
+
+        <div className="products-main">
+          {/* 🔍 Filtres rapides */}
+          <QuickFilters onSort={handleSort} />
+
+          {loading ? (
+            <p>Chargement des produits...</p>
+          ) : (
+            <div className="products-grid">
+              {filteredProducts.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  onAddToCart={onAddToCart}
+                  onAddToWishlist={onAddToWishlist}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

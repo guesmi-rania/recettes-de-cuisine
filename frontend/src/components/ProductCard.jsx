@@ -1,9 +1,11 @@
+// src/components/ProductCard.jsx
 import React from "react";
 import "../styles/ProductCard.css";
+import { FaShoppingCart, FaHeart, FaShareAlt } from "react-icons/fa";
 
 export default function ProductCard({ product, onAddToCart, onAddToWishlist }) {
   const handleShare = () => {
-    const shareUrl = window.location.origin + `/produits/${product._id}`;
+    const shareUrl = window.location.href;
     navigator.clipboard.writeText(shareUrl);
     alert("Lien du produit copié !");
   };
@@ -13,10 +15,18 @@ export default function ProductCard({ product, onAddToCart, onAddToWishlist }) {
       <img src={product.imageUrl} alt={product.name} />
       <h3>{product.name}</h3>
       <p className="product-price">{product.price} Dt</p>
+
+      <button className="add-to-cart-btn" onClick={() => onAddToCart(product)}>
+        <FaShoppingCart /> Ajouter au panier
+      </button>
+
       <div className="product-actions">
-        <button onClick={() => onAddToCart(product)} title="Ajouter au panier">🛒</button>
-        <button onClick={() => onAddToWishlist(product)} title="Ajouter à la wishlist">❤️</button>
-        <button onClick={handleShare} title="Partager">🔗</button>
+        <button onClick={() => onAddToWishlist(product)}>
+          <FaHeart style={{ color: "red" }} />
+        </button>
+        <button onClick={handleShare}>
+          <FaShareAlt style={{ color: "#FE7A36" }} />
+        </button>
       </div>
     </div>
   );
