@@ -51,7 +51,6 @@ export default function ContactPage() {
         {/* Formulaire de contact */}
         <div className="contact-form">
           <h2>Contactez-nous</h2>
-
           <form ref={form} onSubmit={sendEmail}>
             <input
               type="text"
@@ -82,50 +81,47 @@ export default function ContactPage() {
 
         {/* Informations de contact */}
         <div className="contact-info">
-  <h2>Comment pouvons-nous vous aider ?</h2>
+          <h2>Comment pouvons-nous vous aider ?</h2>
 
-  <p>
-    <FaPhoneAlt className="info-icon" />
-    <strong>Téléphone : </strong> +216 20 828 055
-  </p>
-  <p>
-    <FaEnvelope className="info-icon" />
-    <strong>Email : </strong> lotfichef@gmail.com
-  </p>
+          <div className="contact-field">
+            <FaPhoneAlt className="info-icon" />
+            <div>
+              <h4>Téléphone :</h4>
+              <p>+216 20 828 055</p>
+            </div>
+          </div>
 
-<p>
-  <MdLocationOn className="info-icon" />
-  <strong>Localisation :</strong> n°11 rue kawefel Borj Louzir Ariana
-</p>
+          <div className="contact-field">
+            <FaEnvelope className="info-icon" />
+            <div>
+              <h4>Email :</h4>
+              <p>lotfichef@gmail.com</p>
+            </div>
+          </div>
+
+          <div className="contact-field">
+            <MdLocationOn className="info-icon" />
+            <div>
+              <h4>Localisation :</h4>
+              <p>N°11 rue Kawefel Borj Louzir Ariana</p>
+            </div>
+          </div>
 
 
-  <h4>Suivez-nous :</h4>
-  <ul className="social-links">
-    <li>
-      <a
-        href="https://www.facebook.com"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Facebook"
-      >
-        <FaFacebookF className="social-icon animated-icon" />
-        Facebook
-      </a>
-    </li>
-    <li>
-      <a
-        href="https://www.instagram.com"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Instagram"
-      >
-        <FaInstagram className="social-icon animated-icon" />
-        Instagram
-      </a>
-    </li>
-  </ul>
-</div>
-
+          <h4>Suivez-nous :</h4>
+          <ul className="social-links">
+            <li>
+              <a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+                <FaFacebookF className="social-icon animated-icon" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <FaInstagram className="social-icon animated-icon" />
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Carte Google Maps */}
