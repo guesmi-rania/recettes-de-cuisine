@@ -123,9 +123,12 @@
   right: -10px;
 }
 .panier-label {
-  color: #111111; /* ou black */
-  font-weight: 400; /* ou ce que tu veux */
+  color: #333 !important; /* Pour s'assurer qu'il reste noir */
+  font-weight: 500;
+  margin-left: 5px;
+  font-family: 'Poppins', sans-serif;
 }
+
 
 /* Icônes menu burger */
 .menu-toggle {

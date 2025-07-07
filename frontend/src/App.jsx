@@ -1,9 +1,8 @@
-// src/App.jsx
+// App.jsx
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Slider from "./components/Slider"; // Import du slider
-
+import Slider from "./components/Slider";
 import Home from "./pages/Home";
 import CartPage from "./pages/CartPage";
 import ProductsPage from "./pages/ProductsPage";
@@ -13,14 +12,15 @@ import WishlistPage from "./pages/WishlistPage";
 import ProductDetail from "./pages/ProductDetail";
 import TastingList from "./pages/TastingList";
 import ContactPage from "./pages/ContactPage";
-
+import Welcome from "./pages/Welcome";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);
   const [wishlist, setWishlist] = useState(() => JSON.parse(localStorage.getItem("wishlist")) || []);
-  const location = useLocation(); // Récupérer l'URL actuelle
+  const [client, setClient] = useState(() => JSON.parse(localStorage.getItem("client")) || null);
+  const location = useLocation();
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -30,7 +30,6 @@ function App() {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
 
-  // Notifications toast
   const notifyAddCart = (name) => toast.success(`✅ ${name} ajouté au panier !`);
   const notifyAddWishlist = (name) => toast.info(`❤️ ${name} ajouté à la wishlist !`);
   const notifyAlreadyWishlist = (name) => toast.warning(`⚠️ ${name} est déjà dans la wishlist !`);
@@ -52,42 +51,19 @@ function App() {
   return (
     <>
       <Navbar cart={cart} wishlist={wishlist} />
-
-      {/* Afficher le Slider uniquement sur la page d'accueil */}
       {location.pathname === "/" && <Slider />}
-
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/produits"
-          element={
-            <ProductsPage
-              cart={cart}
-              wishlist={wishlist}
-              onAddToCart={handleAddToCart}
-              onAddToWishlist={handleAddToWishlist}
-            />
-          }
-        />
-        <Route
-          path="/produits/:id"
-          element={
-            <ProductDetail
-              onAddToCart={handleAddToCart}
-              onAddToWishlist={handleAddToWishlist}
-              wishlist={wishlist}
-            />
-          }
-        />
+        <Route path="/produits" element={<ProductsPage cart={cart} wishlist={wishlist} onAddToCart={handleAddToCart} onAddToWishlist={handleAddToWishlist} />} />
+        <Route path="/produits/:id" element={<ProductDetail onAddToCart={handleAddToCart} onAddToWishlist={handleAddToWishlist} wishlist={wishlist} />} />
         <Route path="/panier" element={<CartPage cart={cart} setCart={setCart} />} />
         <Route path="/wishlist" element={<WishlistPage wishlist={wishlist} setWishlist={setWishlist} />} />
         <Route path="/commandes" element={<OrdersPage />} />
         <Route path="/login" element={<ClientAuth />} />
+        <Route path="/bienvenue" element={<Welcome />} />
         <Route path="/dégustation" element={<TastingList />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
-
-      {/* Notifications Toast */}
       <ToastContainer position="bottom-right" autoClose={3000} />
     </>
   );

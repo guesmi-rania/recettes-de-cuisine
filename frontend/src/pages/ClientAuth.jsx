@@ -1,16 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/ClientAuth.css";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "https://recettes-de-cuisine.onrender.com";
 
-export default function ClientAuth() {
+export default function ClientAuth({ setUser }) {
   const [isLogin, setIsLogin] = useState(true);
-  
-  // Formulaire de connexion
+  const navigate = useNavigate();
+
+  // Connexion
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Formulaire d'inscription
+  // Inscription
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,7 +22,6 @@ export default function ClientAuth() {
 
   const [loading, setLoading] = useState(false);
 
-  // ✅ Changement des champs pour le formulaire d'inscription
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -28,7 +29,7 @@ export default function ClientAuth() {
     }));
   };
 
-  // ✅ Formulaire Connexion
+  // Connexion
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -44,7 +45,12 @@ export default function ClientAuth() {
       if (response.ok) {
         alert("🎉 Connexion réussie !");
         localStorage.setItem("clientToken", data.token);
-        // window.location.href = "/"; // Redirection si tu veux
+
+        const user = { email, isNew: false };
+        localStorage.setItem("user", JSON.stringify(user));
+        setUser(user);
+
+        navigate("/commandes");
       } else {
         alert(`❌ Erreur : ${data.message}`);
       }
@@ -54,7 +60,7 @@ export default function ClientAuth() {
     }
   };
 
-  // ✅ Formulaire Inscription
+  // Inscription
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -81,7 +87,12 @@ export default function ClientAuth() {
       if (response.status === 201 || response.ok) {
         alert("✅ Inscription réussie !");
         setFormData({ name: "", email: "", password: "", confirmPassword: "" });
-        setIsLogin(true); // Redirige vers la page de connexion après inscription
+
+        const user = { email: formData.email, isNew: true };
+        localStorage.setItem("user", JSON.stringify(user));
+        setUser(user);
+
+        navigate("/welcome");
       } else {
         alert(`❌ Erreur : ${data.message}`);
       }

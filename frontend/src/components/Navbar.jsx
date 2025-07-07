@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
 import { FaUserCircle, FaShoppingBag, FaRegHeart, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import logo from "../assets/loglou.png";
@@ -8,14 +8,20 @@ import Categories from "./Categories";
 function Navbar({ cart = [], wishlist = [] }) {
   const [showCategories, setShowCategories] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  const categories = [
-    "Gâteaux",
-    "Viennoiseries",
-    "Salés",
-    "Tartes",
-    "Gâteaux Spéciaux",
-  ];
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(storedUser);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("clientToken");
+    setUser(null);
+    navigate("/login");
+  };
 
   return (
     <>
@@ -37,12 +43,10 @@ function Navbar({ cart = [], wishlist = [] }) {
                 <FaBars className="menu-icon" /> Toutes les catégories <FaChevronDown />
               </button>
               {showCategories && (
-  <div className={`categories-list ${showCategories ? "open" : ""}`}>
-  <Categories onClickCategory={() => setShowCategories(false)} />
-</div>
-
-)}
-
+                <div className={`categories-list ${showCategories ? "open" : ""}`}>
+                  <Categories onClickCategory={() => setShowCategories(false)} />
+                </div>
+              )}
             </div>
 
             <nav className="menu-links">
@@ -55,10 +59,19 @@ function Navbar({ cart = [], wishlist = [] }) {
 
           {/* Partie droite avec nouvelles icônes */}
           <div className="navbar-right">
-            <div className="top-item">
-              <FaUserCircle className="icon" />
-              <Link to="/login" className="top-bold">Mon compte</Link>
-            </div>
+            {user ? (
+              <div className="top-item">
+                <FaUserCircle className="icon" />
+                <span className="top-bold" style={{ cursor: "pointer" }} onClick={handleLogout}>
+                  Se déconnecter
+                </span>
+              </div>
+            ) : (
+              <div className="top-item">
+                <FaUserCircle className="icon" />
+                <Link to="/login" className="top-bold">Mon compte</Link>
+              </div>
+            )}
 
             <Link to="/wishlist" className="top-item" style={{ position: "relative" }}>
               <FaRegHeart className="icon" />
@@ -87,10 +100,26 @@ function Navbar({ cart = [], wishlist = [] }) {
               <Link to="/contact" onClick={() => setShowSidebar(false)}>Contact</Link>
             </nav>
 
-            <div className="top-item">
-              <FaUserCircle className="icon" />
-              <Link to="/login" className="top-bold" onClick={() => setShowSidebar(false)}>Mon compte</Link>
-            </div>
+            {user ? (
+              <div className="top-item">
+                <FaUserCircle className="icon" />
+                <span
+                  className="top-bold"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    handleLogout();
+                    setShowSidebar(false);
+                  }}
+                >
+                  Se déconnecter
+                </span>
+              </div>
+            ) : (
+              <div className="top-item">
+                <FaUserCircle className="icon" />
+                <Link to="/login" className="top-bold" onClick={() => setShowSidebar(false)}>Mon compte</Link>
+              </div>
+            )}
 
             <Link to="/wishlist" className="top-item" style={{ position: "relative" }} onClick={() => setShowSidebar(false)}>
               <FaRegHeart className="icon" />
@@ -99,7 +128,6 @@ function Navbar({ cart = [], wishlist = [] }) {
 
             <Link to="/panier" className="top-item" style={{ position: "relative" }} onClick={() => setShowSidebar(false)}>
               <FaShoppingBag className="icon" />
-              <span className="panier-label">Panier</span>
               {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
             </Link>
           </div>
