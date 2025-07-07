@@ -1,38 +1,52 @@
-// src/components/Categories.jsx
 import React, { useState } from "react";
-import "../styles/Categories.css"; 
-import { FaUtensils,        // 🍽️ pour Cuisine
-  FaBirthdayCake,    // 🎂 pour Pâtisserie
-  FaBreadSlice,      // 🍞 pour Boulangerie
-  FaIceCream,        // 🍨 pour Chocolatier (garde)
-  FaShoppingBasket,  // 🛒 pour Épicerie
-  FaBookOpen,        // 📖 pour Recettes
-  FaStar             // ⭐ pour Univers du Chef
-} from "react-icons/fa";
-function Categories() {
+import { Link } from "react-router-dom";
+import "../styles/Categories.css";
+import { MdOutlineSoupKitchen} from "react-icons/md";
+import { BsCake } from "react-icons/bs";
+import { GiChocolateBar, GiPieSlice, GiCupcake } from "react-icons/gi";
+import { SiCakephp } from "react-icons/si";
+import { LuDessert ,LuCroissant } from "react-icons/lu";
+import { GiButter } from "react-icons/gi";
+import { LiaCookieSolid } from "react-icons/lia";
+
+function Categories({ onClickCategory }) {
   const categories = [
-    { name: "Cuisine", icon: <FaUtensils /> },
-    { name: "Pâtisserie", icon: <FaBirthdayCake /> },
-    { name: "Boulangerie", icon: <FaBreadSlice /> },
-    { name: "Chocolatier", icon: <FaIceCream /> },
-    { name: "Épicerie", icon: <FaShoppingBasket /> },
-    { name: "Recettes", icon: <FaBookOpen /> },
-    { name: "L'univers de Chef Lotfi", icon: <FaStar /> },
+    { name: "Cuisine Tunisienne", icon: <MdOutlineSoupKitchen /> },
+    { name: "Pâtisserie Classique", icon: <GiCupcake />, isNew: true }, // badge
+    { name: "Pâtisseries Orientales ", icon: <SiCakephp /> },
+    { name: "Gâteaux Spéciaux", icon: <BsCake /> },
+    { name: "Chocolaterie & Confiserie", icon: <GiChocolateBar />, isNew: true }, // badge
+    { name: "Viennoiseries", icon: <LuCroissant /> },
+    { name: "Tartes et Tartelettes", icon: <GiPieSlice /> },
+    { name: "Biscuits & Petits Gâteaux", icon: <LiaCookieSolid /> },
+    { name: "Desserts Glacés", icon: <LuDessert /> },
+    { name: "Pâtes à Tartiner et Confitures", icon: <GiButter /> },
   ];
+  
+  const [selected, setSelected] = useState(null);
 
   return (
     <div className="categories-dropdown">
-      <div className="dropdown-header">Top Categories</div>
       <ul className="dropdown-list">
         {categories.map((cat, index) => (
           <li key={index} className="dropdown-item">
-            <span className="icon">{cat.icon}</span>
-            <span className="name">{cat.name}</span>
-            {cat.isNew && <span className="badge">NEW</span>}
+            <Link 
+  to={`/categorie/${encodeURIComponent(cat.name)}`} 
+  className={`category-link ${selected === cat.name ? "selected" : ""}`}
+  onClick={() => {
+    setSelected(cat.name);
+    if (onClickCategory) onClickCategory();
+  }}
+>
+  <span className="icon">{cat.icon}</span>
+  <span className="name">{cat.name}</span>
+</Link>
+
           </li>
         ))}
       </ul>
     </div>
   );
 }
+
 export default Categories;

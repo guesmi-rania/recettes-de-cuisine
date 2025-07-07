@@ -1,7 +1,9 @@
 // src/App.jsx
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Slider from "./components/Slider"; // Import du slider
+
 import Home from "./pages/Home";
 import CartPage from "./pages/CartPage";
 import ProductsPage from "./pages/ProductsPage";
@@ -18,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);
   const [wishlist, setWishlist] = useState(() => JSON.parse(localStorage.getItem("wishlist")) || []);
+  const location = useLocation(); // Récupérer l'URL actuelle
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -49,6 +52,10 @@ function App() {
   return (
     <>
       <Navbar cart={cart} wishlist={wishlist} />
+
+      {/* Afficher le Slider uniquement sur la page d'accueil */}
+      {location.pathname === "/" && <Slider />}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -80,7 +87,7 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
 
-      {/* 🔥 Toast Container (notification) */}
+      {/* Notifications Toast */}
       <ToastContainer position="bottom-right" autoClose={3000} />
     </>
   );

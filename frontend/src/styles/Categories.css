@@ -1,80 +1,58 @@
-/* 📂 Bloc catégories */
-.categories-dropdown {
+/* Categories.css */
+
+/* Conteneur de la liste des catégories */
+.categories-list {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background-color: white; /* Fond blanc visible */
+  border: 1px solid #ddd; /* Légère bordure grise */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 500;
   width: 300px;
-  min-width: 200px; /* ✅ force la largeur minimum */
-  flex-shrink: 0;
-  border-radius: 18px;
-  overflow: hidden;
-  font-family: 'Krub', sans-serif;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-  border: none;
-  background-color: #ffffff;
-  padding: 0;
-  margin-top: 0px;
- 
+  padding: 10px 0; /* Ajoute un peu d'espace intérieur */
+  font-family: 'Poppins', sans-serif; /* Nouvelle police élégante */
 }
+
+/* Liste */
+.dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Élément de la liste */
 .dropdown-item {
+  margin-bottom: 5px;
+}
+
+/* Lien de catégorie */
+.category-link {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 20px;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: background 0.3s ease;
-}
-
-.dropdown-item:hover {
-  background-color: #f9f9f9;
-}
-
-.dropdown-item .icon {
-  color: #FE7A36;
-  font-size: 1.2rem;
-}
-
-/* 🏷️ En-tête : "Toutes les catégories" */
-.dropdown-header {
-  background-color: #254D70;
-  color: white;
-  padding: 15px 18px;
-  font-size: 1rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 16px 16px 0 0;
-  margin: 0;
-}
-
-/* 📃 Liste déroulante */
-.dropdown-list {
-  background-color: transparent;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  width: 500px;
-  min-width: 500px; /* ✅ force la largeur minimum */
-  flex-shrink: 0;
-}
-
-/* Catégories */
-.dropdown-list li {
-  display: flex;
-  align-items: center;
-  padding: 12.75px 18px;
-  font-size: 1rem;
-  color: #333;
-  border-bottom: 1px solid #f0f0f0;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  cursor: pointer;
-
+  text-decoration: none;
+  color: #222;
+  font-weight: 400;
+  font-size: 0.95rem;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  font-family: 'Poppins', sans-serif; /* Appliquer la police ici aussi */
 }
 
+/* Effet au survol */
+.category-link:hover,
+.category-link.selected {
+  color: #00bcd4; /* Texte bleu ciel */
+  background-color: #f0f8ff; /* Légère couleur de fond au survol */
+}
 
-.dropdown-list li:last-child {
-  border-bottom: none;
+/* Icône */
+.icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  color: #00bcd4;
 }
