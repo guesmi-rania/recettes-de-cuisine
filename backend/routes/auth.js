@@ -12,26 +12,25 @@ router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: "Tous les champs sont obligatoires." });
-    }
-
+    // Vérifier si l'email existe déjà
     const existingClient = await Client.findOne({ email });
     if (existingClient) {
       return res.status(400).json({ message: "Email déjà utilisé." });
     }
 
+    // Hash du mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Créer et sauvegarder le client
     const newClient = new Client({ name, email, password: hashedPassword });
     await newClient.save();
 
     res.status(201).json({ message: "Inscription réussie !" });
   } catch (error) {
-    console.error("Erreur /register:", error); // Affiche l'erreur réelle
+    console.error(error);
     res.status(500).json({ message: "Erreur serveur" });
   }
 });
-
 
 // Route POST pour se connecter
 router.post('/login', async (req, res) => {
