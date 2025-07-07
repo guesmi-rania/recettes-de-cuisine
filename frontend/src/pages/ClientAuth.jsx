@@ -27,7 +27,7 @@ function ClientAuth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!isLogin) {
       // Inscription
       if (formData.password !== formData.confirmPassword) {
@@ -39,7 +39,7 @@ function ClientAuth() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            username: formData.username,
+            name: formData.username,  // Le backend attend "name"
             email: formData.email,
             password: formData.password,
           }),
@@ -61,19 +61,17 @@ function ClientAuth() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            username: formData.username,
+            email: formData.email,
             password: formData.password,
           }),
         });
         const data = await res.json();
         if (res.ok) {
-          // Stocker le token et/ou infos utilisateur
           localStorage.setItem("token", data.token);
-          localStorage.setItem("client", JSON.stringify(data.user));
-  
+          localStorage.setItem("client", JSON.stringify(data.client));
+
           alert("Connexion réussie !");
-          // Redirection selon ta logique, ex. page shop ou dashboard
-          window.location.href = data.user.isNew ? "/produits" : "/commandes";
+          window.location.href = "/produits"; // Redirection après connexion
         } else {
           alert(data.message || "Erreur connexion");
         }
@@ -82,7 +80,7 @@ function ClientAuth() {
       }
     }
   };
-  
+
   return (
     <div className="auth-container">
       <div className="auth-box">
