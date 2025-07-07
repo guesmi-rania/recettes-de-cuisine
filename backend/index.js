@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 
-const authRoutes = require('./routes/authRoutes');  // Nom du fichier corrigé selon ta remarque
+const authRoutes = require('./routes/auth'); 
 const adminRoutes = require('./routes/adminRoutes');
 const productRoutes = require('./routes/products');
 const orderRoutes = require('./routes/orders');
@@ -39,7 +39,7 @@ app.use('/api/orders', orderRoutes);
 app.use(express.static(path.join(__dirname, 'public', 'dist')));
 
 // Fallback pour React Router — pour toutes les routes non-API
-app.get('*', (req, res) => {
+app.get('/:id', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
 });
 
