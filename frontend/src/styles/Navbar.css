@@ -1,160 +1,184 @@
-/* Banner */
+/* ---------- Bandeau supérieur ---------- */
 .banner {
-  background-color: #003366;
+  background: linear-gradient(90deg, #e44d7d, #f783ac);
   color: white;
   text-align: center;
-  padding: 5px;
-  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 0;
+  font-size: 0.95rem;
 }
 
-/* Conteneur */
+/* ---------- Conteneur de la navbar ---------- */
 .navbar-container {
-  background-color: white;
-  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
   position: sticky;
   top: 0;
   z-index: 1000;
-  display: flex;
-  justify-content: center;
-  padding: 0 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Wrapper */
 .navbar-wrapper {
-  width: 100%;
-  max-width: 1300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 0.8rem 2rem;
+  max-width: 1280px;
+  margin: auto;
 }
 
-/* Logo */
+/* ---------- Logo ---------- */
 .logo-link img {
   height: 50px;
 }
 
-/* Partie gauche */
+/* ---------- Menu principal ---------- */
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 20px;
-}
-
-/* Catégories */
-.categories-dropdown {
-  position: relative;
-}
-
-.categories-dropdown button {
-  background-color: #00bcd4;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 30px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: 400;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-}
-
-.categories-dropdown button:hover {
-  background-color: #0194a3;
-}
-
-/* Liens */
-.menu-links {
-  display: flex;
-  gap: 20px;
+  gap: 2rem;
 }
 
 .menu-links a {
+  margin-right: 1.2rem;
+  color: #444;
   text-decoration: none;
-  color: #333;
   font-weight: 500;
-  font-size: 1rem;
   transition: color 0.3s;
 }
 
 .menu-links a:hover {
-  color: #00bcd4;
+  color: #e44d7d;
 }
 
-/* Partie droite */
+/* ---------- Dropdown catégories ---------- */
+.categories-dropdown button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #444;
+}
+
+.categories-list.open {
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  z-index: 100;
+  margin-top: 5px;
+}
+
+/* ---------- Partie droite ---------- */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 1.2rem;
 }
 
 .top-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.top-item a {
-  text-decoration: none;
-  color: #333;
+  color: #444;
   font-weight: 500;
-  font-size: 1rem;
-  transition: color 0.3s;
+  gap: 6px;
+  text-decoration: none;
 }
 
-.top-item a:hover {
-  color: #00bcd4;
+.top-item .icon {
+  font-size: 1.3rem;
 }
 
-/* Badge */
+/* ---------- Badge panier / wishlist ---------- */
 .cart-badge {
-  background-color: red;
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background-color: #e44d7d;
   color: white;
   border-radius: 50%;
   padding: 2px 6px;
-  font-size: 12px;
-  position: absolute;
-  top: -5px;
-  right: -10px;
+  font-size: 0.7rem;
+  font-weight: bold;
 }
 
-/* Déconnexion */
-.logout-btn {
+/* ---------- Infos utilisateur ---------- */
+.user-info {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background-color: #e44d7d;
-  color: white;
-  font-size: 0.95rem;
+  gap: 8px;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.user-text .top-bold {
   font-weight: bold;
+  color: #444;
+}
+
+.welcome-message {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* ---------- Bouton déconnexion ---------- */
+.logout-btn {
+  background: none;
   border: none;
-  border-radius: 8px;
+  color: #e44d7d;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 1.2rem;
+  padding: 0;
 }
 
 .logout-btn:hover {
-  background-color: #c9305c;
+  color: #c52f5a;
 }
 
-.logout-icon {
-  font-size: 1.1rem;
-}
-
-/* Mobile */
+/* ---------- Mobile menu burger ---------- */
 .menu-toggle {
   display: none;
   cursor: pointer;
-  font-size: 24px;
 }
 
+.menu-icon {
+  font-size: 1.4rem;
+}
+
+/* ---------- Menu mobile ---------- */
+.mobile-menu {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.mobile-menu .menu-links a {
+  font-size: 1rem;
+  color: #444;
+  font-weight: 500;
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 768px) {
-  .navbar-left,
-  .navbar-right {
+  .navbar-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .navbar-left .menu-links {
+    display: none;
+  }
+
+  .categories-dropdown {
     display: none;
   }
 
@@ -162,18 +186,7 @@
     display: block;
   }
 
-  .mobile-menu {
-    width: 100%;
-    background-color: white;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .mobile-menu .menu-links {
-    flex-direction: column;
-    gap: 10px;
+  .navbar-right {
+    gap: 0.8rem;
   }
 }

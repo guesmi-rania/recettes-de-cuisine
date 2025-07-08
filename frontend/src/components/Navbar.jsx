@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
@@ -27,7 +26,7 @@ function Navbar({ cart = [], wishlist = [] }) {
 
   const handleLogout = () => {
     localStorage.removeItem("client");
-    localStorage.removeItem("clientToken");
+    localStorage.removeItem("token");
     setClient(null);
     navigate("/login");
   };
@@ -70,16 +69,16 @@ function Navbar({ cart = [], wishlist = [] }) {
           {/* Droite */}
           <div className="navbar-right">
             {client ? (
-              <>
-                <div className="top-item">
-                  <FaUserCircle className="icon" />
-                  <span className="top-bold">Bonjour {firstName}</span>
+              <div className="top-item user-info">
+                <FaUserCircle className="icon" />
+                <div className="user-text">
+                  <span className="top-bold">Mon compte</span>
+                  <span className="welcome-message">Bienvenue {firstName}</span>
                 </div>
                 <button className="logout-btn" onClick={handleLogout}>
                   <FaSignOutAlt className="logout-icon" />
-                  Déconnexion
                 </button>
-              </>
+              </div>
             ) : (
               <div className="top-item">
                 <FaUserCircle className="icon" />
@@ -98,7 +97,7 @@ function Navbar({ cart = [], wishlist = [] }) {
             </Link>
           </div>
 
-          {/* Bouton burger mobile */}
+          {/* Menu burger mobile */}
           <div className="menu-toggle" onClick={() => setShowSidebar(!showSidebar)}>
             {showSidebar ? <FaTimes className="menu-icon" /> : <FaBars className="menu-icon" />}
           </div>
@@ -116,14 +115,16 @@ function Navbar({ cart = [], wishlist = [] }) {
 
             {client ? (
               <>
-                <div className="top-item">
+                <div className="top-item user-info">
                   <FaUserCircle className="icon" />
-                  <span className="top-bold">Bonjour {firstName}</span>
+                  <div className="user-text">
+                    <span className="top-bold">Mon compte</span>
+                    <span className="welcome-message">Bienvenue {firstName}</span>
+                  </div>
+                  <button className="logout-btn" onClick={() => { handleLogout(); setShowSidebar(false); }}>
+                    <FaSignOutAlt className="logout-icon" />
+                  </button>
                 </div>
-                <button className="logout-btn" onClick={() => { handleLogout(); setShowSidebar(false); }}>
-                  <FaSignOutAlt className="logout-icon" />
-                  Déconnexion
-                </button>
               </>
             ) : (
               <div className="top-item">
