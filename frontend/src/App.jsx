@@ -13,13 +13,13 @@ import ProductDetail from "./pages/ProductDetail";
 import TastingList from "./pages/TastingList";
 import ContactPage from "./pages/ContactPage";
 import Welcome from "./pages/Welcome";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);
   const [wishlist, setWishlist] = useState(() => JSON.parse(localStorage.getItem("wishlist")) || []);
-  const [client, setClient] = useState(() => JSON.parse(localStorage.getItem("client")) || null);
   const location = useLocation();
 
   useEffect(() => {
@@ -52,18 +52,52 @@ function App() {
     <>
       <Navbar cart={cart} wishlist={wishlist} />
       {location.pathname === "/" && <Slider />}
+
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/produits" element={<ProductsPage cart={cart} wishlist={wishlist} onAddToCart={handleAddToCart} onAddToWishlist={handleAddToWishlist} />} />
-        <Route path="/produits/:id" element={<ProductDetail onAddToCart={handleAddToCart} onAddToWishlist={handleAddToWishlist} wishlist={wishlist} />} />
+
+        {/* Authentification */}
+        <Route path="/login" element={<ClientAuth />} />
+        <Route path="/bienvenue" element={
+          <ProtectedRoute>
+            <Welcome />
+          </ProtectedRoute>
+        } />
+
+        {/* Pages protégées */}
+        <Route path="/produits" element={
+          <ProtectedRoute>
+            <ProductsPage
+              cart={cart}
+              wishlist={wishlist}
+              onAddToCart={handleAddToCart}
+              onAddToWishlist={handleAddToWishlist}
+            />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/produits/:id" element={
+          <ProtectedRoute>
+            <ProductDetail
+              onAddToCart={handleAddToCart}
+              onAddToWishlist={handleAddToWishlist}
+              wishlist={wishlist}
+            />
+          </ProtectedRoute>
+        } />
+
         <Route path="/panier" element={<CartPage cart={cart} setCart={setCart} />} />
         <Route path="/wishlist" element={<WishlistPage wishlist={wishlist} setWishlist={setWishlist} />} />
-        <Route path="/commandes" element={<OrdersPage />} />
-        <Route path="/login" element={<ClientAuth />} />
-        <Route path="/bienvenue" element={<Welcome />} />
+        <Route path="/commandes" element={
+          <ProtectedRoute>
+            <OrdersPage />
+          </ProtectedRoute>
+        } />
+
         <Route path="/dégustation" element={<TastingList />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
+
       <ToastContainer position="bottom-right" autoClose={3000} />
     </>
   );

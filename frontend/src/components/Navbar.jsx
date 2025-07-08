@@ -1,27 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
-import { FaUserCircle, FaShoppingBag, FaRegHeart, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import {
+  FaUserCircle,
+  FaShoppingBag,
+  FaRegHeart,
+  FaBars,
+  FaTimes,
+  FaChevronDown,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import logo from "../assets/loglou.png";
 import Categories from "./Categories";
 
 function Navbar({ cart = [], wishlist = [] }) {
   const [showCategories, setShowCategories] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-  const [user, setUser] = useState(null);
+  const [client, setClient] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser);
+    const storedClient = JSON.parse(localStorage.getItem("client"));
+    setClient(storedClient);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("client");
     localStorage.removeItem("clientToken");
-    setUser(null);
+    setClient(null);
     navigate("/login");
   };
+
+  const firstName = client?.name?.split(" ")[0] || "Client";
 
   return (
     <>
@@ -57,15 +67,18 @@ function Navbar({ cart = [], wishlist = [] }) {
             </nav>
           </div>
 
-          {/* Partie droite avec nouvelles icônes */}
+          {/* Partie droite */}
           <div className="navbar-right">
-            {user ? (
-              <div className="top-item">
-                <FaUserCircle className="icon" />
-                <span className="top-bold" style={{ cursor: "pointer" }} onClick={handleLogout}>
-                  Se déconnecter
-                </span>
-              </div>
+            {client ? (
+              <>
+                <div className="top-item">
+                  <FaUserCircle className="icon" />
+                  <span className="top-bold">Bonjour {firstName}</span>
+                </div>
+                <button onClick={handleLogout} className="logout-btn" title="Déconnexion">
+                  <FaSignOutAlt />
+                </button>
+              </>
             ) : (
               <div className="top-item">
                 <FaUserCircle className="icon" />
@@ -100,20 +113,22 @@ function Navbar({ cart = [], wishlist = [] }) {
               <Link to="/contact" onClick={() => setShowSidebar(false)}>Contact</Link>
             </nav>
 
-            {user ? (
-              <div className="top-item">
-                <FaUserCircle className="icon" />
-                <span
-                  className="top-bold"
-                  style={{ cursor: "pointer" }}
+            {client ? (
+              <>
+                <div className="top-item">
+                  <FaUserCircle className="icon" />
+                  <span className="top-bold">Bonjour {firstName}</span>
+                </div>
+                <button
                   onClick={() => {
                     handleLogout();
                     setShowSidebar(false);
                   }}
+                  className="logout-btn"
                 >
-                  Se déconnecter
-                </span>
-              </div>
+                  <FaSignOutAlt />
+                </button>
+              </>
             ) : (
               <div className="top-item">
                 <FaUserCircle className="icon" />
@@ -121,12 +136,12 @@ function Navbar({ cart = [], wishlist = [] }) {
               </div>
             )}
 
-            <Link to="/wishlist" className="top-item" style={{ position: "relative" }} onClick={() => setShowSidebar(false)}>
+            <Link to="/wishlist" className="top-item" onClick={() => setShowSidebar(false)}>
               <FaRegHeart className="icon" />
               {wishlist.length > 0 && <span className="cart-badge">{wishlist.length}</span>}
             </Link>
 
-            <Link to="/panier" className="top-item" style={{ position: "relative" }} onClick={() => setShowSidebar(false)}>
+            <Link to="/panier" className="top-item" onClick={() => setShowSidebar(false)}>
               <FaShoppingBag className="icon" />
               {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
             </Link>
