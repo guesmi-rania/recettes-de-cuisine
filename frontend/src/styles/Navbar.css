@@ -1,184 +1,193 @@
-/* ---------- Bandeau supérieur ---------- */
+/* Banner */
 .banner {
-  background: linear-gradient(90deg, #e44d7d, #f783ac);
+  background-color: #003366;
   color: white;
   text-align: center;
-  font-weight: bold;
-  padding: 6px 0;
-  font-size: 0.95rem;
+  padding: 5px;
+  font-size: 14px;
 }
 
-/* ---------- Conteneur de la navbar ---------- */
+/* Conteneur */
 .navbar-container {
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
   position: sticky;
   top: 0;
   z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Wrapper */
 .navbar-wrapper {
+  width: 100%;
+  max-width: 1300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 2rem;
-  max-width: 1280px;
-  margin: auto;
+  padding: 10px 0;
 }
 
-/* ---------- Logo ---------- */
+/* Logo */
 .logo-link img {
   height: 50px;
 }
 
-/* ---------- Menu principal ---------- */
+/* Partie gauche */
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 20px;
 }
 
-.menu-links a {
-  margin-right: 1.2rem;
-  color: #444;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
+/* Catégories */
+.categories-dropdown {
+  position: relative;
 }
 
-.menu-links a:hover {
-  color: #e44d7d;
-}
-
-/* ---------- Dropdown catégories ---------- */
 .categories-dropdown button {
-  background: none;
+  background-color: #00bcd4;
+  color: white;
   border: none;
-  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 30px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #444;
+  font-weight: 400;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
-.categories-list.open {
-  position: absolute;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 1rem;
-  z-index: 100;
-  margin-top: 5px;
+.categories-dropdown button:hover {
+  background-color: #0194a3;
 }
 
-/* ---------- Partie droite ---------- */
+/* Liens */
+.menu-links {
+  display: flex;
+  gap: 20px;
+}
+
+.menu-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.menu-links a:hover {
+  color: #00bcd4;
+}
+
+/* Partie droite */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 25px;
 }
 
 .top-item {
   display: flex;
   align-items: center;
-  color: #444;
-  font-weight: 500;
-  gap: 6px;
-  text-decoration: none;
-}
-
-.top-item .icon {
-  font-size: 1.3rem;
-}
-
-/* ---------- Badge panier / wishlist ---------- */
-.cart-badge {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  background-color: #e44d7d;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 0.7rem;
-  font-weight: bold;
-}
-
-/* ---------- Infos utilisateur ---------- */
-.user-info {
-  display: flex;
-  align-items: center;
   gap: 8px;
 }
 
-.user-text {
+.top-item a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.top-item a:hover {
+  color: #00bcd4;
+}
+
+/* Badge */
+.cart-badge {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+
+/* === Mon compte, bienvenue, et bouton déconnexion stylisés === */
+.top-item.user-info {
+  gap: 10px;
+  cursor: default;
+  align-items: center;
+}
+
+.top-item.user-info .icon {
+  font-size: 1.6rem;
+  color: #e44d7d;
+}
+
+.top-item.user-info .user-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
-.user-text .top-bold {
-  font-weight: bold;
-  color: #444;
-}
-
-.welcome-message {
-  font-size: 0.8rem;
-  color: #888;
-}
-
-/* ---------- Bouton déconnexion ---------- */
-.logout-btn {
-  background: none;
-  border: none;
+.top-item.user-info .top-bold {
+  font-weight: 700;
+  font-size: 1rem;
   color: #e44d7d;
+}
+
+.top-item.user-info .welcome-message {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+/* Bouton déconnexion */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background-color: #e44d7d;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.2rem;
-  padding: 0;
+  transition: background-color 0.3s ease;
 }
 
 .logout-btn:hover {
-  color: #c52f5a;
+  background-color: #c9305c;
 }
 
-/* ---------- Mobile menu burger ---------- */
+.logout-icon {
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Mobile */
 .menu-toggle {
   display: none;
   cursor: pointer;
+  font-size: 24px;
 }
 
-.menu-icon {
-  font-size: 1.4rem;
-}
-
-/* ---------- Menu mobile ---------- */
-.mobile-menu {
-  background-color: #fff;
-  border-top: 1px solid #eee;
-  padding: 1rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.mobile-menu .menu-links a {
-  font-size: 1rem;
-  color: #444;
-  font-weight: 500;
-}
-
-/* ---------- Responsive ---------- */
 @media (max-width: 768px) {
-  .navbar-wrapper {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .navbar-left .menu-links {
-    display: none;
-  }
-
-  .categories-dropdown {
+  .navbar-left,
+  .navbar-right {
     display: none;
   }
 
@@ -186,7 +195,18 @@
     display: block;
   }
 
-  .navbar-right {
-    gap: 0.8rem;
+  .mobile-menu {
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .mobile-menu .menu-links {
+    flex-direction: column;
+    gap: 10px;
   }
 }

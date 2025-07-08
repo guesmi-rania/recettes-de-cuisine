@@ -75,7 +75,7 @@ function Navbar({ cart = [], wishlist = [] }) {
                   <span className="top-bold">Mon compte</span>
                   <span className="welcome-message">Bienvenue {firstName}</span>
                 </div>
-                <button className="logout-btn" onClick={handleLogout}>
+                <button className="logout-btn" onClick={handleLogout} aria-label="Déconnexion">
                   <FaSignOutAlt className="logout-icon" />
                 </button>
               </div>
@@ -114,22 +114,29 @@ function Navbar({ cart = [], wishlist = [] }) {
             </nav>
 
             {client ? (
-              <>
-                <div className="top-item user-info">
-                  <FaUserCircle className="icon" />
-                  <div className="user-text">
-                    <span className="top-bold">Mon compte</span>
-                    <span className="welcome-message">Bienvenue {firstName}</span>
-                  </div>
-                  <button className="logout-btn" onClick={() => { handleLogout(); setShowSidebar(false); }}>
-                    <FaSignOutAlt className="logout-icon" />
-                  </button>
+              <div className="top-item user-info">
+                <FaUserCircle className="icon" />
+                <div className="user-text">
+                  <span className="top-bold">Mon compte</span>
+                  <span className="welcome-message">Bienvenue {firstName}</span>
                 </div>
-              </>
+                <button
+                  className="logout-btn"
+                  onClick={() => {
+                    handleLogout();
+                    setShowSidebar(false);
+                  }}
+                  aria-label="Déconnexion"
+                >
+                  <FaSignOutAlt className="logout-icon" />
+                </button>
+              </div>
             ) : (
               <div className="top-item">
                 <FaUserCircle className="icon" />
-                <Link to="/login" className="top-bold" onClick={() => setShowSidebar(false)}>Mon compte</Link>
+                <Link to="/login" className="top-bold" onClick={() => setShowSidebar(false)}>
+                  Mon compte
+                </Link>
               </div>
             )}
 
