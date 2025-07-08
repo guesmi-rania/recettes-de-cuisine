@@ -16,22 +16,24 @@ import Categories from "./Categories";
 function Navbar({ cart = [], wishlist = [] }) {
   const [showCategories, setShowCategories] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-  const [client, setClient] = useState(null);
+  const [firstName, setFirstName] = useState(null);
   const navigate = useNavigate();
 
+  // Chargement du prénom depuis localStorage
   useEffect(() => {
     const storedClient = JSON.parse(localStorage.getItem("client"));
-    setClient(storedClient);
+    if (storedClient?.name) {
+      const prenom = storedClient.name.split(" ")[0];
+      setFirstName(prenom);
+    }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("client");
     localStorage.removeItem("token");
-    setClient(null);
+    setFirstName(null);
     navigate("/login");
   };
-
-  const firstName = client?.name?.split(" ")[0] || "Client";
 
   return (
     <>
@@ -68,7 +70,7 @@ function Navbar({ cart = [], wishlist = [] }) {
 
           {/* Droite */}
           <div className="navbar-right">
-            {client ? (
+            {firstName ? (
               <div className="top-item user-info">
                 <FaUserCircle className="icon" />
                 <div className="user-text">
@@ -113,7 +115,7 @@ function Navbar({ cart = [], wishlist = [] }) {
               <Link to="/contact" onClick={() => setShowSidebar(false)}>Contact</Link>
             </nav>
 
-            {client ? (
+            {firstName ? (
               <div className="top-item user-info">
                 <FaUserCircle className="icon" />
                 <div className="user-text">
