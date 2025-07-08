@@ -38,9 +38,6 @@ function Welcome() {
             Voir mes commandes
           </Link>
         </div>
-
-        {/* Bouton déconnecter */}
-        <LogoutButton />
       </div>
     </div>
   );
