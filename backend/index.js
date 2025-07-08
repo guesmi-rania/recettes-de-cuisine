@@ -1,10 +1,11 @@
-require('dotenv').config();
+require('dotenv').config(); // Charger les variables d'environnement en premier
+
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 
-const authRoutes = require('./routes/auth'); 
+const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/adminRoutes');
 const productRoutes = require('./routes/products');
 const orderRoutes = require('./routes/orders');
@@ -12,22 +13,22 @@ const orderRoutes = require('./routes/orders');
 const app = express();
 
 const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI;
+const JWT_SECRET = process.env.JWT_SECRET; // à utiliser dans auth.js
 
-// Configuration CORS
+// Configuration CORS : adapte les origines selon besoin
 const corsOptions = {
   origin: [
-    'http://localhost:5173',
-    'https://frontend-recettes-fxc8.onrender.com',
-    // ajoute d'autres domaines autorisés si besoin
+    'http://localhost:5173', // frontend dev
+    'https://frontend-recettes-fxc8.onrender.com', // frontend prod (exemple)
+    // ajoute d'autres domaines autorisés ici
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
-
-// Middleware JSON — à déclarer une seule fois !
-app.use(express.json());
+app.use(express.json()); // middleware JSON
 
 // Routes API
 app.use('/api/auth', authRoutes);
@@ -38,14 +39,13 @@ app.use('/api/orders', orderRoutes);
 // Servir le frontend React buildé (dist dans public)
 app.use(express.static(path.join(__dirname, 'public', 'dist')));
 
-// Fallback pour React Router — pour toutes les routes non-API
+// Fallback React Router (toutes les routes non-API)
 app.get('/:id', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
 });
 
 // Connexion MongoDB + démarrage serveur
-mongoose
-  .connect(process.env.MONGO_URI)
+mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('✅ Connecté à MongoDB Atlas');
     app.listen(PORT, () => {
