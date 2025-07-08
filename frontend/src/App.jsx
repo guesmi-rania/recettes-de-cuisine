@@ -58,11 +58,18 @@ function App() {
 
         {/* Authentification */}
         <Route path="/login" element={<ClientAuth />} />
-        <Route path="/bienvenue" element={
-          <ProtectedRoute>
-            <Welcome />
-          </ProtectedRoute>
-        } />
+        <Routes>
+  {/* Route protégée */}
+  <Route
+    path="/bienvenue"
+    element={
+      <ProtectedRoute>
+        <Welcome />
+      </ProtectedRoute>
+    }
+  />
+  {/* Autres routes */}
+</Routes>
 
         {/* Pages protégées */}
         <Route path="/produits" element={
