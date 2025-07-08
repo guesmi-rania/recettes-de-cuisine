@@ -77,6 +77,7 @@ function ClientAuth() {
         alert("Inscription réussie, connectez-vous !");
         setIsLogin(true);
         setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+        navigate("/login");  // ← ajouter ceci
       } else {
         alert(data.message || "Erreur lors de l’inscription.");
       }
