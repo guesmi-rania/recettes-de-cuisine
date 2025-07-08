@@ -22,7 +22,7 @@
   
   .welcome-box h1 {
     font-size: 2.5rem;
-    color: #e91e63;
+    color: #00BCD4;
     margin-bottom: 10px;
   }
   
@@ -58,27 +58,27 @@
   }
   
   .btn-primary {
-    background-color: #e91e63;
+    background-color: #00BCD4;
     color: white;
   }
   
   .btn-primary:hover {
-    background-color: #c2185b;
+    background-color: #00BCD4;
   }
   
   .btn-secondary {
     background-color: transparent;
-    border: 2px solid #e91e63;
-    color: #e91e63;
+    border: 2px solid hwb(187 0% 56%);
+    color: #00BCD4;
   }
   
   .btn-secondary:hover {
-    background-color: #e91e63;
+    background-color: hwb(187 0% 56%);
     color: white;
   }
   .logout-btn {
     margin-top: 20px;
-    background-color: #d9534f;
+    background-color: #00BCD4;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -89,6 +89,6 @@
   }
   
   .logout-btn:hover {
-    background-color: #c9302c;
+    background-color: #00BCD4;
   }
   
