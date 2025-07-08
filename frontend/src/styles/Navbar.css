@@ -1,5 +1,3 @@
-/* Navbar.css */
-
 /* Banner */
 .banner {
   background-color: #003366;
@@ -9,7 +7,7 @@
   font-size: 14px;
 }
 
-/* Navbar Container */
+/* Conteneur */
 .navbar-container {
   background-color: white;
   border-bottom: 1px solid #ddd;
@@ -22,7 +20,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Wrapper Centré */
+/* Wrapper */
 .navbar-wrapper {
   width: 100%;
   max-width: 1300px;
@@ -32,18 +30,19 @@
   padding: 10px 0;
 }
 
-/* Partie Gauche */
+/* Logo */
+.logo-link img {
+  height: 50px;
+}
+
+/* Partie gauche */
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.logo-link img {
-  height: 50px;
-}
-
-/* Bouton "Toutes les catégories" */
+/* Catégories */
 .categories-dropdown {
   position: relative;
 }
@@ -59,16 +58,15 @@
   align-items: center;
   gap: 5px;
   font-weight: 400;
-  font-size: 1rem; /* Taille harmonisée */
+  font-size: 1rem;
   transition: background-color 0.3s;
 }
 
 .categories-dropdown button:hover {
   background-color: #0194a3;
-  color: white;
 }
 
-/* Liens Menu */
+/* Liens */
 .menu-links {
   display: flex;
   gap: 20px;
@@ -78,7 +76,7 @@
   text-decoration: none;
   color: #333;
   font-weight: 500;
-  font-size: 1rem; /* Taille harmonisée */
+  font-size: 1rem;
   transition: color 0.3s;
 }
 
@@ -86,7 +84,7 @@
   color: #00bcd4;
 }
 
-/* Partie Droite */
+/* Partie droite */
 .navbar-right {
   display: flex;
   align-items: center;
@@ -103,7 +101,7 @@
   text-decoration: none;
   color: #333;
   font-weight: 500;
-  font-size: 1rem; /* Taille harmonisée */
+  font-size: 1rem;
   transition: color 0.3s;
 }
 
@@ -111,7 +109,7 @@
   color: #00bcd4;
 }
 
-/* Badge panier/wishlist */
+/* Badge */
 .cart-badge {
   background-color: red;
   color: white;
@@ -122,22 +120,38 @@
   top: -5px;
   right: -10px;
 }
-.panier-label {
-  color: #333 !important; /* Pour s'assurer qu'il reste noir */
-  font-weight: 500;
-  margin-left: 5px;
-  font-family: 'Poppins', sans-serif;
+
+/* Déconnexion */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background-color: #e44d7d;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
+.logout-btn:hover {
+  background-color: #c9305c;
+}
 
-/* Icônes menu burger */
+.logout-icon {
+  font-size: 1.1rem;
+}
+
+/* Mobile */
 .menu-toggle {
   display: none;
   cursor: pointer;
   font-size: 24px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .navbar-left,
   .navbar-right {

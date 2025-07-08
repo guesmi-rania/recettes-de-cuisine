@@ -1,3 +1,4 @@
+// src/components/Navbar.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
@@ -41,8 +42,7 @@ function Navbar({ cart = [], wishlist = [] }) {
 
       <header className="navbar-container">
         <div className="navbar-wrapper">
-
-          {/* Partie gauche */}
+          {/* Gauche */}
           <div className="navbar-left">
             <Link to="/" className="logo-link">
               <img src={logo} alt="Logo Mr. Chef" />
@@ -53,7 +53,7 @@ function Navbar({ cart = [], wishlist = [] }) {
                 <FaBars className="menu-icon" /> Toutes les catégories <FaChevronDown />
               </button>
               {showCategories && (
-                <div className={`categories-list ${showCategories ? "open" : ""}`}>
+                <div className="categories-list open">
                   <Categories onClickCategory={() => setShowCategories(false)} />
                 </div>
               )}
@@ -67,7 +67,7 @@ function Navbar({ cart = [], wishlist = [] }) {
             </nav>
           </div>
 
-          {/* Partie droite */}
+          {/* Droite */}
           <div className="navbar-right">
             {client ? (
               <>
@@ -75,8 +75,9 @@ function Navbar({ cart = [], wishlist = [] }) {
                   <FaUserCircle className="icon" />
                   <span className="top-bold">Bonjour {firstName}</span>
                 </div>
-                <button onClick={handleLogout} className="logout-btn" title="Déconnexion">
-                  <FaSignOutAlt />
+                <button className="logout-btn" onClick={handleLogout}>
+                  <FaSignOutAlt className="logout-icon" />
+                  Déconnexion
                 </button>
               </>
             ) : (
@@ -97,13 +98,13 @@ function Navbar({ cart = [], wishlist = [] }) {
             </Link>
           </div>
 
-          {/* Menu mobile */}
+          {/* Bouton burger mobile */}
           <div className="menu-toggle" onClick={() => setShowSidebar(!showSidebar)}>
             {showSidebar ? <FaTimes className="menu-icon" /> : <FaBars className="menu-icon" />}
           </div>
         </div>
 
-        {/* Menu mobile responsive */}
+        {/* Menu mobile */}
         {showSidebar && (
           <div className="mobile-menu">
             <nav className="menu-links">
@@ -119,14 +120,9 @@ function Navbar({ cart = [], wishlist = [] }) {
                   <FaUserCircle className="icon" />
                   <span className="top-bold">Bonjour {firstName}</span>
                 </div>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setShowSidebar(false);
-                  }}
-                  className="logout-btn"
-                >
-                  <FaSignOutAlt />
+                <button className="logout-btn" onClick={() => { handleLogout(); setShowSidebar(false); }}>
+                  <FaSignOutAlt className="logout-icon" />
+                  Déconnexion
                 </button>
               </>
             ) : (
