@@ -1,22 +1,27 @@
-// src/pages/Welcome.jsx
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Welcome.css";
 
 function Welcome() {
-  const [client, setClient] = useState(null);
+  const [firstName, setFirstName] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedClient = JSON.parse(localStorage.getItem("client"));
+
     if (!storedClient) {
-      navigate("/login");
+      navigate("/login"); // Redirige si pas connecté
     } else {
-      setClient(storedClient);
+      const prenom = storedClient.name?.split(" ")[0] || "";
+      setFirstName(prenom);
     }
   }, [navigate]);
 
-  const firstName = client?.name?.split(" ")[0] || "";
+  const handleLogout = () => {
+    localStorage.removeItem("client");
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <div className="welcome-container">
@@ -38,6 +43,10 @@ function Welcome() {
             Voir mes commandes
           </Link>
         </div>
+
+        <button className="logout-btn" onClick={handleLogout}>
+          Se déconnecter
+        </button>
       </div>
     </div>
   );
