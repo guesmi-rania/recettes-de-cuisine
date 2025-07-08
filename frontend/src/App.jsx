@@ -58,48 +58,56 @@ function App() {
 
         {/* Authentification */}
         <Route path="/login" element={<ClientAuth />} />
-        <Routes>
-  {/* Route protégée */}
-  <Route
-    path="/bienvenue"
-    element={
-      <ProtectedRoute>
-        <Welcome />
-      </ProtectedRoute>
-    }
-  />
-  {/* Autres routes */}
-</Routes>
+
+        {/* Route protégée pour la page bienvenue */}
+        <Route
+          path="/bienvenue"
+          element={
+            <ProtectedRoute>
+              <Welcome />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Pages protégées */}
-        <Route path="/produits" element={
-          <ProtectedRoute>
-            <ProductsPage
-              cart={cart}
-              wishlist={wishlist}
-              onAddToCart={handleAddToCart}
-              onAddToWishlist={handleAddToWishlist}
-            />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/produits"
+          element={
+            <ProtectedRoute>
+              <ProductsPage
+                cart={cart}
+                wishlist={wishlist}
+                onAddToCart={handleAddToCart}
+                onAddToWishlist={handleAddToWishlist}
+              />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path="/produits/:id" element={
-          <ProtectedRoute>
-            <ProductDetail
-              onAddToCart={handleAddToCart}
-              onAddToWishlist={handleAddToWishlist}
-              wishlist={wishlist}
-            />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/produits/:id"
+          element={
+            <ProtectedRoute>
+              <ProductDetail
+                onAddToCart={handleAddToCart}
+                onAddToWishlist={handleAddToWishlist}
+                wishlist={wishlist}
+              />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="/panier" element={<CartPage cart={cart} setCart={setCart} />} />
         <Route path="/wishlist" element={<WishlistPage wishlist={wishlist} setWishlist={setWishlist} />} />
-        <Route path="/commandes" element={
-          <ProtectedRoute>
-            <OrdersPage />
-          </ProtectedRoute>
-        } />
+
+        <Route
+          path="/commandes"
+          element={
+            <ProtectedRoute>
+              <OrdersPage />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="/dégustation" element={<TastingList />} />
         <Route path="/contact" element={<ContactPage />} />
