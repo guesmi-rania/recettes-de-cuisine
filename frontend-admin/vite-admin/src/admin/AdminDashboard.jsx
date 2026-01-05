@@ -13,20 +13,17 @@ export default function AdminDashboard() {
   const BASE_URL = import.meta.env.VITE_API_URL;
   const PRODUCTS_URL = import.meta.env.VITE_PRODUCTS_URL;
 
-  // Récupération des données
+  // Récupérer toutes les données
   const fetchData = async () => {
     try {
-      const ordersRes = await axios.get(`${BASE_URL}/api/orders`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const [ordersRes, productsRes, clientsRes] = await Promise.all([
+        axios.get(`${BASE_URL}/api/orders`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${PRODUCTS_URL}`),
+        axios.get(`${BASE_URL}/clients`, { headers: { Authorization: `Bearer ${token}` } }),
+      ]);
+
       setOrders(Array.isArray(ordersRes.data) ? ordersRes.data : []);
-
-      const productsRes = await axios.get(`${PRODUCTS_URL}`);
       setProducts(Array.isArray(productsRes.data) ? productsRes.data : []);
-
-      const clientsRes = await axios.get(`${BASE_URL}/clients`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
       setClients(Array.isArray(clientsRes.data) ? clientsRes.data : []);
     } catch (err) {
       console.error(err);
@@ -79,7 +76,7 @@ export default function AdminDashboard() {
   if (loading) return <p style={{ padding: "20px" }}>Chargement...</p>;
 
   return (
-    <div className="dashboard-content">
+    <div className="admin-main">
       {/* Stats */}
       <div className="stats-grid">
         <div className="stat-card">
@@ -101,58 +98,61 @@ export default function AdminDashboard() {
       {orders.length === 0 ? (
         <p>Aucune commande trouvée.</p>
       ) : (
-        <table className="orders-table">
-          <thead>
-            <tr>
-              <th>Client</th>
-              <th>Email</th>
-              <th>Adresse</th>
-              <th>Produits</th>
-              <th>Total</th>
-              <th>Statut</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order.clientInfo?.name}</td>
-                <td>{order.clientInfo?.email}</td>
-                <td>{order.clientInfo?.address}</td>
-                <td>
-                  <ul>
-                    {order.cart?.map((item, idx) => (
-                      <li key={idx}>
-                        {item.name} × {item.quantity}
-                      </li>
-                    ))}
-                  </ul>
-                </td>
-                <td>{order.totalPrice} DT</td>
-                <td>{order.status || "En attente"}</td>
-                <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td>
-                  <button onClick={() => handleStatusChange(order._id, "Validée")}>
-                    Valider
-                  </button>
-                  <button
-                    onClick={() => handleStatusChange(order._id, "Annulée")}
-                    style={{ marginLeft: "5px", backgroundColor: "#e74c3c" }}
-                  >
-                    Annuler
-                  </button>
-                  <button
-                    onClick={() => generatePDF(order)}
-                    style={{ marginLeft: "5px", backgroundColor: "#007bff" }}
-                  >
-                    PDF
-                  </button>
-                </td>
+        <div className="orders-table-wrapper">
+          <table className="orders-table">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>Produits</th>
+                <th>Total</th>
+                <th>Statut</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order.clientInfo?.name}</td>
+                  <td>{order.clientInfo?.email}</td>
+                  <td>{order.clientInfo?.address}</td>
+                  <td>
+                    <ul>
+                      {order.cart?.map((item, idx) => (
+                        <li key={idx}>
+                          {item.name} × {item.quantity}
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td>{order.totalPrice.toFixed(2)} DT</td>
+                  <td>
+                    <span className={`status ${order.status?.toLowerCase().replace(" ", "-")}`}>
+                      {order.status || "En attente"}
+                    </span>
+                  </td>
+                  <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                  <td className="actions-cell">
+                    <button onClick={() => handleStatusChange(order._id, "Validée")}>
+                      Valider
+                    </button>
+                    <button
+                      onClick={() => handleStatusChange(order._id, "Annulée")}
+                      className="cancel-btn"
+                    >
+                      Annuler
+                    </button>
+                    <button onClick={() => generatePDF(order)} className="pdf-btn">
+                      PDF
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
