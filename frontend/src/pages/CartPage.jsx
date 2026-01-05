@@ -1,122 +1,115 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "../styles/Orders.css";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import "../styles/Cart.css";
 import Footer from "../components/Footer";
+import { calculateTotals } from "../utils/calculateTotals";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "https://recettes-de-cuisine.onrender.com";
+export default function CartPage({ cart, setCart }) {
+  const navigate = useNavigate();
+  const [totals, setTotals] = useState({
+    subTotal: 0,
+    taxes: 0,
+    shipping: 0,
+    total: 0,
+  });
 
-export default function OrdersPage() {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // Totaux globaux
-  const [subTotal, setSubTotal] = useState(0);
-  const [taxes, setTaxes] = useState(0);
-  const [shipping, setShipping] = useState(0);
-  const [grandTotal, setGrandTotal] = useState(0);
-
-  // Récupérer les commandes
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const res = await axios.get(`${BASE_URL}/api/orders`);
-        setOrders(res.data);
-      } catch (err) {
-        console.error("Erreur lors du chargement des commandes", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchOrders();
-  }, []);
+    const newTotals = calculateTotals(cart, { type: "cart", shippingPerItem: 7, taxRate: 0.05 });
+    setTotals(newTotals);
+  }, [cart]);
 
-  // Calculer les totaux globaux
-  useEffect(() => {
-    if (orders.length > 0) {
-      // Sous-total : somme de totalPrice de chaque commande
-      const sub = orders.reduce((sum, order) => sum + (order.totalPrice || 0), 0);
+  const handleRemove = (id) => {
+    const updated = cart.filter((item) => item._id !== id);
+    setCart(updated);
+    localStorage.setItem("cart", JSON.stringify(updated));
+  };
 
-      // Taxes : 5% du sous-total
-      const tax = sub * 0.05;
+  const handleQuantityChange = (id, delta) => {
+    const updated = cart.map((item) =>
+      item._id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
+    );
+    setCart(updated);
+    localStorage.setItem("cart", JSON.stringify(updated));
+  };
 
-      // Livraison : 7 DT par commande
-      const ship = orders.length * 7;
-
-      // Total général
-      const total = sub + tax + ship;
-
-      setSubTotal(sub);
-      setTaxes(tax);
-      setShipping(ship);
-      setGrandTotal(total);
-    } else {
-      setSubTotal(0);
-      setTaxes(0);
-      setShipping(0);
-      setGrandTotal(0);
+  const handleCheckout = () => {
+    if (cart.length === 0) {
+      alert("Votre panier est vide !");
+      return;
     }
-  }, [orders]);
-
-  // Calculer le total de chaque commande individuellement
-  const calculateOrderTotal = (order) => {
-    const orderSubTotal = order.cart?.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0;
-    const orderTax = orderSubTotal * 0.05;
-    const orderShipping = order.cart?.length > 0 ? 7 : 0;
-    return orderSubTotal + orderTax + orderShipping;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    navigate("/checkout");
   };
 
   return (
-    <div className="orders-page">
-      <h2 className="orders-title">Mes commandes</h2>
+    <div className="cart-page">
+      <div className="cart-container">
+        <Helmet>
+          <title>Mon Panier | Douceurs du Chef</title>
+          <meta
+            name="description"
+            content="Consultez les articles de votre panier sur Douceurs du Chef."
+          />
+          <meta name="robots" content="noindex, nofollow" />
+        </Helmet>
 
-      {loading ? (
-        <p className="loading">Chargement des commandes...</p>
-      ) : orders.length === 0 ? (
-        <p className="empty">Vous n’avez pas encore passé de commande.</p>
-      ) : (
-        <>
-          {/* ===== Résumé global ===== */}
-          <div className="orders-summary">
-            <h3>Résumé global des commandes</h3>
-            <p>Sous-total : {subTotal.toFixed(2)} DT</p>
-            <p>Taxes (5%) : {taxes.toFixed(2)} DT</p>
-            <p>Livraison : {shipping.toFixed(2)} DT</p>
-            <h3>Total général : {grandTotal.toFixed(2)} DT</h3>
-          </div>
+        <h2>🛒 Mon Panier</h2>
 
-          {/* ===== Liste des commandes ===== */}
-          {orders.map((order) => (
-            <div key={order._id} className="order-card">
-              <div className="order-info">
-                <p><strong>Client :</strong> {order.clientInfo?.name}</p>
-                <p><strong>Email :</strong> {order.clientInfo?.email}</p>
-                <p><strong>Adresse :</strong> {order.clientInfo?.address}</p>
-                <p><strong>Total commande :</strong> {calculateOrderTotal(order).toFixed(2)} DT</p>
-                <p>
-                  <strong>Statut :</strong>{" "}
-                  <span className={`status ${order.status.toLowerCase().replace(" ", "-")}`}>
-                    {order.status}
-                  </span>
-                </p>
-              </div>
-              <div className="order-products">
-                <strong>Produits :</strong>
-                <ul>
-                  {order.cart?.length > 0 ? (
-                    order.cart.map((item, idx) => (
-                      <li key={idx}>
-                        {item.name} × {item.quantity} = {(item.price * item.quantity).toFixed(2)} DT
-                      </li>
-                    ))
-                  ) : (
-                    <li>Aucun produit</li>
-                  )}
-                </ul>
-              </div>
+        {cart.length === 0 ? (
+          <p className="empty">Votre panier est vide.</p>
+        ) : (
+          <>
+            <table className="cart-table">
+              <thead>
+                <tr>
+                  <th>Produit</th>
+                  <th>Prix</th>
+                  <th>Quantité</th>
+                  <th>Total</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cart.map((item) => (
+                  <tr key={item._id}>
+                    <td className="product-info">
+                      <img src={item.imageUrl} alt={item.name} />
+                      <span>{item.name}</span>
+                    </td>
+                    <td>{item.price.toFixed(2)} DT</td>
+                    <td>
+                      <div className="qty-control">
+                        <button onClick={() => handleQuantityChange(item._id, -1)}>-</button>
+                        <span>{item.quantity}</span>
+                        <button onClick={() => handleQuantityChange(item._id, 1)}>+</button>
+                      </div>
+                    </td>
+                    <td>{(item.price * item.quantity).toFixed(2)} DT</td>
+                    <td>
+                      <button className="remove-btn" onClick={() => handleRemove(item._id)}>
+                        ❌
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="cart-summary">
+              <h3>Résumé de la commande</h3>
+              <p>Sous-total : {totals.subTotal.toFixed(2)} DT</p>
+              <p>Livraison : {totals.shipping.toFixed(2)} DT</p>
+              <p>Taxes (5%) : {totals.taxes.toFixed(2)} DT</p>
+              <h3>Total : {totals.total.toFixed(2)} DT</h3>
+
+              <button className="checkout-btn" onClick={handleCheckout}>
+                Passer la commande
+              </button>
             </div>
-          ))}
-        </>
-      )}
+          </>
+        )}
+      </div>
 
       <Footer />
     </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/Orders.css";
 import Footer from "../components/Footer";
+import { calculateTotals } from "../utils/calculateTotals";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "https://recettes-de-cuisine.onrender.com";
 
@@ -10,12 +11,13 @@ export default function OrdersPage() {
   const [loading, setLoading] = useState(true);
 
   // Totaux globaux
-  const [subTotal, setSubTotal] = useState(0);
-  const [taxes, setTaxes] = useState(0);
-  const [shipping, setShipping] = useState(0);
-  const [grandTotal, setGrandTotal] = useState(0);
+  const [totals, setTotals] = useState({
+    subTotal: 0,
+    taxes: 0,
+    shipping: 0,
+    total: 0,
+  });
 
-  // Récupérer les commandes
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -30,24 +32,9 @@ export default function OrdersPage() {
     fetchOrders();
   }, []);
 
-  // Calculer les totaux quand les commandes changent
   useEffect(() => {
-    if (orders.length > 0) {
-      const sub = orders.reduce((sum, order) => sum + (order.totalPrice || 0), 0);
-      const tax = sub * 0.05; // 5% de taxe
-      const ship = orders.length * 7; // 7 DT par commande
-      const total = sub + tax + ship;
-
-      setSubTotal(sub);
-      setTaxes(tax);
-      setShipping(ship);
-      setGrandTotal(total);
-    } else {
-      setSubTotal(0);
-      setTaxes(0);
-      setShipping(0);
-      setGrandTotal(0);
-    }
+    const newTotals = calculateTotals(orders, { type: "orders", shippingPerItem: 7, taxRate: 0.05 });
+    setTotals(newTotals);
   }, [orders]);
 
   return (
@@ -60,16 +47,16 @@ export default function OrdersPage() {
         <p className="empty">Vous n’avez pas encore passé de commande.</p>
       ) : (
         <>
-          {/* ===== Résumé global ===== */}
+          {/* Résumé global */}
           <div className="orders-summary">
             <h3>Résumé global des commandes</h3>
-            <p>Sous-total : {subTotal.toFixed(2)} DT</p>
-            <p>Taxes (5%) : {taxes.toFixed(2)} DT</p>
-            <p>Livraison : {shipping.toFixed(2)} DT</p>
-            <h3>Total général : {grandTotal.toFixed(2)} DT</h3>
+            <p>Sous-total : {totals.subTotal.toFixed(2)} DT</p>
+            <p>Taxes (5%) : {totals.taxes.toFixed(2)} DT</p>
+            <p>Livraison : {totals.shipping.toFixed(2)} DT</p>
+            <h3>Total général : {totals.total.toFixed(2)} DT</h3>
           </div>
 
-          {/* ===== Liste des commandes ===== */}
+          {/* Liste des commandes */}
           {orders.map((order) => (
             <div key={order._id} className="order-card">
               <div className="order-info">
