@@ -9,14 +9,7 @@ const BASE_URL = import.meta.env.VITE_API_URL || "https://recettes-de-cuisine.on
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Totaux globaux
-  const [totals, setTotals] = useState({
-    subTotal: 0,
-    taxes: 0,
-    shipping: 0,
-    total: 0,
-  });
+  const [totals, setTotals] = useState({ subTotal: 0, taxes: 0, shipping: 0, total: 0 });
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -33,8 +26,8 @@ export default function OrdersPage() {
   }, []);
 
   useEffect(() => {
-    const newTotals = calculateTotals(orders, { type: "orders", shippingPerItem: 7, taxRate: 0.05 });
-    setTotals(newTotals);
+    const result = calculateTotals(orders, { type: "orders" });
+    setTotals(result);
   }, [orders]);
 
   return (
@@ -47,7 +40,6 @@ export default function OrdersPage() {
         <p className="empty">Vous n’avez pas encore passé de commande.</p>
       ) : (
         <>
-          {/* Résumé global */}
           <div className="orders-summary">
             <h3>Résumé global des commandes</h3>
             <p>Sous-total : {totals.subTotal.toFixed(2)} DT</p>
@@ -56,7 +48,6 @@ export default function OrdersPage() {
             <h3>Total général : {totals.total.toFixed(2)} DT</h3>
           </div>
 
-          {/* Liste des commandes */}
           {orders.map((order) => (
             <div key={order._id} className="order-card">
               <div className="order-info">

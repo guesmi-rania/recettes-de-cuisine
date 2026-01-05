@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import "../styles/Cart.css";
@@ -7,16 +7,11 @@ import { calculateTotals } from "../utils/calculateTotals";
 
 export default function CartPage({ cart, setCart }) {
   const navigate = useNavigate();
-  const [totals, setTotals] = useState({
-    subTotal: 0,
-    taxes: 0,
-    shipping: 0,
-    total: 0,
-  });
+  const [totals, setTotals] = useState({ subTotal: 0, taxes: 0, shipping: 0, total: 0 });
 
   useEffect(() => {
-    const newTotals = calculateTotals(cart, { type: "cart", shippingPerItem: 7, taxRate: 0.05 });
-    setTotals(newTotals);
+    const result = calculateTotals(cart, { type: "cart" });
+    setTotals(result);
   }, [cart]);
 
   const handleRemove = (id) => {
@@ -87,9 +82,7 @@ export default function CartPage({ cart, setCart }) {
                     </td>
                     <td>{(item.price * item.quantity).toFixed(2)} DT</td>
                     <td>
-                      <button className="remove-btn" onClick={() => handleRemove(item._id)}>
-                        ❌
-                      </button>
+                      <button className="remove-btn" onClick={() => handleRemove(item._id)}>❌</button>
                     </td>
                   </tr>
                 ))}
