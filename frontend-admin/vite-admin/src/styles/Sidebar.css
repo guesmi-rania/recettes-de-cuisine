@@ -1,14 +1,17 @@
-/* Sidebar déjà existante */
+/* ================= SIDEBAR BASE ================= */
 .sidebar ul {
   display: flex;
   flex-direction: column;
   height: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .sidebar li {
   padding: 15px 20px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.25s ease;
   display: flex;
   align-items: center;
 }
@@ -16,13 +19,16 @@
 .sidebar li a {
   color: #fff;
   width: 100%;
+  display: block;
 }
 
+/* Active / Hover */
 .sidebar li.active,
 .sidebar li:hover {
   background: #40739e;
 }
 
+/* Logout button */
 .sidebar li:last-child {
   margin-top: auto;
   background: #e84118;
@@ -32,4 +38,54 @@
 
 .sidebar li:last-child:hover {
   background: #c23616;
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar li {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .sidebar ul {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .sidebar li {
+    flex: 1;
+    justify-content: center;
+    padding: 12px 8px;
+    font-size: 0.85rem;
+  }
+
+  .sidebar li a {
+    text-align: center;
+  }
+
+  /* Logout button mobile */
+  .sidebar li:last-child {
+    margin-top: 0;
+    border-radius: 0;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 400px) {
+  .sidebar li {
+    font-size: 0.75rem;
+    padding: 10px 5px;
+  }
 }

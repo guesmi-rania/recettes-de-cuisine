@@ -25,7 +25,8 @@ export default function Checkout({ cart, setCart }) {
   const [shipDifferent, setShipDifferent] = useState(false);
   const [shippingInfo, setShippingInfo] = useState({ ...clientInfo });
 
-  const BASE_URL = import.meta.env.VITE_API_URL;
+  const BASE_URL =
+  import.meta.env.VITE_API_URL || "https://recettes-de-cuisine.onrender.com";
   const totalPrice = cart.reduce((acc, item) => acc + item.price * (item.quantity || 1), 0);
 
   const handleChange = (e, shipping = false) => {
