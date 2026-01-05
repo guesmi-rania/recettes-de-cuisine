@@ -1,4 +1,15 @@
 /* ================= SIDEBAR BASE ================= */
+.sidebar {
+  background: linear-gradient(180deg, #2f3640, #353b48);
+  width: 220px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
 .sidebar ul {
   display: flex;
   flex-direction: column;
@@ -9,45 +20,52 @@
 }
 
 .sidebar li {
-  padding: 15px 20px;
+  padding: 16px 25px;
   cursor: pointer;
-  transition: background 0.25s ease;
   display: flex;
   align-items: center;
+  border-radius: 8px 0 0 8px;
+  transition: all 0.3s ease;
 }
 
 .sidebar li a {
-  color: #fff;
+  color: #f5f6fa;
   width: 100%;
   display: block;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 /* Active / Hover */
 .sidebar li.active,
 .sidebar li:hover {
   background: #40739e;
+  box-shadow: inset 5px 0 0 #00a8ff;
 }
 
 /* Logout button */
-.sidebar li:last-child {
+.sidebar li.logout {
   margin-top: auto;
   background: #e84118;
   text-align: center;
   font-weight: bold;
+  border-radius: 0 8px 8px 0;
+  color: #fff;
 }
 
-.sidebar li:last-child:hover {
+.sidebar li.logout:hover {
   background: #c23616;
+  box-shadow: inset 5px 0 0 #ff6b6b;
 }
 
 /* ================= TABLET ================= */
 @media (max-width: 768px) {
   .sidebar {
-    width: 200px;
+    width: 180px;
   }
 
   .sidebar li {
-    padding: 12px 15px;
+    padding: 14px 18px;
     font-size: 0.95rem;
   }
 }
@@ -57,28 +75,33 @@
   .sidebar {
     width: 100%;
     height: auto;
+    flex-direction: row;
+    background: #353b48;
+    padding: 5px 0;
   }
 
   .sidebar ul {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
   }
 
   .sidebar li {
     flex: 1;
     justify-content: center;
-    padding: 12px 8px;
+    padding: 12px 0;
     font-size: 0.85rem;
+    border-radius: 0;
+    margin: 0 4px;
   }
 
   .sidebar li a {
     text-align: center;
   }
 
-  /* Logout button mobile */
-  .sidebar li:last-child {
+  .sidebar li.logout {
     margin-top: 0;
-    border-radius: 0;
+    border-radius: 8px;
   }
 }
 
@@ -86,6 +109,19 @@
 @media (max-width: 400px) {
   .sidebar li {
     font-size: 0.75rem;
-    padding: 10px 5px;
+    padding: 8px 0;
+    margin: 0 2px;
   }
+}
+
+/* ================= ICONS ================= */
+.sidebar li svg {
+  margin-right: 10px;
+  color: #f5f6fa;
+  transition: color 0.3s ease;
+}
+
+.sidebar li:hover svg,
+.sidebar li.active svg {
+  color: #00a8ff;
 }
