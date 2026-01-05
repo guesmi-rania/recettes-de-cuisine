@@ -6,6 +6,8 @@ import AboutUs from "../components/AboutUs";
 import Footer from "../components/Footer";
 import CategoryExplore from "../components/CategoryExplore";
 import PopularProducts from "../components/PopularProducts";
+import Features from "../components/Features";
+
 import "../styles/Home.css";
 import { FaShippingFast, FaHeadset, FaLock, FaTags } from "react-icons/fa";
 
@@ -46,10 +48,7 @@ export default function Home({ onAddToCart, wishlist, compareList, onToggleWishl
         <link rel="canonical" href={`${window.location.origin}/`} />
       </Helmet>
 
-      <div className="main-content">
-        {/* Slider ou bannière principale ici */}
-      </div>
-
+      <Features />
       <hr className="section-separator" />
 
       <CategoryExplore />

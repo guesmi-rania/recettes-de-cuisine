@@ -1,32 +1,49 @@
 .popular-products {
   padding: 2rem;
+  text-align: center; /* centre le titre et le texte global */
 }
 
-.popular-products h2 { margin-bottom: 1rem; }
+.popular-products h2 {
+  margin-bottom: 1rem;
+}
 
+/* Grille centrée */
 .popular-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
+  justify-content: center; /* centre les cartes horizontalement */
 }
 
+/* Cartes produits */
 .popular-card {
   border: 1px solid #eee;
   border-radius: 12px;
   padding: 1rem;
-  text-align: center;
   background: #fff;
   transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centre le contenu horizontalement */
+  text-align: center;  /* centre le texte */
+  position: relative;
 }
-.popular-card:hover { transform: translateY(-5px); }
 
+.popular-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Image produit */
 .popular-card img {
   width: 100%;
+  max-width: 180px; /* limite la taille pour uniformité */
   height: 180px;
   object-fit: cover;
   border-radius: 8px;
+  margin-bottom: 0.5rem;
 }
 
+/* Badge produit */
 .popular-card .badge {
   position: absolute;
   background: #e63946;
@@ -38,21 +55,63 @@
   font-size: 0.75rem;
 }
 
+/* Boutons sous la carte */
 .popular-card .buttons {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
   margin-top: 0.5rem;
+  width: 100%;
+  align-items: center;
 }
 
 .popular-card .buttons button {
   border: none;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.8rem;
   background: #f1f1f1;
+  width: 80%; /* centrage avec largeur fixe relative */
+  transition: all 0.2s ease;
 }
 
-.popular-card .buttons button.active { color: #e63946; }
-.popular-card .buttons button:hover { background: #e63946; color: #fff; }
+.popular-card .buttons button.active {
+  color: #e63946;
+}
+
+.popular-card .buttons button:hover {
+  background: #e63946;
+  color: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .popular-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .popular-card img {
+    height: 150px;
+  }
+
+  .popular-card .buttons button {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .popular-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .popular-card img {
+    height: 120px;
+  }
+
+  .popular-card .buttons button {
+    width: 100%;
+    font-size: 0.75rem;
+  }
+}
