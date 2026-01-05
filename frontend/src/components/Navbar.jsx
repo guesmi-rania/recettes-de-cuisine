@@ -12,8 +12,8 @@ import {
   FaTag,
   FaBars,
   FaTimes,
-  FaThLarge,
 } from "react-icons/fa";
+import { TiThLargeOutline } from "react-icons/ti";
 import logo from "../assets/loglou.png";
 import Categories from "./Categories";
 import "../styles/Navbar.css";
@@ -113,7 +113,7 @@ const Navbar = ({ cart = [], wishlist = [] }) => {
             onClick={() => setShowCategories((prev) => !prev)}
             aria-expanded={showCategories}
           >
-            <FaThLarge style={{ marginRight: "6px" }} />
+            <TiThLargeOutline style={{ marginRight: "6px" }} />
             Toutes les catégories <FaChevronDown style={{ marginLeft: "6px" }} />
           </button>
 
@@ -191,7 +191,7 @@ const Navbar = ({ cart = [], wishlist = [] }) => {
       <div className="info-bar">
         <nav className="info-menu-links">
           <button className="categories-toggle-btn" onClick={() => setShowCategories(!showCategories)}>
-            <FaThLarge style={{ marginRight: "6px" }} />
+            <TiThLargeOutline style={{ marginRight: "6px" }} />
             Tous Catégories <FaChevronDown style={{ marginLeft: "6px" }} />
           </button>
 

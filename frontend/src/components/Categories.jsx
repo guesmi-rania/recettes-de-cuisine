@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // ajoute useNavigate si tu veux naviguer
 import { MdOutlineSoupKitchen, MdOutlineDinnerDining } from "react-icons/md";
-import { GiCupcake, GiCheeseWedge, GiDonut } from "react-icons/gi";
-import { FaBirthdayCake, FaBreadSlice } from "react-icons/fa";
+import { LuDonut } from "react-icons/lu";
 import { TbRectangle } from "react-icons/tb";
-import { BsFillCloudFill } from "react-icons/bs";
+import { RiCake3Line } from "react-icons/ri";
+import { BsCake } from "react-icons/bs";
+import { PiCloudFill } from "react-icons/pi";
+import { LiaBreadSliceSolid } from "react-icons/lia";
+import { BiCheese } from "react-icons/bi";
+
 import "../styles/Categories.css";
 
 function Categories({ onClickCategory }) {
@@ -13,14 +17,14 @@ function Categories({ onClickCategory }) {
 
   const categories = [
     { name: "Gâteaux Signature", icon: <MdOutlineSoupKitchen /> },
-    { name: "Mousses & Entremets", icon: <GiCupcake />, isNew: true },
-    { name: "Gâteaux Événementiels", icon: <FaBirthdayCake /> },
-    { name: "Viennoiseries", icon: <FaBreadSlice /> },
+    { name: "Mousses & Entremets", icon: <RiCake3Line />, isNew: true },
+    { name: "Gâteaux Événementiels", icon: <BsCake /> },
+    { name: "Viennoiseries", icon: <LiaBreadSliceSolid /> },
     { name: "Millefeuilles", icon: <TbRectangle />, isNew: true },
     { name: "Feuilletés Salés", icon: <MdOutlineDinnerDining /> },
-    { name: "Choux & Crèmes", icon: <BsFillCloudFill /> },
-    { name: "Cheesecakes", icon: <GiCheeseWedge /> },
-    { name: "Donuts", icon: <GiDonut /> },
+    { name: "Choux & Crèmes", icon: <PiCloudFill /> },
+    { name: "Cheesecakes", icon: <BiCheese /> },
+    { name: "Donuts", icon: <LuDonut /> },
   ];
 
   const newItems = [
