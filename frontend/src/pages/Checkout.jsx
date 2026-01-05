@@ -42,20 +42,18 @@ export default function Checkout({ cart, setCart }) {
     try {
       // Mapper clientInfo pour correspondre au modèle backend
       const orderData = {
-        clientInfo: {
-          name: `${clientInfo.firstName} ${clientInfo.lastName}`,
-          email: clientInfo.email,
-          phone: clientInfo.phone,
-          address: `${clientInfo.street}, ${clientInfo.city}, ${clientInfo.state}, ${clientInfo.zip}`
-        },
+        clientName: `${clientInfo.firstName} ${clientInfo.lastName}`,
+        clientEmail: clientInfo.email,
+        address: `${clientInfo.street}, ${clientInfo.city}, ${clientInfo.state}, ${clientInfo.zip}`,
         cart: cart.map(item => ({
-          productId: item._id,
+          product: item._id,     // ✅ correspond au schema mongoose
           name: item.name,
           price: item.price,
-          quantity: item.quantity
+          quantity: item.quantity || 1
         })),
         totalPrice,
       };
+      
 
       await axios.post(`${BASE_URL}/api/orders`, orderData);
       setCart([]);
