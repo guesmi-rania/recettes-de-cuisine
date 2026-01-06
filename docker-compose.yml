@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: Rania@123
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./backend       # indique le dossier du backend
+    container_name: backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      MONGO_URI: mongodb+srv://raniaguesmi:AhfnzsUoS3gnIfNe@cluster2.stjl3ql.mongodb.net/recettes?retryWrites=true&w=majority&appName=Cluster2
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend      # indique le dossier du frontend
+    container_name: frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
