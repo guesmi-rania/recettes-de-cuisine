@@ -76,7 +76,7 @@ function Footer() {
       <div className="footer-top">
         <div className="footer-contact">
           <h4>Contactez-nous</h4>
-          <p>📞 +216 20 828 055</p>
+          <p>📞 +216 00 000 000</p>
           <p>✉️ contact@chefLotfi.com</p>
           <p>📍 123 Rue des Gourmands, Tunis, Tunisie</p>
         </div>

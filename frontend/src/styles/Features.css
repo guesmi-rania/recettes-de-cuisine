@@ -16,10 +16,10 @@
     padding: 20px 15px;
     border-radius: 18px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 25px rgba(182, 0, 189, 0.1);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
-    color: #000000;
+    color: #1b0000;
   }
   
   .feature-card:hover {

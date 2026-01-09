@@ -12,7 +12,7 @@ export default function FeaturesStylish() {
     },
     {
       icon: <FaTags />,
-      title: "Nouveaux stocks",
+      title: "Dernières offres",
       description: "Tasigförsamhet beteendedesign. Mobile checkout. Ylig kärrtorpa.",
       bg: "feature-green",
     },

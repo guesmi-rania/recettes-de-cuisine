@@ -61,7 +61,7 @@ export default function TastingPage() {
           <ul>
             <li>Adresse : 123 Rue des Gourmands, Tunis</li>
             <li>Horaires : Tous les jours de 10h à 18h</li>
-            <li>Contact : <a href="tel:+21620828055">+216 20 828 055</a> | <a href="mailto:contact@chefLotfi.com">contact@chefLotfi.com</a></li>
+            <li>Contact : <a href="tel:+21620828055">+216 00 000 000 </a> | <a href="mailto:contact@chefLotfi.com">contact@chefLotfi.com</a></li>
           </ul>
         </div>
 

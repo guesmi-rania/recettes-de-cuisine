@@ -96,7 +96,7 @@ export default function ContactPage() {
             <FaPhoneAlt className="info-icon" />
             <div>
               <h4>Téléphone :</h4>
-              <p>+216 20 828 055</p>
+              <p>+216 00 000 000</p>
             </div>
           </div>
 
@@ -104,7 +104,7 @@ export default function ContactPage() {
             <FaEnvelope className="info-icon" />
             <div>
               <h4>Email :</h4>
-              <p>lotfichef@gmail.com</p>
+              <p>contact@chefLotfi.com</p>
             </div>
           </div>
 
@@ -112,7 +112,7 @@ export default function ContactPage() {
             <MdLocationOn className="info-icon" />
             <div>
               <h4>Localisation :</h4>
-              <p>N°11 rue Kawefel Borj Louzir Ariana</p>
+              <p>N°00 rue **** **** </p>
             </div>
           </div>
 
