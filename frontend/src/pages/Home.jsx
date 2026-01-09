@@ -75,30 +75,6 @@ export default function Home({ onAddToCart, wishlist, compareList, onToggleWishl
       <AboutUs />
       <hr className="section-separator" />
 
-      <section className="home-features">
-        <div className="features-container">
-          <div className="feature-item">
-            <FaShippingFast size={30} color="#FE81CC" />
-            <h4>Livraison gratuite dès 200 DT</h4>
-            <p>Pour toute commande supérieure à 200 DT</p>
-          </div>
-          <div className="feature-item">
-            <FaHeadset size={30} color="#FE81CC" />
-            <h4>Support 24/7</h4>
-            <p>Disponible à tout moment pour vous aider</p>
-          </div>
-          <div className="feature-item">
-            <FaLock size={30} color="#FE81CC" />
-            <h4>Paiement sécurisé</h4>
-            <p>Achetez en toute sécurité et confiance</p>
-          </div>
-          <div className="feature-item">
-            <FaTags size={30} color="#FE81CC" />
-            <h4>Dernières offres</h4>
-            <p>Jusqu'à 18% de réduction sur nos produits</p>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>
