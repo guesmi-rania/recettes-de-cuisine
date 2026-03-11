@@ -1,4 +1,3 @@
-// ===== AdminNewsletter.jsx =====
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -24,56 +23,33 @@ export default function AdminNewsletter() {
         setLoading(false);
       }
     };
+
     fetchSubscribers();
   }, [token]);
 
-  if (loading) return (
-    <div className="loading-state">
-      <div className="loading-spinner"></div>
-      Chargement des abonnés...
-    </div>
-  );
-  if (error) return <div className="alert-error">{error}</div>;
+  if (loading) return <p>Chargement des abonnés...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (!subscribers.length) return <p>Aucun abonné trouvé.</p>;
 
   return (
     <div>
-      <div className="page-header">
-        <h2>Newsletter</h2>
-        <p>{subscribers.length} abonné{subscribers.length !== 1 ? "s" : ""}</p>
-      </div>
-
-      {subscribers.length === 0 ? (
-        <div className="table-wrapper">
-          <div className="empty-state"><p>Aucun abonné pour le moment.</p></div>
-        </div>
-      ) : (
-        <div className="table-wrapper">
-          <table className="orders-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Email</th>
-                <th>Inscrit le</th>
-              </tr>
-            </thead>
-            <tbody>
-              {subscribers.map((sub, idx) => (
-                <tr key={sub._id}>
-                  <td style={{ color: "var(--text-muted)", fontSize: "0.82rem" }}>
-                    {String(idx + 1).padStart(2, "0")}
-                  </td>
-                  <td style={{ color: "var(--text-primary)", fontWeight: 500 }}>
-                    {sub.email}
-                  </td>
-                  <td style={{ color: "var(--text-muted)", fontSize: "0.82rem" }}>
-                    {new Date(sub.createdAt).toLocaleDateString("fr-FR")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <h2>Abonnés à la Newsletter</h2>
+      <table className="orders-table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Inscrit le</th>
+          </tr>
+        </thead>
+        <tbody>
+          {subscribers.map((sub) => (
+            <tr key={sub._id}>
+              <td>{sub.email}</td>
+              <td>{new Date(sub.createdAt).toLocaleDateString()}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

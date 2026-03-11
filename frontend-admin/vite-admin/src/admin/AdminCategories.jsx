@@ -1,4 +1,4 @@
-// ===== AdminCategories.jsx =====
+// frontend/src/pages/AdminCategories.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -27,51 +27,29 @@ export default function AdminCategories() {
     fetchCategories();
   }, [token]);
 
-  if (loading) return (
-    <div className="loading-state">
-      <div className="loading-spinner"></div>
-      Chargement des catégories...
-    </div>
-  );
-  if (error) return <div className="alert-error">{error}</div>;
+  if (loading) return <p>Chargement des catégories...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (!categories.length) return <p>Aucune catégorie trouvée.</p>;
 
   return (
     <div>
-      <div className="page-header">
-        <h2>Catégories</h2>
-        <p>{categories.length} catégorie{categories.length !== 1 ? "s" : ""}</p>
-      </div>
-
-      {categories.length === 0 ? (
-        <div className="table-wrapper">
-          <div className="empty-state"><p>Aucune catégorie trouvée.</p></div>
-        </div>
-      ) : (
-        <div className="table-wrapper">
-          <table className="orders-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nom</th>
-                <th>Créée le</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.map((c, idx) => (
-                <tr key={c._id}>
-                  <td style={{ color: "var(--text-muted)", fontSize: "0.82rem" }}>
-                    {String(idx + 1).padStart(2, "0")}
-                  </td>
-                  <td style={{ color: "var(--text-primary)", fontWeight: 500 }}>{c.name}</td>
-                  <td style={{ color: "var(--text-muted)", fontSize: "0.82rem" }}>
-                    {new Date(c.createdAt).toLocaleDateString("fr-FR")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <h2>Catégories</h2>
+      <table className="orders-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Créé le</th>
+          </tr>
+        </thead>
+        <tbody>
+          {categories.map((c) => (
+            <tr key={c._id}>
+              <td>{c.name}</td>
+              <td>{new Date(c.createdAt).toLocaleDateString()}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
