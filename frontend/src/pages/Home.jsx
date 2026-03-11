@@ -9,7 +9,6 @@ import PopularProducts from "../components/PopularProducts";
 import Features from "../components/Features";
 
 import "../styles/Home.css";
-import { FaShippingFast, FaHeadset, FaLock, FaTags } from "react-icons/fa";
 
 export default function Home({ onAddToCart, wishlist, compareList, onToggleWishlist, onAddToCompare }) {
   const [products, setProducts] = useState([]);

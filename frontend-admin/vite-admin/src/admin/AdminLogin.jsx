@@ -68,7 +68,7 @@ export default function AdminLogin({ onLogin }) {
                 Utilisateur : <code>admin</code>
               </p>
               <p>
-                Mot de passe : <code>Rania@123</code>
+                Mot de passe : <code>Admin123!</code>
               </p>
             </div>
           </div>
