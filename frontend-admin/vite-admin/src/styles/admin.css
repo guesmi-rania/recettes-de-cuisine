@@ -7,8 +7,8 @@
 
 html, body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f6fa;
-  color: #333;
+  background-color: #0d0f14;
+  color: #e0e2ea;
   scroll-behavior: smooth;
 }
 
@@ -31,12 +31,12 @@ p {
 /* ================= SIDEBAR ================= */
 .sidebar {
   width: 250px;
-  background: linear-gradient(180deg, #2f3640, #353b48);
+  background: linear-gradient(180deg, #0f1117, #13161e);
   color: #fff;
   display: flex;
   flex-direction: column;
   padding: 20px 10px;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  box-shadow: 2px 0 10px rgba(0,0,0,0.4);
   transition: width 0.3s ease;
 }
 
@@ -45,13 +45,13 @@ p {
   margin-bottom: 30px;
   font-size: 1.5rem;
   letter-spacing: 1px;
-  color: #f5f6fa;
+  color: #f0f2f8;
 }
 
 .sidebar button {
   background: none;
   border: none;
-  color: #fff;
+  color: #a0a8c0;
   padding: 14px 20px;
   text-align: left;
   cursor: pointer;
@@ -65,27 +65,36 @@ p {
 
 .sidebar button svg {
   margin-right: 10px;
-  color: #f5f6fa;
+  color: #a0a8c0;
   transition: color 0.3s ease;
 }
 
 .sidebar button:hover,
 .sidebar button.active {
-  background-color: #40739e;
-  box-shadow: inset 5px 0 0 #00a8ff;
+  background-color: #1e2330;
+  box-shadow: inset 5px 0 0 #f97316;
+  color: #f97316;
+}
+
+.sidebar button:hover svg,
+.sidebar button.active svg {
+  color: #f97316;
 }
 
 .logout-btn {
   margin-top: auto;
-  background-color: #e84118;
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  color: #ef4444 !important;
   font-weight: bold;
   border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
   transition: all 0.3s ease;
 }
 
 .logout-btn:hover {
-  background-color: #c23616;
-  box-shadow: inset 5px 0 0 #ff6b6b;
+  background-color: #ef4444 !important;
+  color: #fff !important;
+  box-shadow: none !important;
 }
 
 /* ================= MAIN CONTENT ================= */
@@ -94,6 +103,7 @@ p {
   padding: 25px;
   overflow-x: auto;
   transition: all 0.3s ease;
+  background: #0d0f14;
 }
 
 /* ================= DASHBOARD STATS ================= */
@@ -105,21 +115,23 @@ p {
 }
 
 .stat-card {
-  background: #fff;
+  background: #181c26;
+  border: 1px solid rgba(255,255,255,0.06);
   padding: 25px;
   border-radius: 15px;
   text-align: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  background: #1e2330;
 }
 
 .stat-card h4 {
-  color: #40739e;
+  color: #8891a8;
   font-size: 1.1rem;
   letter-spacing: 0.5px;
 }
@@ -128,7 +140,7 @@ p {
   font-size: 1.8rem;
   font-weight: 700;
   margin-top: 10px;
-  color: #2f3640;
+  color: #f0f2f8;
 }
 
 /* ================= ORDERS TABLE ================= */
@@ -146,22 +158,30 @@ p {
 }
 
 .orders-table thead th {
-  background: #40739e;
-  color: #fff;
+  background: #181c26;
+  color: #8891a8;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .orders-table tbody tr {
-  background: #fff;
+  background: #181c26;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .orders-table tbody tr:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  background: #1e2330;
+}
+
+.orders-table tbody td {
+  color: #a0a8c0;
 }
 
 /* Status badges */
@@ -174,9 +194,9 @@ p {
   color: #fff;
 }
 
-.status.validée { background-color: #2ecc71; }
-.status.annulée { background-color: #e74c3c; }
-.status.en-attente { background-color: #f39c12; }
+.status.validée  { background-color: #16a34a; }
+.status.annulée  { background-color: #dc2626; }
+.status.en-attente { background-color: #d97706; }
 
 /* ================= BUTTONS ================= */
 button {
@@ -184,14 +204,14 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #40739e;
-  color: #fff;
+  background-color: #1e2330;
+  color: #e0e2ea;
   font-weight: 500;
   transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #2f3640;
+  background-color: #2a3045;
   transform: translateY(-1px);
 }
 
@@ -200,14 +220,36 @@ button:hover {
   padding: 6px 10px;
   font-size: 0.85rem;
   margin-right: 5px;
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.orders-table button:hover {
+  background-color: #22c55e;
+  color: #fff;
 }
 
 .orders-table button:nth-child(2) {
-  background-color: #e74c3c; /* Annuler */
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.orders-table button:nth-child(2):hover {
+  background-color: #ef4444;
+  color: #fff;
 }
 
 .orders-table button:nth-child(3) {
-  background-color: #007bff; /* PDF */
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.orders-table button:nth-child(3):hover {
+  background-color: #3b82f6;
+  color: #fff;
 }
 
 /* ================= ADMIN LOGIN ================= */
@@ -216,17 +258,18 @@ button:hover {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #abd9ff, #ffffff);
+  background: #0d0f14;
   padding: 1rem;
 }
 
 .admin-login-form {
-  background: #fff;
+  background: #181c26;
+  border: 1px solid rgba(255,255,255,0.06);
   padding: 40px;
   width: 100%;
   max-width: 400px;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   transition: all 0.3s ease;
 }
 
@@ -234,88 +277,109 @@ button:hover {
   text-align: center;
   margin-bottom: 25px;
   font-size: 1.8rem;
+  color: #f0f2f8;
 }
 
 .admin-login-form input {
   width: 100%;
   padding: 14px 16px;
   border-radius: 8px;
-  border: 1px solid #74c0fc;
+  border: 1px solid rgba(255,255,255,0.1);
   margin-bottom: 18px;
+  background: #13161e;
+  color: #e0e2ea;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-login-form input::placeholder {
+  color: #4a5268;
 }
 
 .admin-login-form input:focus {
   outline: none;
-  border-color: #40739e;
-  box-shadow: 0 0 5px #40739e;
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
 }
 
 .admin-login-form button {
   width: 100%;
   padding: 14px;
   font-weight: bold;
-  background: linear-gradient(135deg, #74c0fc, #1b1b1b);
+  background: #f97316;
+  color: #fff;
+  border: none;
 }
 
 .admin-login-form button:hover {
-  background: linear-gradient(135deg, #1b1b1b, #74c0fc);
+  background: #ea6c0a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
 }
 
 .error {
-  color: #e74c3c;
+  color: #ef4444;
   text-align: center;
   margin-bottom: 15px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 10px;
+  border-radius: 8px;
 }
+
+/* ================= DEMO BANNER ================= */
 .demo-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fffbeb;
-  border: 1.5px dashed #f59e0b;
+  background: rgba(249, 115, 22, 0.08);
+  border: 1.5px dashed rgba(249, 115, 22, 0.4);
   border-radius: 10px;
   padding: 12px 16px;
   margin-bottom: 16px;
   flex-wrap: wrap;
   gap: 10px;
 }
+
 .demo-info { display: flex; align-items: flex-start; gap: 10px; }
 .demo-icon { font-size: 1.3rem; }
-.demo-info strong { display: block; color: #92400e; font-size: 0.88rem; margin-bottom: 4px; }
-.demo-info p { margin: 2px 0; font-size: 0.82rem; color: #78350f; }
-.demo-info code { background: #fde68a; padding: 1px 5px; border-radius: 4px; font-family: monospace; }
-.btn-demo { background: #f59e0b; color: white; border: none; border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer; }
-.btn-demo:hover { background: #d97706; }
-.btn-demo:disabled { opacity: 0.7; cursor: not-allowed; }
-/* ================= RESPONSIVE ================= */
+.demo-info strong { display: block; color: #f97316; font-size: 0.88rem; margin-bottom: 4px; }
+.demo-info p { margin: 2px 0; font-size: 0.82rem; color: #a0a8c0; }
+.demo-info code { background: rgba(249, 115, 22, 0.15); color: #f97316; padding: 1px 5px; border-radius: 4px; font-family: monospace; }
 
-/* Tablet */
+.btn-demo {
+  background: #f97316;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-demo:hover { background: #ea6c0a; }
+.btn-demo:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
   .sidebar { width: 200px; }
-
   .orders-table th,
   .orders-table td { padding: 10px; }
 }
 
-/* Mobile */
 @media (max-width: 600px) {
   .admin-container { flex-direction: column; }
-
   .sidebar {
     width: 100%;
     flex-direction: row;
     overflow-x: auto;
   }
-
   .sidebar button {
     flex: 1;
     text-align: center;
     padding: 12px;
     font-size: 0.9rem;
   }
-
   .admin-main { padding: 15px; }
-
   .orders-table {
     display: block;
     overflow-x: auto;
@@ -323,11 +387,7 @@ button:hover {
   }
 }
 
-/* Small Mobile */
 @media (max-width: 400px) {
-  .admin-login-form {
-    padding: 25px 18px;
-  }
-
+  .admin-login-form { padding: 25px 18px; }
   .admin-login-form h2 { font-size: 1.4rem; }
 }
