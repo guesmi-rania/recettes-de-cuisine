@@ -24,79 +24,118 @@ export default function AdminOrders() {
     }
   };
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
+  useEffect(() => { fetchOrders(); }, []);
 
   const handleUpdateStatus = async (orderId, status) => {
     try {
       await axios.put(`${BASE_URL}/api/admin/orders/${orderId}/status`, { status }, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
       fetchOrders();
     } catch (err) {
       console.error(err);
-      alert("Erreur lors de la mise à jour du statut");
     }
   };
 
   const handleSendEmail = async (email) => {
     const subject = prompt("Sujet de l'email:");
-    const message = prompt("Message à envoyer:");
-    if (!subject || !message) return;
-
+    const msg = prompt("Message à envoyer:");
+    if (!subject || !msg) return;
     try {
-      await axios.post(`${BASE_URL}/api/admin/send-email`, { email, subject, message }, {
-        headers: { Authorization: `Bearer ${token}` }
+      await axios.post(`${BASE_URL}/api/admin/send-email`, { email, subject, message: msg }, {
+        headers: { Authorization: `Bearer ${token}` },
       });
-      setMessage("Email envoyé avec succès !");
+      setMessage("✓ Email envoyé avec succès !");
       setTimeout(() => setMessage(""), 3000);
     } catch (err) {
       console.error(err);
-      alert("Erreur lors de l'envoi de l'email");
     }
   };
 
-  if (loading) return <p>Chargement des commandes...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
-  if (!orders.length) return <p>Aucune commande trouvée.</p>;
+  if (loading) return (
+    <div className="loading-state">
+      <div className="loading-spinner"></div>
+      Chargement des commandes...
+    </div>
+  );
 
   return (
     <div>
-      <h2>Commandes</h2>
-      {message && <p style={{ color: "green" }}>{message}</p>}
-      <table className="orders-table">
-        <thead>
-          <tr>
-            <th>Client</th>
-            <th>Commande</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Créée le</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map(order => (
-            <tr key={order._id}>
-              <td>{order.clientInfo.name}<br/>{order.clientInfo.email}</td>
-              <td>
-                {order.cart.map(item => (
-                  <div key={item.name}>{item.name} x{item.quantity} - {item.price} TND</div>
+      <div className="page-header">
+        <h2>Commandes</h2>
+        <p>{orders.length} commande{orders.length !== 1 ? "s" : ""} au total</p>
+      </div>
+
+      {message && <div className="alert-success">{message}</div>}
+      {error && <div className="alert-error">{error}</div>}
+
+      {orders.length === 0 ? (
+        <div className="table-wrapper">
+          <div className="empty-state"><p>Aucune commande trouvée.</p></div>
+        </div>
+      ) : (
+        <div className="table-wrapper">
+          <div className="orders-table-wrapper">
+            <table className="orders-table">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Commande</th>
+                  <th>Total</th>
+                  <th>Statut</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map(order => (
+                  <tr key={order._id}>
+                    <td>
+                      <div style={{ fontWeight: 500, color: "var(--text-primary)" }}>
+                        {order.clientInfo.name}
+                      </div>
+                      <div style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginTop: 3 }}>
+                        {order.clientInfo.email}
+                      </div>
+                    </td>
+                    <td>
+                      {order.cart.map(item => (
+                        <div key={item.name} style={{ fontSize: "0.82rem", color: "var(--text-muted)" }}>
+                          {item.name} ×{item.quantity} — {item.price} TND
+                        </div>
+                      ))}
+                    </td>
+                    <td style={{ color: "var(--accent)", fontWeight: 600 }}>
+                      {order.totalPrice} TND
+                    </td>
+                    <td>
+                      <span className={`status ${order.status?.toLowerCase().replace(" ", "-") || "en-attente"}`}>
+                        {order.status || "En attente"}
+                      </span>
+                    </td>
+                    <td style={{ fontSize: "0.82rem", color: "var(--text-muted)" }}>
+                      {new Date(order.createdAt).toLocaleString("fr-FR")}
+                    </td>
+                    <td>
+                      <div className="actions-cell">
+                        <button onClick={() => handleUpdateStatus(order._id, "Validée")}>
+                          ✓ Valider
+                        </button>
+                        <button className="cancel-btn" onClick={() => handleUpdateStatus(order._id, "Annulée")}>
+                          ✕ Annuler
+                        </button>
+                        <button className="email-btn" onClick={() => handleSendEmail(order.clientInfo.email)}>
+                          ✉ Email
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
                 ))}
-              </td>
-              <td>{order.totalPrice} TND</td>
-              <td>{order.status}</td>
-              <td>{new Date(order.createdAt).toLocaleString()}</td>
-              <td>
-                <button onClick={() => handleUpdateStatus(order._id, "Validée")}>Valider</button>
-                <button onClick={() => handleUpdateStatus(order._id, "Annulée")}>Annuler</button>
-                <button onClick={() => handleSendEmail(order.clientInfo.email)}>Envoyer Email</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
