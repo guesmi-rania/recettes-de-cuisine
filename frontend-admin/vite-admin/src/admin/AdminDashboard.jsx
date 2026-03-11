@@ -13,13 +13,12 @@ export default function AdminDashboard() {
   const BASE_URL = import.meta.env.VITE_API_URL;
   const PRODUCTS_URL = import.meta.env.VITE_PRODUCTS_URL;
 
-  // Récupérer toutes les données
   const fetchData = async () => {
     try {
       const [ordersRes, productsRes, clientsRes] = await Promise.all([
-        axios.get(`${BASE_URL}/api/orders`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${BASE_URL}/api/admin/orders`, { headers: { Authorization: `Bearer ${token}` } }),   // ← corrigé
         axios.get(`${PRODUCTS_URL}`),
-        axios.get(`${BASE_URL}/clients`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${BASE_URL}/api/admin/clients`, { headers: { Authorization: `Bearer ${token}` } }), // ← corrigé
       ]);
 
       setOrders(Array.isArray(ordersRes.data) ? ordersRes.data : []);
@@ -37,11 +36,11 @@ export default function AdminDashboard() {
     else setLoading(false);
   }, [token]);
 
-  // Modifier le statut d'une commande
+  // ← URL corrigée : /api/admin/orders/:id/status
   const handleStatusChange = async (id, status) => {
     try {
       await axios.put(
-        `${BASE_URL}/orders/${id}`,
+        `${BASE_URL}/api/admin/orders/${id}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -51,7 +50,6 @@ export default function AdminDashboard() {
     }
   };
 
-  // Générer PDF d'une commande
   const generatePDF = (order) => {
     const doc = new jsPDF();
     doc.setFontSize(16);
@@ -62,18 +60,16 @@ export default function AdminDashboard() {
     doc.text(`Adresse : ${order.clientInfo?.address}`, 20, 55);
     doc.text(`Date : ${new Date(order.createdAt).toLocaleString()}`, 20, 65);
     doc.text("Produits :", 20, 75);
-
     let y = 85;
     order.cart.forEach((item, idx) => {
       doc.text(`${idx + 1}. ${item.name} × ${item.quantity} - ${item.price} DT`, 25, y);
       y += 10;
     });
-
     doc.text(`Total : ${order.totalPrice} DT`, 20, y + 5);
     doc.save(`commande_${order._id}.pdf`);
   };
 
-  if (loading) return <p style={{ padding: "20px" }}>Chargement...</p>;
+  if (loading) return <p style={{ padding: "20px", color: "#a0a8c0" }}>Chargement...</p>;
 
   return (
     <div className="admin-main">
@@ -96,7 +92,7 @@ export default function AdminDashboard() {
       {/* Commandes récentes */}
       <h3 style={{ marginTop: "30px" }}>Commandes récentes</h3>
       {orders.length === 0 ? (
-        <p>Aucune commande trouvée.</p>
+        <p style={{ color: "#a0a8c0" }}>Aucune commande trouvée.</p>
       ) : (
         <div className="orders-table-wrapper">
           <table className="orders-table">
@@ -119,17 +115,15 @@ export default function AdminDashboard() {
                   <td>{order.clientInfo?.email}</td>
                   <td>{order.clientInfo?.address}</td>
                   <td>
-                    <ul>
+                    <ul style={{ paddingLeft: "16px" }}>
                       {order.cart?.map((item, idx) => (
-                        <li key={idx}>
-                          {item.name} × {item.quantity}
-                        </li>
+                        <li key={idx}>{item.name} × {item.quantity}</li>
                       ))}
                     </ul>
                   </td>
                   <td>{order.totalPrice.toFixed(2)} DT</td>
                   <td>
-                    <span className={`status ${order.status?.toLowerCase().replace(" ", "-")}`}>
+                    <span className={`status ${order.status?.toLowerCase().replace(" ", "-") || "en-attente"}`}>
                       {order.status || "En attente"}
                     </span>
                   </td>
@@ -138,13 +132,10 @@ export default function AdminDashboard() {
                     <button onClick={() => handleStatusChange(order._id, "Validée")}>
                       Valider
                     </button>
-                    <button
-                      onClick={() => handleStatusChange(order._id, "Annulée")}
-                      className="cancel-btn"
-                    >
+                    <button onClick={() => handleStatusChange(order._id, "Annulée")}>
                       Annuler
                     </button>
-                    <button onClick={() => generatePDF(order)} className="pdf-btn">
+                    <button onClick={() => generatePDF(order)}>
                       PDF
                     </button>
                   </td>
