@@ -89,17 +89,20 @@ export default function Sidebar({ onLogout }) {
         </ul>
       </nav>
 
-      {/* Footer / Logout */}
+      {/* Footer — Admin connecté + bouton déconnexion */}
       <div className="sidebar-footer">
         <div className="sidebar-user">
           <div className="sidebar-avatar">A</div>
           <div className="sidebar-user-info">
             <span className="sidebar-username">Admin</span>
-            <span className="sidebar-useremail">connecté</span>
+            <span className="sidebar-userstatus">
+              <span className="sidebar-status-dot" />
+              Connecté
+            </span>
           </div>
         </div>
-        <button className="sidebar-logout" onClick={onLogout} title="Déconnexion">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <button className="sidebar-logout" onClick={onLogout} title="Se déconnecter">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
             <polyline points="16 17 21 12 16 7"/>
             <line x1="21" y1="12" x2="9" y2="12"/>
