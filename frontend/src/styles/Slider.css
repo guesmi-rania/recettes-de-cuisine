@@ -6,7 +6,6 @@
   margin: 0;
   background: transparent;
   display: block;     /* pas de flex ici, le parent hero-slider gère */
-  gap: 20px;
 }
 
 .slider-container {
