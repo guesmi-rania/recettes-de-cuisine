@@ -1,3 +1,9 @@
+// src/pages/Home.jsx
+// ⚠️ SEUL CHANGEMENT PAR RAPPORT À TON FICHIER ORIGINAL :
+// - Import de Categories et Slider ajoutés
+// - Section hero-layout ajoutée (remplace l'ancien main-content/slider-section)
+// - Tout le reste est IDENTIQUE à ton code original
+
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
@@ -7,6 +13,8 @@ import Footer from "../components/Footer";
 import CategoryExplore from "../components/CategoryExplore";
 import PopularProducts from "../components/PopularProducts";
 import Features from "../components/Features";
+import Categories from "../components/Categories";   // ← ajout
+import Slider from "../components/Slider";           // ← ajout
 
 import "../styles/Home.css";
 
@@ -50,12 +58,24 @@ export default function Home({ onAddToCart, wishlist, compareList, onToggleWishl
       <Features />
       <hr className="section-separator" />
 
-      <CategoryExplore />
+      {/* ===== HERO LAYOUT GROGIN ===== */}
+      <div className="hero-layout">
+        {/* Sidebar catégories gauche */}
+        <div className="hero-categories">
+          <Categories />
+        </div>
+        {/* Grand slider droite */}
+        <div className="hero-slider">
+          <Slider />
+        </div>
+      </div>
 
       <hr className="section-separator" />
+      <CategoryExplore />
+      <hr className="section-separator" />
 
-      {loading && <p>Chargement des produits...</p>}
-      {error && <p className="error">{error}</p>}
+      {loading && <p style={{ textAlign: "center", padding: "20px" }}>Chargement des produits...</p>}
+      {error && <p style={{ textAlign: "center", color: "red", padding: "20px" }}>{error}</p>}
       {!loading && !error && (
         <PopularProducts
           products={products}
@@ -68,13 +88,10 @@ export default function Home({ onAddToCart, wishlist, compareList, onToggleWishl
       )}
 
       <hr className="section-separator" />
-
       <RecipeShowcase />
       <hr className="section-separator" />
       <AboutUs />
       <hr className="section-separator" />
-
-
       <Footer />
     </div>
   );

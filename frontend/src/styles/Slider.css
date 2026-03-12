@@ -1,11 +1,10 @@
 /* ================= SLIDER SECTION ================= */
-/* .slider-section et .slider-container sont dans le JSX */
 .slider-section {
   width: 100%;
-  padding: 0;         /* plus de padding-left:650px */
+  padding: 0;
   margin: 0;
   background: transparent;
-  display: block;     /* pas de flex ici, le parent hero-slider gère */
+  display: block;
 }
 
 .slider-container {
@@ -19,9 +18,9 @@
   overflow: hidden;
   border-radius: 12px;
   width: 100%;
-  height: 420px;       /* hauteur confortable sur desktop */
-  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
-  transform: none;     /* annule l'ancien rotateY(-5deg) */
+  height: 420px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.11);
+  transform: none;        /* annule rotateY(-5deg) de l'ancien CSS */
 }
 
 /* ================= SLIDE ================= */
@@ -37,16 +36,13 @@
   align-items: center;
   justify-content: flex-start;
 }
-.slide.active {
-  left: 0;
-  opacity: 1;
-}
+.slide.active { left: 0; opacity: 1; }
 
 /* ================= SLIDE CONTENT ================= */
 .slide-content {
   margin-left: 44px;
-  padding: 30px 34px;
-  background: rgba(0,0,0,0.36);
+  padding: 28px 32px;
+  background: rgba(0,0,0,0.38);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   border-radius: 12px;
@@ -54,7 +50,6 @@
   max-width: 54%;
   text-align: left;
 }
-
 .slide-content h2 {
   font-size: 26px;
   font-weight: 700;
@@ -62,7 +57,6 @@
   line-height: 1.3;
   font-family: 'Poppins', sans-serif;
 }
-
 .slide-content p {
   font-size: 14px;
   margin-bottom: 18px;
@@ -70,7 +64,6 @@
   line-height: 1.5;
   font-family: 'Poppins', sans-serif;
 }
-
 .slide-content button {
   background: #00BCD4;
   color: #fff;
@@ -83,10 +76,7 @@
   font-family: 'Poppins', sans-serif;
   transition: background 0.2s, transform 0.15s;
 }
-.slide-content button:hover {
-  background: #0097a7;
-  transform: translateY(-1px);
-}
+.slide-content button:hover { background: #0097a7; transform: translateY(-1px); }
 
 /* ================= DOTS ================= */
 .dots {
@@ -98,48 +88,32 @@
 .dot {
   width: 9px; height: 9px;
   background: rgba(255,255,255,0.5);
-  border-radius: 50%; cursor: pointer;
-  transition: all 0.3s;
+  border-radius: 50%; cursor: pointer; transition: all 0.3s;
 }
 .dot.active { background: #00BCD4; transform: scale(1.3); }
 
-/* ================= RESPONSIVE TABLETTE ================= */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
   .slider { height: 360px; }
-  .slide-content { margin-left: 30px; padding: 24px 28px; max-width: 62%; }
+  .slide-content { margin-left: 30px; padding: 22px 26px; max-width: 62%; }
   .slide-content h2 { font-size: 22px; }
 }
-
 @media (max-width: 768px) {
-  .slider { height: 260px; border-radius: 10px; }
-  .slide-content {
-    margin-left: 18px;
-    padding: 16px 20px;
-    max-width: 80%;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
+  .slider { height: 250px; border-radius: 10px; }
+  .slide-content { margin-left: 18px; padding: 16px 18px; max-width: 80%; backdrop-filter: none; -webkit-backdrop-filter: none; }
   .slide-content h2 { font-size: 18px; }
   .slide-content p { font-size: 12px; margin-bottom: 10px; }
   .slide-content button { padding: 8px 18px; font-size: 12px; }
 }
-
-/* ================= MOBILE <=576px ================= */
 @media (max-width: 576px) {
   .slider { height: 200px; border-radius: 8px; }
-  .slide-content {
-    margin-left: 12px;
-    padding: 12px 14px;
-    max-width: 88%;
-    backdrop-filter: none;
-  }
+  .slide-content { margin-left: 12px; padding: 12px 14px; max-width: 88%; backdrop-filter: none; }
   .slide-content h2 { font-size: 14px; margin-bottom: 5px; }
   .slide-content p { font-size: 11px; margin-bottom: 8px; }
   .slide-content button { padding: 6px 14px; font-size: 11px; }
   .dots { bottom: 8px; gap: 5px; }
   .dot { width: 7px; height: 7px; }
 }
-
 @media (max-width: 400px) {
   .slider { height: 170px; }
   .slide-content p { display: none; }
