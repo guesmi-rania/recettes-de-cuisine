@@ -13,8 +13,6 @@ import Footer from "../components/Footer";
 import CategoryExplore from "../components/CategoryExplore";
 import PopularProducts from "../components/PopularProducts";
 import Features from "../components/Features";
-import Categories from "../components/Categories";   // ← ajout
-import Slider from "../components/Slider";           // ← ajout
 
 import "../styles/Home.css";
 
@@ -58,18 +56,7 @@ export default function Home({ onAddToCart, wishlist, compareList, onToggleWishl
       <Features />
       <hr className="section-separator" />
 
-      {/* ===== HERO LAYOUT GROGIN ===== */}
-      <div className="hero-layout">
-        {/* Sidebar catégories gauche */}
-        <div className="hero-categories">
-          <Categories />
-        </div>
-        {/* Grand slider droite */}
-        <div className="hero-slider">
-          <Slider />
-        </div>
-      </div>
-
+    
       <hr className="section-separator" />
       <CategoryExplore />
       <hr className="section-separator" />
