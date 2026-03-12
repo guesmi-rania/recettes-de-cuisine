@@ -1,14 +1,14 @@
 /* ================= SLIDER SECTION ================= */
 /* .slider-section et .slider-container sont dans le JSX */
 .slider-section {
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 0 20px;
-
+  width: 100%;
+  padding: 0;         /* plus de padding-left:650px */
+  margin: 0;
+  background: transparent;
+/***  display: block;     /* pas de flex ici, le parent hero-slider gère */
   display: grid;
-  grid-template-columns: 260px 1fr; /* Sidebar fixe + Slider */
+  grid-template-columns: 260px 1fr; /* sidebar | slider */
   gap: 20px;
-  align-items: stretch;
 }
 
 .slider-container {
