@@ -1,3 +1,7 @@
+// src/pages/Home.jsx
+// ⚠️ SEUL CHANGEMENT : le slider est maintenant dans un hero-layout avec Categories à gauche
+// Tout le reste du code est identique
+
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
@@ -7,8 +11,11 @@ import Footer from "../components/Footer";
 import CategoryExplore from "../components/CategoryExplore";
 import PopularProducts from "../components/PopularProducts";
 import Features from "../components/Features";
+import Categories from "../components/Categories";   // ← ajout
+import Slider from "../components/Slider";           // ← ajout
 
 import "../styles/Home.css";
+import "../styles/Slider.css";                        // ← s'assurer que Slider.css est importé ici
 
 export default function Home({ onAddToCart, wishlist, compareList, onToggleWishlist, onAddToCompare }) {
   const [products, setProducts] = useState([]);
@@ -50,6 +57,22 @@ export default function Home({ onAddToCart, wishlist, compareList, onToggleWishl
       <Features />
       <hr className="section-separator" />
 
+      {/* ===== HERO LAYOUT : sidebar catégories gauche + slider droite ===== */}
+      <div className="hero-layout">
+        {/* Colonne gauche — catégories */}
+        <div className="hero-categories">
+          <Categories />
+        </div>
+
+        {/* Colonne droite — slider */}
+        <div className="hero-slider">
+          <Slider />
+        </div>
+      </div>
+      {/* ===== FIN HERO LAYOUT ===== */}
+
+      <hr className="section-separator" />
+
       <CategoryExplore />
 
       <hr className="section-separator" />
@@ -73,7 +96,6 @@ export default function Home({ onAddToCart, wishlist, compareList, onToggleWishl
       <hr className="section-separator" />
       <AboutUs />
       <hr className="section-separator" />
-
 
       <Footer />
     </div>
