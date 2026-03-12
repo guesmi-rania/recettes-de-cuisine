@@ -12,52 +12,6 @@
   margin: 0;
 }
 
-/* ===============================================================
-   HERO LAYOUT GROGIN
-   sidebar catégories 220px gauche + slider pleine largeur droite
-   =============================================================== */
-.hero-layout {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 20px;
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-/* SIDEBAR CATÉGORIES */
-.hero-categories {
-  width: 220px;
-  flex-shrink: 0;
-  background: #fff;
-  border: 1px solid #e8e8e8;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  position: relative;
-  z-index: 1;
-}
-
-/* Force la liste catégories à être statique ici */
-.hero-categories .categories-list {
-  position: static !important;
-  width: 100% !important;
-  box-shadow: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-  max-height: none !important;
-  overflow-y: visible !important;
-  z-index: auto !important;
-  padding: 4px 0 !important;
-}
-
-/* SLIDER DROITE */
-.hero-slider {
-  flex: 1;
-  min-width: 0;
-  position: relative;
-  z-index: 1;
-}
 
 /* ================= POPULAR PRODUCTS ================= */
 .popular-products {
