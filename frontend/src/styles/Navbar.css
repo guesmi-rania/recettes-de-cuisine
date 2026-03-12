@@ -20,7 +20,6 @@ img { max-width: 100%; display: block; }
   border-bottom: 1px solid #f0f0f0;
   padding: 5px 0;
 }
-
 .top-bar-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -29,44 +28,27 @@ img { max-width: 100%; display: block; }
   justify-content: space-between;
   align-items: center;
 }
-
-.top-bar-text {
-  font-size: 12px;
-  color: #777;
-}
-
-.blue-time {
-  color: #00BCD4;
-  font-weight: 600;
-}
-
-.top-links {
-  display: flex;
-  gap: 16px;
-}
-
-.top-links a {
-  font-size: 12px;
-  color: #666;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
+.top-bar-text { font-size: 12px; color: #777; }
+.blue-time { color: #00BCD4; font-weight: 600; }
+.top-links { display: flex; gap: 16px; }
+.top-links a { font-size: 12px; color: #666; font-weight: 500; transition: color 0.2s; }
 .top-links a:hover { color: #00BCD4; }
 
-.navbar-separator {
-  border: none;
-  border-top: 1px solid #eee;
-}
+/* ================= SEPARATOR ================= */
+.navbar-separator { border: none; border-top: 1px solid #eee; margin: 0; }
 
-/* ================= MAIN NAV ================= */
+/* ================= MAIN NAV — une seule ligne ================= */
+/* Le JSX met class="main-nav container" donc on cible les deux */
 .main-nav {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 10px 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+  /* reset tout ce qui pourrait venir d'une classe .container globale */
+  flex-wrap: nowrap !important;
 }
 
 .logo {
@@ -77,66 +59,59 @@ img { max-width: 100%; display: block; }
   font-size: 17px;
   color: #333;
   flex-shrink: 0;
+  min-width: 140px;
   cursor: pointer;
+  text-decoration: none;
 }
+.logo img { height: 44px; width: auto; }
 
-.logo img {
-  height: 44px;
-  width: auto;
-}
-
-/* ================= SEARCH BAR ================= */
+/* SEARCH BAR */
 .search-bar {
   flex: 1;
-  max-width: 620px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   border: 1.5px solid #e0e0e0;
   border-radius: 8px;
   background: #f5f5f5;
   overflow: hidden;
-  transition: border-color 0.2s, background 0.2s;
+  min-width: 0;
+  transition: border-color 0.2s;
 }
-
-.search-bar:focus-within {
-  border-color: #00BCD4;
-  background: #fff;
-}
-
+.search-bar:focus-within { border-color: #00BCD4; background: #fff; }
 .search-input {
   flex: 1;
   border: none;
   outline: none;
-  padding: 10px 14px;
+  padding: 9px 14px;
   font-size: 13px;
   background: transparent;
+  font-family: 'Poppins', sans-serif;
   min-width: 0;
 }
-
 .search-button {
   background: #00BCD4;
   border: none;
   color: #fff;
-  padding: 10px 18px;
+  padding: 9px 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   transition: background 0.2s;
+  border-radius: 0 6px 6px 0;
 }
-
 .search-button:hover { background: #0097a7; }
 
-/* ================= NAV ICONS ================= */
+/* NAV ICONS */
 .nav-icons {
   display: flex;
   gap: 14px;
   align-items: center;
   flex-shrink: 0;
+  margin-left: 0;    /* ← annule le margin-left:100px original */
+  padding-right: 0;
 }
-
 .icon-item {
   position: relative;
   text-align: center;
@@ -148,48 +123,104 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 2px;
   white-space: nowrap;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
 }
-
-.icon-item svg {
-  font-size: 21px;
-  color: #00BCD4;
-}
-
+.icon-item svg { font-size: 21px; color: #00BCD4; }
 .icon-item:hover { color: #00BCD4; }
 
 .badge {
   position: absolute;
-  top: -4px;
-  right: -7px;
-  background: #00BCD4;
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 3px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: -4px; right: -7px;
+  background: #00BCD4; color: #fff;
+  font-size: 10px; font-weight: 700;
+  min-width: 16px; height: 16px;
+  padding: 0 3px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
 }
 
+.user-info {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+.logout-btn { background: transparent; border: none; color: #00BCD4; font-size: 17px; cursor: pointer; padding: 0; }
+.logout-btn:hover { color: #005763; }
+
 /* ================= INFO BAR ================= */
+/* Structure dans Navbar.jsx :
+   <div class="info-bar">
+     <nav class="info-menu-links">
+       <button class="categories-toggle-btn">
+       <Link>Produits</Link>
+       <Link>...</Link>
+       {showCategories && <Categories />}
+     </nav>
+     <div class="info-right">  ← DOIT être sur la même ligne
+       ...
+     </div>
+   </div>
+*/
+.info-bar {
+  border-top: 1px solid #eee;
+  background: #fff;
+  position: relative;
+  /* Wrapper flex pour aligner info-menu-links et info-right sur UNE SEULE LIGNE */
+  display: flex;
+  align-items: stretch;
+  padding: 0 20px;
+  max-width: 100%;
+}
+
+/* Conteneur interne pour respecter la max-width */
+.info-bar::before {
+  display: none; /* pas de pseudo */
+}
+
+/* INFO-MENU-LINKS = nav avec bouton catégories + liens */
+.info-menu-links {
+  display: flex;
+  align-items: stretch;
+  position: relative;   /* accroche le dropdown .categories-list */
+  flex: 0 0 auto;       /* ne pas étirer — juste la taille du contenu */
+  max-width: 1200px;
+  margin: 0 auto;
+  /* On va gérer la largeur totale avec une autre approche */
+}
+
+/* Approche correcte : info-bar est le flex container */
 .info-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  border-top: 1px solid #eee;
-  background: #fff;
+  padding: 0;
+  position: relative;
 }
 
+/* On utilise un wrapper interne via le layout réel du JSX :
+   info-bar contient directement info-menu-links ET info-right
+   On les aligne avec flex sur info-bar */
+.info-bar {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 20px !important;
+  max-width: 100% !important;
+  border-top: 1px solid #eee;
+  background: #fff;
+  position: relative;
+}
+
+/* Centrage max-width via les enfants */
 .info-menu-links {
   display: flex;
   align-items: stretch;
   position: relative;
+  flex-shrink: 0;
 }
 
+/* BOUTON "Tous Catégories" */
 .categories-toggle-btn {
   background: #00BCD4;
   border: none;
@@ -201,67 +232,174 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 6px;
   padding: 12px 16px;
+  user-select: none;
+  transition: background 0.2s;
   white-space: nowrap;
+  flex-shrink: 0;
   font-family: 'Poppins', sans-serif;
+  border-radius: 0;
+  min-width: 180px;
 }
-
 .categories-toggle-btn:hover { background: #0097a7; }
 
+/* DROPDOWN catégories navbar — passe AU-DESSUS du slider */
+.info-menu-links .categories-list {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  width: 240px !important;
+  background: #fff !important;
+  border: 1px solid #e5e5e5 !important;
+  border-top: 2px solid #00BCD4 !important;
+  border-radius: 0 0 8px 8px !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.14) !important;
+  z-index: 9999 !important;
+  padding: 6px 0 !important;
+  max-height: 420px !important;
+  overflow-y: auto !important;
+}
+
+/* Liens de nav dans info-menu-links */
 .info-menu-links > a {
   color: #333;
   font-size: 13px;
   font-weight: 600;
   padding: 0 16px;
+  transition: color 0.2s;
+  white-space: nowrap;
   display: flex;
   align-items: center;
-  height: 44px;
-  transition: color 0.2s, background 0.2s;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
 }
+.info-menu-links > a:hover { color: #00BCD4; }
 
-.info-menu-links > a:hover {
-  color: #00BCD4;
-  background: #f8f8f8;
-}
-
-/* ================= INFO RIGHT ================= */
+/* INFO RIGHT — emplacement / réduction / téléphone */
 .info-right {
   display: flex;
   gap: 16px;
   align-items: center;
+  flex-shrink: 0;
+  padding: 8px 0;
+  margin-left: auto;
 }
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
+.info-item { display: flex; align-items: center; gap: 7px; position: relative; }
+.info-icon { color: #FE81CC !important; fill: #FE81CC !important; font-size: 14px; flex-shrink: 0; }
 .info-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.3;
-  font-size: 11px;
-  color: #777;
-  white-space: nowrap;
+  display: flex; flex-direction: column;
+  line-height: 1.3; font-size: 11px; color: #777; white-space: nowrap;
 }
-
-.info-text strong {
-  font-size: 12px;
-  color: #333;
-  font-weight: 600;
+.info-text strong,
+.info-text .location-select {
+  font-size: 12px; color: #333; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; gap: 3px;
 }
+.discount-link { color: #00BCD4; font-weight: 700; font-size: 12px; }
+.discount-link:hover { text-decoration: underline; }
+.phone-number { color: #333; font-weight: 600; font-size: 12px; }
 
-/* ================= RESPONSIVE ================= */
+/* LOCATION DROPDOWN */
+.location-dropdown {
+  position: absolute; top: calc(100% + 6px); left: 0;
+  width: 340px; background: #fff; padding: 14px;
+  border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+  z-index: 9999; font-size: 13px;
+}
+.location-dropdown h4 { margin-bottom: 6px; color: #0095af; font-weight: 700; }
+.location-dropdown p { margin-bottom: 8px; color: #555; font-size: 12px; }
+.location-dropdown input {
+  width: 100%; padding: 6px 10px; border: 1px solid #ccc;
+  border-radius: 4px; margin-bottom: 8px; font-size: 13px; outline: none;
+}
+.location-dropdown ul { list-style: none; max-height: 120px; overflow-y: auto; border-top: 1px solid #eee; }
+.location-dropdown li { padding: 6px 8px; cursor: pointer; border-bottom: 1px solid #f5f5f5; font-size: 13px; transition: background 0.15s; }
+.location-dropdown li:hover { background: #e0f7fa; }
+
+/* ================= MOBILE — caché par défaut ================= */
+.mobile-navbar { display: none; }
+.mobile-menu { display: none; }
+.menu-overlay { display: none; }
+
+/* Mobile menu styles (visibles seulement <=991px) */
+.mobile-nav-links { list-style: none; padding: 0; }
+.mobile-nav-links li { margin-bottom: 14px; }
+.mobile-nav-links li a { font-size: 16px; color: #222; font-weight: 600; text-decoration: none; }
+.mobile-nav-links li a:hover { color: #00BCD4; }
+.mobile-user-section { border-top: 1px solid #f0f0f0; padding-top: 14px; }
+.mobile-user-info { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #333; font-weight: 600; }
+.mobile-logout-btn { background: none; border: none; cursor: pointer; padding: 0; margin-left: auto; }
+.mobile-login-link { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #333; font-weight: 600; text-decoration: none; }
+.mobile-icons-section { display: flex; gap: 20px; border-top: 1px solid #f0f0f0; padding-top: 14px; }
+.mobile-icon-link { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; color: #555; text-decoration: none; position: relative; }
+.mobile-badge { position: absolute; top: -5px; right: -8px; background: #00BCD4; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 5px; border-radius: 50%; }
+.mobile-categories-section { border-top: 1px solid #f0f0f0; padding-top: 14px; }
+.mobile-categories-section .categories-toggle-btn { width: 100%; border-radius: 8px; justify-content: center; min-width: unset; }
+
+/* ================= RESPONSIVE DESKTOP ================= */
+@media (max-width: 1200px) {
+  .info-item.call { display: none; }
+}
+@media (max-width: 1060px) {
+  .info-item.discount, .info-item.call { display: none; }
+  .logo img { height: 40px; }
+  .categories-toggle-btn { min-width: 150px; font-size: 12px; padding: 12px 12px; }
+  .nav-icons { gap: 10px; }
+}
 @media (max-width: 1024px) {
-  .main-nav { padding: 8px 16px; gap: 12px; }
-  .info-bar { padding: 0 16px; }
+  .info-item.location { display: none; }
+  .main-nav { gap: 12px !important; padding: 8px 16px !important; }
+  .info-bar { padding: 0 16px !important; }
 }
 
+/* ================= MOBILE <=991px ================= */
 @media (max-width: 991px) {
   .top-bar,
   .main-nav,
   .info-bar,
-  .navbar-separator {
-    display: none;
+  .navbar-separator { display: none !important; }
+
+  .mobile-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    z-index: 4000;
+    position: relative;
   }
+  .hamburger {
+    background: transparent; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0; z-index: 5100; color: #00BCD4; font-size: 22px;
+  }
+  .mobile-navbar .logo img { height: 36px; }
+  .cart-icon {
+    position: relative; font-size: 22px; color: #00BCD4;
+    cursor: pointer; text-decoration: none;
+  }
+  .cart-icon .badge {
+    position: absolute; top: -5px; right: -8px;
+    background: #00BCD4; color: #fff; font-size: 10px;
+    font-weight: 700; padding: 2px 5px; border-radius: 50%;
+  }
+  .mobile-menu {
+    display: flex; position: fixed;
+    top: 0; left: -300px;
+    width: 270px; height: 100vh;
+    background: #fff; box-shadow: 3px 0 14px rgba(0,0,0,0.13);
+    padding: 50px 20px 20px; overflow-y: auto;
+    transition: left 0.3s ease; z-index: 5000;
+    flex-direction: column; gap: 20px;
+  }
+  .mobile-menu.open { left: 0; }
+  .menu-overlay {
+    display: block; position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.4); z-index: 4500; cursor: pointer;
+  }
+}
+@media (max-width: 480px) {
+  .mobile-navbar { padding: 8px 12px; }
+  .mobile-navbar .logo img { height: 32px; }
 }
