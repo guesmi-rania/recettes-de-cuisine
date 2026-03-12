@@ -223,7 +223,7 @@ img { max-width: 100%; display: block; }
 /* BOUTON "Tous Catégories" */
 .categories-toggle-btn {
   background: #00BCD4;
-  border-radius: 12px;
+  border: none;
   color: #fff;
   font-weight: 700;
   font-size: 13px;
@@ -237,7 +237,7 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
   flex-shrink: 0;
   font-family: 'Poppins', sans-serif;
-  border-radius: 0;
+  border-radius: 12;
   min-width: 220px;
 }
 .categories-toggle-btn:hover { background: #0097a7; }
