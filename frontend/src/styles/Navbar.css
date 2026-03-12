@@ -238,7 +238,7 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
   font-family: 'Poppins', sans-serif;
   border-radius: 0;
-  min-width: 180px;
+  min-width: 220px;
 }
 .categories-toggle-btn:hover { background: #0097a7; }
 
