@@ -223,7 +223,7 @@ img { max-width: 100%; display: block; }
 /* BOUTON "Tous Catégories" */
 .categories-toggle-btn {
   background: #00BCD4;
-  border: none;
+  border-radius: 12px;
   color: #fff;
   font-weight: 700;
   font-size: 13px;
