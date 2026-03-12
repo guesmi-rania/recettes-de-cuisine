@@ -5,9 +5,7 @@
   padding: 0;         /* plus de padding-left:650px */
   margin: 0;
   background: transparent;
-/***  display: block;     /* pas de flex ici, le parent hero-slider gère */
-  display: grid;
-  grid-template-columns: 260px 1fr; /* sidebar | slider */
+  display: block;     /* pas de flex ici, le parent hero-slider gère */
   gap: 20px;
 }
 
