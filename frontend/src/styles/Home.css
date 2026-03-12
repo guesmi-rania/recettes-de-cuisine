@@ -237,3 +237,205 @@
     font-size: 14px;
   }
 }
+/* ================= 🌐 GLOBAL HOME ================= */
+.home-page {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 16px;
+}
+
+/* ================= SEPARATOR ================= */
+.section-separator {
+  border: none;
+  border-top: 1px solid #e8e8e8;
+  margin: 0;
+}
+
+/* ===============================================================
+   HERO LAYOUT — GROGIN EXACT
+   Sidebar catégories 220px à gauche + Slider flex-1 à droite
+   =============================================================== */
+.hero-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR CATÉGORIES */
+.hero-categories {
+  width: 220px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;           /* EN-DESSOUS du dropdown navbar (z-index:9999) */
+}
+
+/* Forcer la liste catégories à être statique dans la sidebar */
+.hero-categories .categories-list {
+  position: static !important;
+  width: 100% !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  max-height: none !important;
+  overflow-y: visible !important;
+  z-index: auto !important;
+  padding: 4px 0 !important;
+}
+
+/* SLIDER DROITE */
+.hero-slider {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ================= POPULAR PRODUCTS ================= */
+.popular-products {
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.popular-products h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: #222;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 20px;
+}
+
+.shop-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.shop-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.11);
+}
+
+.shop-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.shop-card h2 { font-size: 16px; margin-bottom: 4px; color: #222; }
+.category { font-size: 12px; color: #00BCD4; font-weight: 600; margin-bottom: 6px; }
+
+.price-box { display: flex; gap: 8px; margin: 6px 0 10px; align-items: center; }
+.price { font-weight: 700; color: #FE81CC; font-size: 15px; }
+.old-price { text-decoration: line-through; font-size: 12px; color: #bbb; }
+
+/* ACTION BUTTONS */
+.right-buttons { display: flex; gap: 6px; }
+.right-buttons button {
+  flex: 1;
+  padding: 7px 6px;
+  border-radius: 7px;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.2s;
+}
+.cart-btn { background: #00BCD4; color: #fff; }
+.cart-btn:hover { background: #0097a7; }
+.wishlist-btn { border: 1px solid #FE81CC; color: #FE81CC; background: #fff; }
+.wishlist-btn:hover { background: #FE81CC; color: #fff; }
+
+/* ================= FEATURES ================= */
+.features-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 24px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  flex: 1 1 200px;
+  background: #fff;
+  padding: 18px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+/* ================= RESPONSIVE TABLETTE 768-1024px ================= */
+@media (max-width: 1024px) {
+  .hero-categories { width: 190px; }
+  .hero-layout { padding: 16px; gap: 16px; }
+}
+
+@media (max-width: 768px) {
+  /* Tablette : sidebar passe au-dessus, slider dessous */
+  .hero-layout {
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+  }
+  .hero-categories {
+    width: 100%;
+    /* Sur mobile, la liste peut scroller horizontalement */
+  }
+  .hero-categories .categories-list {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    padding: 8px !important;
+  }
+  .hero-categories .dropdown-item {
+    border-bottom: none !important;
+  }
+  .hero-categories .category-link {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    border: 1px solid #eee !important;
+    border-radius: 20px !important;
+    background: #f8f8f8 !important;
+  }
+  .popular-products { padding: 24px 12px; }
+  .shop-grid { gap: 12px; }
+  .shop-card img { height: 150px; }
+}
+
+/* ================= MOBILE <=576px ================= */
+@media (max-width: 576px) {
+  .hero-layout { padding: 8px; gap: 8px; }
+  .popular-products h2 { font-size: 22px; }
+  .shop-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .shop-card img { height: 120px; }
+  .shop-card h2 { font-size: 13px; }
+  .right-buttons { flex-wrap: wrap; }
+  .right-buttons button { font-size: 12px; padding: 6px; }
+  .home-page { font-size: 14px; }
+  .features-container { padding: 16px 8px; }
+}
+
+@media (max-width: 400px) {
+  .shop-grid { grid-template-columns: 1fr; }
+}

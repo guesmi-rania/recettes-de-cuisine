@@ -1,31 +1,10 @@
-/* ================= SLIDER SECTION WRAPPER ================= */
-/* Layout Grogin : sidebar catégories à gauche + slider à droite */
+/* ================= SLIDER SECTION ================= */
 .slider-section {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 20px;
-  display: flex;
-  gap: 20px;
-  align-items: stretch;
-  position: relative;
-  z-index: 1;           /* EN-DESSOUS du dropdown catégories (z-index: 9999) */
 }
 
-/* ================= SIDEBAR CATÉGORIES (colonne gauche) ================= */
-.slider-section::before {
-  display: none; /* pas de pseudo, juste le layout flex */
-}
-
-/* Le composant Categories doit être mis dans un wrapper à gauche */
-/* Ajouter dans Home.jsx / App : une sidebar à gauche du slider */
-/* Voir commentaire en bas de ce fichier */
-
-/* ================= SLIDER CONTAINER ================= */
 .slider-container {
-  flex: 1;
-  min-width: 0;
-  display: flex;
+  width: 100%;
 }
 
 /* ================= SLIDER ================= */
@@ -34,35 +13,30 @@
   overflow: hidden;
   border-radius: 12px;
   width: 100%;
-  height: 420px;
+  height: 400px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 /* ================= SLIDE ================= */
 .slide {
   position: absolute;
-  top: 0;
-  left: 100%;
+  top: 0; left: 100%;
   opacity: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   background-size: cover;
   background-position: center;
-  transition: left 0.6s ease, opacity 0.6s ease;
+  transition: left 0.6s ease, opacity 0.5s ease;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
-.slide.active {
-  left: 0;
-  opacity: 1;
-}
+.slide.active { left: 0; opacity: 1; }
 
 /* ================= SLIDE CONTENT ================= */
 .slide-content {
-  margin-left: 48px;
-  padding: 32px 36px;
-  background: rgba(0,0,0,0.38);
+  margin-left: 44px;
+  padding: 30px 34px;
+  background: rgba(0,0,0,0.36);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   border-radius: 12px;
@@ -96,117 +70,50 @@
   font-family: 'Poppins', sans-serif;
   transition: background 0.2s, transform 0.15s;
 }
-.slide-content button:hover {
-  background: #0097a7;
-  transform: translateY(-1px);
-}
+.slide-content button:hover { background: #0097a7; transform: translateY(-1px); }
 
 /* ================= DOTS ================= */
 .dots {
   position: absolute;
-  bottom: 16px;
-  left: 50%;
+  bottom: 14px; left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 2;
+  display: flex; gap: 8px; z-index: 2;
 }
 .dot {
-  width: 10px; height: 10px;
+  width: 9px; height: 9px;
   background: rgba(255,255,255,0.5);
-  border-radius: 50%;
-  cursor: pointer;
+  border-radius: 50%; cursor: pointer;
   transition: all 0.3s;
 }
-.dot.active {
-  background: #00BCD4;
-  transform: scale(1.25);
-}
+.dot.active { background: #00BCD4; transform: scale(1.3); }
 
-/* =========================================================
-   IMPORTANT — Pour reproduire exactement le layout Grogin,
-   dans Home.jsx wrappez le Slider dans ce layout :
-
-   <div className="hero-layout">
-     <div className="hero-categories">
-       <Categories />
-     </div>
-     <Slider />
-   </div>
-
-   Et ajoutez ce CSS :
-   ========================================================= */
-
-.hero-layout {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 20px;
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-categories {
-  width: 220px;
-  flex-shrink: 0;
-  background: #fff;
-  border: 1px solid #e8e8e8;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  /* z-index normal, le dropdown navbar est z-index:9999 donc au-dessus */
-}
-
-.hero-slider {
-  flex: 1;
-  min-width: 0;
-  position: relative;
-  z-index: 1;
-}
-
-/* ================= RESPONSIVE — TABLETTE ================= */
+/* ================= RESPONSIVE TABLETTE ================= */
 @media (max-width: 1024px) {
-  .slider { height: 360px; }
-  .slide-content { margin-left: 32px; padding: 24px 28px; max-width: 60%; }
+  .slider { height: 350px; }
+  .slide-content { margin-left: 30px; padding: 24px 28px; max-width: 62%; }
   .slide-content h2 { font-size: 22px; }
-  .hero-categories { width: 190px; }
 }
 
 @media (max-width: 768px) {
-  .hero-layout { flex-direction: column; gap: 12px; padding: 12px 12px; }
-  .hero-categories { width: 100%; }
-  .slider { height: 280px; border-radius: 10px; }
-  .slider-section { padding: 12px; }
-  .slide-content {
-    margin-left: 20px;
-    padding: 18px 20px;
-    max-width: 80%;
-    backdrop-filter: none;
-  }
+  .slider { height: 260px; border-radius: 10px; }
+  .slide-content { margin-left: 18px; padding: 16px 20px; max-width: 80%; backdrop-filter: none; }
   .slide-content h2 { font-size: 18px; }
-  .slide-content p { font-size: 12px; margin-bottom: 12px; }
+  .slide-content p { font-size: 12px; margin-bottom: 10px; }
   .slide-content button { padding: 8px 18px; font-size: 12px; }
 }
 
 /* ================= MOBILE <=576px ================= */
 @media (max-width: 576px) {
-  .slider { height: 210px; border-radius: 8px; }
-  .slide-content {
-    margin-left: 12px;
-    padding: 12px 14px;
-    max-width: 88%;
-  }
-  .slide-content h2 { font-size: 15px; margin-bottom: 6px; }
+  .slider { height: 200px; border-radius: 8px; }
+  .slide-content { margin-left: 12px; padding: 12px 14px; max-width: 88%; }
+  .slide-content h2 { font-size: 14px; margin-bottom: 5px; }
   .slide-content p { font-size: 11px; margin-bottom: 8px; }
-  .slide-content button { padding: 7px 14px; font-size: 11px; }
-  .dots { bottom: 10px; gap: 6px; }
-  .dot { width: 8px; height: 8px; }
+  .slide-content button { padding: 6px 14px; font-size: 11px; }
+  .dots { bottom: 8px; gap: 5px; }
+  .dot { width: 7px; height: 7px; }
 }
-
 @media (max-width: 400px) {
-  .slider { height: 180px; }
+  .slider { height: 170px; }
   .slide-content p { display: none; }
   .slide-content h2 { font-size: 13px; }
 }
