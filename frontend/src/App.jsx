@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Slider from "./components/Slider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CartDrawer from "./pages/CartDrawer";
 
@@ -42,7 +41,11 @@ function App() {
   const notifyRemoveWishlist = (name) => toast.info(`❌ ${name} retiré de la wishlist !`);
   const notifyAddCompare = (name) => toast.info(`⚖️ ${name} ajouté à la comparaison !`);
 
-  const handleAddToCart = (product) => { setCart(prev => [...prev, product]); notifyAddCart(product.name); setIsCartOpen(true); };
+  const handleAddToCart = (product) => {
+    setCart(prev => [...prev, product]);
+    notifyAddCart(product.name);
+    setIsCartOpen(true);
+  };
 
   const handleToggleWishlist = (product) => {
     if (wishlist.find(item => item._id === product._id)) {
@@ -62,14 +65,15 @@ function App() {
   };
 
   const openQuickView = (product) => {
-    alert(`Quick View: ${product.name}`); // ici tu peux mettre modal si tu veux
+    alert(`Quick View: ${product.name}`);
   };
 
   return (
     <>
       <Navbar cart={cart} wishlist={wishlist} onCartClick={() => setIsCartOpen(true)} />
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cartItems={cart} />
-      {location.pathname === "/" && <Slider />}
+
+      {/* ✅ Slider supprimé ici — il est dans Home.jsx via hero-layout */}
 
       <Routes>
         <Route path="/" element={
@@ -83,10 +87,11 @@ function App() {
         } />
 
         <Route path="/login" element={<ClientAuth />} />
+
         <Route path="/bienvenue" element={
-       <ProtectedRoute>
-         <Welcome />
-        </ProtectedRoute>
+          <ProtectedRoute>
+            <Welcome />
+          </ProtectedRoute>
         } />
 
         <Route path="/produits" element={
@@ -99,16 +104,15 @@ function App() {
           />
         } />
 
-<Route path="/produits/:category" element={
-  <ProductsByCategory
-    onAddToCart={handleAddToCart}
-    wishlist={wishlist}
-    onToggleWishlist={handleToggleWishlist}
-    onAddToCompare={handleAddToCompare}
-    openQuickView={openQuickView} // <-- important
-  />
-} />
-
+        <Route path="/produits/:category" element={
+          <ProductsByCategory
+            onAddToCart={handleAddToCart}
+            wishlist={wishlist}
+            onToggleWishlist={handleToggleWishlist}
+            onAddToCompare={handleAddToCompare}
+            openQuickView={openQuickView}
+          />
+        } />
 
         <Route path="/produits/detail/:id" element={
           <ProtectedRoute>
@@ -125,8 +129,7 @@ function App() {
         <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
         <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />} />
         <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="/wishlist" element={
-        <WishlistPage wishlist={wishlist} setWishlist={setWishlist} />} />
+        <Route path="/wishlist" element={<WishlistPage wishlist={wishlist} setWishlist={setWishlist} />} />
         <Route path="/commandes" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
         <Route path="/dégustation" element={<TastingList />} />
         <Route path="/contact" element={<ContactPage />} />
